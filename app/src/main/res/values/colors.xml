@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#393939</color>
+    <color name="colorPrimaryDark">#393939</color>
+    <color name="colorAccent">#ffffff</color>
+
+    <color name="main_activity_background_color">#E4393939</color>
+    <color name="conversion_activity_background_color">#393939</color>
+    <color name="spinner_popup_background_color">#2C2C2C</color>
+
+    <color name="conversion_activity_digit_button_background">#ff8112</color>
+    <color name="conversion_activity_digit_button_background_onPressed">#E76C00</color>
+    <color name="conversion_activity_func_button_background">#DD2C00</color>
+    <color name="conversion_activity_func_button_background_onPressed">#BE2600</color>
+
+    <color name="main_activity_buttons_background_color">#E9310A</color>
+    <color name="main_activity_buttons_background_color_onPressed">#DD2C00</color>
+    <color name="main_activity_buttons_background_color_2">#003CE4</color>
+    <color name="main_activity_buttons_background_color_2_onPressed">#0037D1</color>
+
+    <color name="text_color">#B5FFFFFF</color>
+    <color name="hint_color">#70FFFFFF</color>
+
+</resources>

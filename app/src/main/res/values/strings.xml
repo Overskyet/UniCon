@@ -1,0 +1,180 @@
+<resources>
+
+    <dimen name="layout_height">65dp</dimen>
+    <dimen name="button_margin">0.5dp</dimen>
+    <dimen name="textSize">25sp</dimen>
+    <dimen name="textViewSize">20sp</dimen>
+    <dimen name="mainActivityButtonsTextSize">8pt</dimen>
+    <dimen name="textSpinnerItemSize">16sp</dimen>
+
+    <string name="app_name">UniCon</string>
+
+    <string name="currency_activity_name">Currency</string>
+    <string name="weight_activity_name">Weight</string>
+    <string name="volume_activity_name">Volume</string>
+    <string name="length_activity_name">Length</string>
+    <string name="speed_activity_name">Speed</string>
+    <string name="temperature_activity_name">Temperature</string>
+    <string name="area_activity_name">Area</string>
+    <string name="angle_activity_name">Angle</string>
+    <string name="time_activity_name">Time</string>
+    <string name="fuel_consumption_activity_name">Fuel consumption</string>
+    <string name="pressure_activity_name">Pressure</string>
+    <string name="energy_activity_name">Energy</string>
+
+    <string name="currency_button">CURRENCY</string>
+    <string name="weight_button">WEIGHT</string>
+    <string name="volume_button">VOLUME</string>
+    <string name="length_button">LENGTH</string>
+    <string name="speed_button">SPEED</string>
+    <string name="temperature_button">TEMPERATURE</string>
+    <string name="area_button">AREA</string>
+    <string name="angle_button">ANGLE</string>
+    <string name="time_button">TIME</string>
+    <string name="fuel_consumption_button">FUEL CONSUMPTION</string>
+    <string name="pressure_button">PRESSURE</string>
+    <string name="energy_button">ENERGY</string>
+
+    <string name="button_0">0</string>
+    <string name="button_1">1</string>
+    <string name="button_2">2</string>
+    <string name="button_3">3</string>
+    <string name="button_4">4</string>
+    <string name="button_5">5</string>
+    <string name="button_6">6</string>
+    <string name="button_7">7</string>
+    <string name="button_8">8</string>
+    <string name="button_9">9</string>
+    <string name="button_dot">.</string>
+    <string name="button_clear">C</string>
+    <string name="button_plus_minus">+/-</string>
+    <string name="button_delete">\u232b</string>
+    <string name="button_reverse">\u21c4</string>
+    <string name="button_copy">\u2397</string>
+
+    <string name="from_string">From</string>
+    <string name="to_string">To</string>
+    <string name="output_hint">=0</string>
+
+    <string-array name="weight_block">
+        <item>Tonne</item>
+        <item>Kilogram</item>
+        <item>Gram</item>
+        <item>Milligram</item>
+        <item>Microgram</item>
+        <item>Long ton (UK)</item>
+        <item>Short ton (US)</item>
+        <item>Stone</item>
+        <item>Pound</item>
+        <item>Ounce</item>
+    </string-array>
+
+    <string-array name="volume_block">
+        <item>Liter</item>
+        <item>Milliliter</item>
+        <item>Gallon (US)</item>
+        <item>Gallon (UK)</item>
+        <item>Cubic Meter</item>
+        <item>Cubic foot</item>
+        <item>Cubic inch</item>
+        <item>Fluid ounce (US)</item>
+        <item>Fluid ounce (UK)</item>
+        <item>Liquid pint (US)</item>
+        <item>Imperial Pint (UK)</item>
+    </string-array>
+
+    <string-array name="speed_block">
+        <item>Kilometer per hour (Km/h)</item>
+        <item>Mile per hour (Mi/h)</item>
+        <item>Meter per second (M/s)</item>
+        <item>Foot per second (Ft/s)</item>
+        <item>Knot (Kt)</item>
+    </string-array>
+
+    <string-array name="length_block">
+        <item>Kilometer</item>
+        <item>Meter</item>
+        <item>Centimeter</item>
+        <item>Millimeter</item>
+        <item>Micrometer</item>
+        <item>Nanometer</item>
+        <item>Mile</item>
+        <item>Yard</item>
+        <item>Foot</item>
+        <item>Inch</item>
+        <item>Nautical mile</item>
+    </string-array>
+
+    <string-array name="temperature_block">
+        <item>Celsius</item>
+        <item>Fahrenheit</item>
+        <item>Kelvin</item>
+    </string-array>
+
+    <string-array name="area_block">
+        <item>Square kilometer</item>
+        <item>Square meter</item>
+        <item>Square mile</item>
+        <item>Square yard</item>
+        <item>Square foot</item>
+        <item>Square inch</item>
+        <item>Hectare</item>
+        <item>Acre</item>
+    </string-array>
+
+    <string-array name="angle_block">
+        <item>Gradian</item>
+        <item>Degree</item>
+        <item>Arcminute</item>
+        <item>Radian</item>
+        <item>Milliradian</item>
+        <item>Arcsecond</item>
+    </string-array>
+
+    <string-array name="time_block">
+        <item>Nanosecond</item>
+        <item>Microsecond</item>
+        <item>Millisecond</item>
+        <item>Second</item>
+        <item>Minute</item>
+        <item>Hour</item>
+        <item>Day</item>
+        <item>Week</item>
+        <item>Month</item>
+        <item>Year</item>
+        <item>Decade</item>
+        <item>Century</item>
+    </string-array>
+
+    <string-array name="fuel_consumption_block">
+        <item>Mile per gallon (US)</item>
+        <item>Mile per gallon (UK)</item>
+        <item>Kilometer per liter</item>
+        <item>Liter per 100 kilometers</item>
+    </string-array>
+
+    <string-array name="pressure_block">
+        <item>Standard atmosphere</item>
+        <item>Bar</item>
+        <item>Pascal</item>
+        <item>Torr</item>
+        <item>Pound per square inch (PSI)</item>
+    </string-array>
+
+    <string-array name="energy_block">
+        <item>Joule</item>
+        <item>Kilojoule</item>
+        <item>Calorie</item>
+        <item>Kilocalorie</item>
+        <item>Watt hour</item>
+        <item>Kilowatt hour</item>
+        <item>Electron-volt</item>
+        <item>British thermal unit</item>
+        <item>Therm</item>
+        <item>Foot pound</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
