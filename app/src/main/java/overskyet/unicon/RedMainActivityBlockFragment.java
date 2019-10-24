@@ -28,17 +28,17 @@ public class RedMainActivityBlockFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_red_main_activity_block, container, false);
 
-        Button buttonCurrency = (Button) v.findViewById(R.id.button_currency);
-        Button buttonTime = (Button) v.findViewById(R.id.button_time);
-        Button buttonFuelConsumption = (Button) v.findViewById(R.id.button_fuel_consumption);
-        Button buttonPressure = (Button) v.findViewById(R.id.button_pressure);
-        Button buttonEnergy = (Button) v.findViewById(R.id.button_energy);
-        Button buttonTemperature = (Button) v.findViewById(R.id.button_temperature);
+        Button buttonCurrency = v.findViewById(R.id.button_currency);
+        Button buttonTime = v.findViewById(R.id.button_time);
+        Button buttonFuelConsumption = v.findViewById(R.id.button_fuel_consumption);
+        Button buttonPressure = v.findViewById(R.id.button_pressure);
+        Button buttonEnergy = v.findViewById(R.id.button_energy);
+        Button buttonTemperature = v.findViewById(R.id.button_temperature);
 
         buttonCurrency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myIntent = new Intent(getActivity(), CurrencyActivity.class);
+                myIntent = new Intent(getActivity(), CurrencyExchangeRatesActivity.class);
                 startActivity(myIntent);
             }
         });
@@ -46,7 +46,7 @@ public class RedMainActivityBlockFragment extends Fragment {
         buttonTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myIntent = new Intent(getActivity(), TimeActivity.class);
+                myIntent = new Intent(getActivity(), ConversionActivity.class);
                 startActivity(myIntent);
             }
         });
@@ -54,7 +54,7 @@ public class RedMainActivityBlockFragment extends Fragment {
         buttonFuelConsumption.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myIntent = new Intent(getActivity(), FuelConsumptionActivity.class);
+                myIntent = new Intent(getActivity(), ConversionActivity.class);
                 startActivity(myIntent);
             }
         });
@@ -62,7 +62,7 @@ public class RedMainActivityBlockFragment extends Fragment {
         buttonPressure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myIntent = new Intent(getActivity(), PressureActivity.class);
+                myIntent = new Intent(getActivity(), ConversionActivity.class);
                 startActivity(myIntent);
             }
         });
@@ -70,7 +70,7 @@ public class RedMainActivityBlockFragment extends Fragment {
         buttonEnergy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myIntent = new Intent(getActivity(), EnergyActivity.class);
+                myIntent = new Intent(getActivity(), ConversionActivity.class);
                 startActivity(myIntent);
             }
         });
@@ -78,7 +78,7 @@ public class RedMainActivityBlockFragment extends Fragment {
         buttonTemperature.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myIntent = new Intent(getActivity(), TemperatureActivity.class);
+                myIntent = new Intent(getActivity(), ConversionActivity.class);
                 startActivity(myIntent);
             }
         });

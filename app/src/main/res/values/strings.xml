@@ -1,26 +1,31 @@
 <resources>
 
-    <dimen name="layout_height">65dp</dimen>
-    <dimen name="button_margin">0.5dp</dimen>
-    <dimen name="textSize">25sp</dimen>
-    <dimen name="textViewSize">20sp</dimen>
-    <dimen name="mainActivityButtonsTextSize">8pt</dimen>
-    <dimen name="textSpinnerItemSize">16sp</dimen>
-
     <string name="app_name">UniCon</string>
+    <string name="exchange_rates_activity_name">Exchange Rates</string>
 
-    <string name="currency_activity_name">Currency</string>
-    <string name="weight_activity_name">Weight</string>
-    <string name="volume_activity_name">Volume</string>
-    <string name="length_activity_name">Length</string>
-    <string name="speed_activity_name">Speed</string>
-    <string name="temperature_activity_name">Temperature</string>
-    <string name="area_activity_name">Area</string>
-    <string name="angle_activity_name">Angle</string>
-    <string name="time_activity_name">Time</string>
-    <string name="fuel_consumption_activity_name">Fuel consumption</string>
-    <string name="pressure_activity_name">Pressure</string>
-    <string name="energy_activity_name">Energy</string>
+    <string name="preference_key_1_time_conversion">overskyet.unicon.TIME_SPINNER_1</string>
+    <string name="preference_key_1_fuel_consumption_conversion">overskyet.unicon.FUEL_CONSUMPTION_SPINNER_1</string>
+    <string name="preference_key_1_pressure_conversion">overskyet.unicon.PRESSURE_SPINNER_1</string>
+    <string name="preference_key_1_energy_conversion">overskyet.unicon.ENERGY_SPINNER_1</string>
+    <string name="preference_key_1_temperature_conversion">overskyet.unicon.TEMPERATURE_SPINNER_1</string>
+    <string name="preference_key_1_length_conversion">overskyet.unicon.LENGTH_SPINNER_1</string>
+    <string name="preference_key_1_weight_conversion">overskyet.unicon.WEIGHT_SPINNER_1</string>
+    <string name="preference_key_1_volume_conversion">overskyet.unicon.VOLUME_SPINNER_1</string>
+    <string name="preference_key_1_area_conversion">overskyet.unicon.AREA_SPINNER_1</string>
+    <string name="preference_key_1_angle_conversion">overskyet.unicon.ANGLE_SPINNER_1</string>
+    <string name="preference_key_1_speed_conversion">overskyet.unicon.SPEED_SPINNER_1</string>
+
+    <string name="preference_key_2_time_conversion">overskyet.unicon.TIME_SPINNER_2</string>
+    <string name="preference_key_2_fuel_consumption_conversion">overskyet.unicon.FUEL_CONSUMPTION_SPINNER_2</string>
+    <string name="preference_key_2_pressure_conversion">overskyet.unicon.PRESSURE_SPINNER_2</string>
+    <string name="preference_key_2_energy_conversion">overskyet.unicon.ENERGY_SPINNER_2</string>
+    <string name="preference_key_2_temperature_conversion">overskyet.unicon.TEMPERATURE_SPINNER_2</string>
+    <string name="preference_key_2_length_conversion">overskyet.unicon.LENGTH_SPINNER_2</string>
+    <string name="preference_key_2_weight_conversion">overskyet.unicon.WEIGHT_SPINNER_2</string>
+    <string name="preference_key_2_volume_conversion">overskyet.unicon.VOLUME_SPINNER_2</string>
+    <string name="preference_key_2_area_conversion">overskyet.unicon.AREA_SPINNER_2</string>
+    <string name="preference_key_2_angle_conversion">overskyet.unicon.ANGLE_SPINNER_2</string>
+    <string name="preference_key_2_speed_conversion">overskyet.unicon.SPEED_SPINNER_2</string>
 
     <string name="currency_button">CURRENCY</string>
     <string name="weight_button">WEIGHT</string>
@@ -55,6 +60,11 @@
     <string name="from_string">From</string>
     <string name="to_string">To</string>
     <string name="output_hint">=0</string>
+
+    <string name="copy_notification">Copied</string>
+    <string name="incorrect_paste_value_notification">Incorrect data format for paste value.
+        Make sure you copy either integer or floating-point number, such as: \u201c123 or 123.45\u201d</string>
+    <string name="max_length_of_pasted_value_exceeded_notification">The maximum amount of characters in the input field is 30</string>
 
     <string-array name="weight_block">
         <item>Tonne</item>

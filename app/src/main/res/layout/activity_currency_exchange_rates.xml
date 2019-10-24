@@ -5,6 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/conversion_activity_background_color"
-    tools:context=".CurrencyActivity">
+    tools:context=".CurrencyExchangeRatesActivity">
 
 </android.support.constraint.ConstraintLayout>

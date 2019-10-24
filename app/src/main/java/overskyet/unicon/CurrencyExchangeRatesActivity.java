@@ -3,11 +3,11 @@ package overskyet.unicon;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class CurrencyActivity extends AppCompatActivity {
+public class CurrencyExchangeRatesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_currency);
+        setContentView(R.layout.activity_currency_exchange_rates);
     }
 }

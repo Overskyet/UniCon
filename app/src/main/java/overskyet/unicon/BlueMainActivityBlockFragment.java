@@ -28,17 +28,17 @@ public class BlueMainActivityBlockFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_blue_main_activity_block, container, false);
 
-        Button buttonLength = (Button) v.findViewById(R.id.button_length);
-        Button buttonWeight = (Button) v.findViewById(R.id.button_weight);
-        Button buttonVolume = (Button) v.findViewById(R.id.button_volume);
-        Button buttonArea = (Button) v.findViewById(R.id.button_area);
-        Button buttonAngle = (Button) v.findViewById(R.id.button_angle);
-        Button buttonSpeed = (Button) v.findViewById(R.id.button_speed);
+        Button buttonLength = v.findViewById(R.id.button_length);
+        Button buttonWeight = v.findViewById(R.id.button_weight);
+        Button buttonVolume = v.findViewById(R.id.button_volume);
+        Button buttonArea = v.findViewById(R.id.button_area);
+        Button buttonAngle = v.findViewById(R.id.button_angle);
+        Button buttonSpeed = v.findViewById(R.id.button_speed);
 
         buttonLength.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myIntent = new Intent(getActivity(), LengthActivity.class);
+                myIntent = new Intent(getActivity(), ConversionActivity.class);
                 startActivity(myIntent);
             }
         });
@@ -46,7 +46,7 @@ public class BlueMainActivityBlockFragment extends Fragment {
         buttonWeight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myIntent = new Intent(getActivity(), WeightActivity.class);
+                myIntent = new Intent(getActivity(), ConversionActivity.class);
                 startActivity(myIntent);
             }
         });
@@ -54,7 +54,7 @@ public class BlueMainActivityBlockFragment extends Fragment {
         buttonVolume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myIntent = new Intent(getActivity(), VolumeActivity.class);
+                myIntent = new Intent(getActivity(), ConversionActivity.class);
                 startActivity(myIntent);
             }
         });
@@ -62,7 +62,7 @@ public class BlueMainActivityBlockFragment extends Fragment {
         buttonArea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myIntent = new Intent(getActivity(), AreaActivity.class);
+                myIntent = new Intent(getActivity(), ConversionActivity.class);
                 startActivity(myIntent);
             }
         });
@@ -70,7 +70,7 @@ public class BlueMainActivityBlockFragment extends Fragment {
         buttonAngle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myIntent = new Intent(getActivity(), AngleActivity.class);
+                myIntent = new Intent(getActivity(), ConversionActivity.class);
                 startActivity(myIntent);
             }
         });
@@ -78,7 +78,7 @@ public class BlueMainActivityBlockFragment extends Fragment {
         buttonSpeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myIntent = new Intent(getActivity(), SpeedActivity.class);
+                myIntent = new Intent(getActivity(), ConversionActivity.class);
                 startActivity(myIntent);
             }
         });

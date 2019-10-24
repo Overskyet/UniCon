@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="conversion_activity_vertical_layout_height">65dp</dimen>
+    <dimen name="conversion_activity_button_margin">0.5dp</dimen>
+    <dimen name="conversion_activity_textview_text_size">20sp</dimen>
+    <dimen name="main_activity_buttons_text_size">8pt</dimen>
+    <dimen name="main_activity_buttons_height">60dp</dimen>
+
+    <dimen name="text_size">25sp</dimen>
+    <dimen name="spinner_items_text_size">16sp</dimen>
+
+</resources>

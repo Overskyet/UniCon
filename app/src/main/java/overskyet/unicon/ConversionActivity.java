@@ -1,6 +1,7 @@
 package overskyet.unicon;
 
 import android.content.ClipData;
+import android.content.ClipDescription;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -17,28 +18,36 @@ import android.widget.Toast;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class EnergyActivity extends AppCompatActivity {
+public class ConversionActivity extends AppCompatActivity {
 
     private static final String SPINNER_1_PREFERENCE_KEY = "overskyet.unicon.spinner1SelectedItem",
             SPINNER_2_PREFERENCE_KEY = "overskyet.unicon.spinner2SelectedItem",
-            FIRST_LAUNCH = "overskyet.unicon.firstLaunchCheck";
+            FIRST_LAUNCH = "overskyet.unicon.FIRST_LAUNCH_CHECK";
+
     private SharedPreferences mySettingsForSpinners;
     private SharedPreferences firstLaunch;
+    private ClipboardManager clipboard;
+
+    // Widgets
     private EditText editTextInput, editTextOutput;
-    Spinner spinner, spinner2;
+    private Spinner spinner, spinner2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_energy);
+        setContentView(R.layout.activity_conversion);
+
+        this.setTitle("");
+
+        clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
 
         firstLaunch = this.getPreferences(Context.MODE_PRIVATE);
         mySettingsForSpinners = this.getPreferences(Context.MODE_PRIVATE);
 
-        spinner = (Spinner) findViewById(R.id.spinner);
-        spinner2 = (Spinner) findViewById(R.id.spinner2);
+        spinner = findViewById(R.id.spinner);
+        spinner2 = findViewById(R.id.spinner2);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.energy_block,R.layout.spinner_item);
+                R.array.angle_block,R.layout.spinner_item);
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner2.setAdapter(adapter);
@@ -65,12 +74,27 @@ public class EnergyActivity extends AppCompatActivity {
             }
         });
 
-        editTextInput = (EditText) findViewById(R.id.input_converter);
-        editTextOutput = (EditText) findViewById(R.id.output_converter);
+        editTextInput = findViewById(R.id.input_converter);
+        editTextOutput = findViewById(R.id.output_converter);
 
         // disable input for EditText view
         editTextInput.setKeyListener(null);
         editTextOutput.setKeyListener(null);
+
+        final Button copyButton = findViewById(R.id.button_copy);
+        copyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                copy();
+            }
+        });
+        copyButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                paste();
+                return true;
+            }
+        });
 
     }
 
@@ -80,15 +104,15 @@ public class EnergyActivity extends AppCompatActivity {
 
         if (firstLaunch.getBoolean(FIRST_LAUNCH, true)) {
 
-            spinner.setSelection(4);
-            spinner2.setSelection(0);
+            spinner.setSelection(0);
+            spinner2.setSelection(1);
 
             firstLaunch.edit().putBoolean(FIRST_LAUNCH, false).apply();
 
         } else {
 
-            spinner.setSelection(mySettingsForSpinners.getInt(SPINNER_1_PREFERENCE_KEY, 4));
-            spinner2.setSelection(mySettingsForSpinners.getInt(SPINNER_2_PREFERENCE_KEY, 0));
+            spinner.setSelection(mySettingsForSpinners.getInt(SPINNER_1_PREFERENCE_KEY, 0));
+            spinner2.setSelection(mySettingsForSpinners.getInt(SPINNER_2_PREFERENCE_KEY, 1));
 
         }
 
@@ -108,7 +132,7 @@ public class EnergyActivity extends AppCompatActivity {
 
         Button btn = (Button) v;
         editTextInput.setText(editTextInput.getText().append(btn.getText()));
-        digitsAmountCheck();
+        checkAmountOfDigits();
         conversion();
 
     }
@@ -136,11 +160,6 @@ public class EnergyActivity extends AppCompatActivity {
             case R.id.button_sign:
                 signCheck();
                 digitsCheck();
-                break;
-
-            // Copy block
-            case R.id.button_copy:
-                copy();
                 break;
 
             // Reverse block
@@ -203,25 +222,47 @@ public class EnergyActivity extends AppCompatActivity {
 
     }
 
-    private void digitsAmountCheck() {
-
+    private void checkAmountOfDigits() {
         String textInput = editTextInput.getText().toString();
-
         if (textInput.length() > 30) {
             editTextInput.setText(textInput.substring(0, textInput.length() - 1));
         }
+    }
 
+    private void checkAmountOfDigitsForPasteValue() {
+        String textInput = editTextInput.getText().toString();
+        if (textInput.length() > 30) {
+            String str = getResources().getString(R.string.max_length_of_pasted_value_exceeded_notification);
+            editTextInput.setText(textInput.substring(0, 30));
+            showInfoText(str);
+        }
     }
 
     private void copy() {
-
-        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("Output", editTextOutput.getText());
         clipboard.setPrimaryClip(clip);
 
-        CharSequence text = "Copied";
-        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+        String str = getResources().getString(R.string.copy_notification);
+        showInfoText(str);
+    }
 
+    private void paste() {
+        String pasteData;
+        try {
+            if (clipboard.hasPrimaryClip()) {
+                if (clipboard.getPrimaryClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
+                    ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
+                    pasteData = item.getText().toString();
+                    editTextInput.setText(pasteData);
+                    checkAmountOfDigitsForPasteValue();
+                    conversion();
+                }
+            }
+        } catch (NumberFormatException e) {
+            String str = getResources().getString(R.string.incorrect_paste_value_notification);
+            showInfoText(str);
+            editTextInput.getText().clear();
+        }
     }
 
     private void reverse() {
@@ -239,13 +280,17 @@ public class EnergyActivity extends AppCompatActivity {
 
     }
 
+    private void showInfoText(String infoMsg) {
+        Toast.makeText(getApplicationContext(), infoMsg, Toast.LENGTH_LONG).show();
+    }
+
     private void conversion() {
 
         double inputValue = Double.valueOf(editTextInput.getText().toString());
         String spinnerItemName = spinner.getSelectedItem().toString();
         String spinner2ItemName = spinner2.getSelectedItem().toString();
 
-        double output = EnergyMethods.convert(inputValue, spinnerItemName, spinner2ItemName);
+        double output = AngleMethods.convert(inputValue, spinnerItemName, spinner2ItemName);
         editTextOutput.setText(String.valueOf(output));
 
     }
