@@ -8,23 +8,23 @@ import android.os.Bundle;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class HomeScreen extends AppCompatActivity {
 
     MyPageAdapter pageAdapter;
-    RedMainActivityBlockFragment redBlockFragment;
-    BlueMainActivityBlockFragment blueBlockFragment;
+    RedHomeScreenBlockFragment redBlockFragment;
+    BlueHomeScreenBlockFragment blueBlockFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home_screen);
 
-        redBlockFragment = new RedMainActivityBlockFragment();
-        blueBlockFragment = new BlueMainActivityBlockFragment();
+        redBlockFragment = new RedHomeScreenBlockFragment();
+        blueBlockFragment = new BlueHomeScreenBlockFragment();
 
         List<Fragment> fragments = getFragments();
         pageAdapter = new MyPageAdapter(getSupportFragmentManager(), fragments);
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
+        ViewPager viewPager = findViewById(R.id.viewPager);
         viewPager.setAdapter(pageAdapter);
 
     }

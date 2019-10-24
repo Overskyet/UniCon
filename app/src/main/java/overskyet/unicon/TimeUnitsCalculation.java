@@ -1,6 +1,6 @@
 package overskyet.unicon;
 
-final class TimeMethods {
+final class TimeUnitsCalculation {
     static double convert(double inputValue, String spinnerItemName, String spinner2ItemName) {
 
         double output = 0.0;

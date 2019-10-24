@@ -18,7 +18,7 @@ import android.widget.Toast;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ConversionActivity extends AppCompatActivity {
+public class UnitsConversionScreen extends AppCompatActivity {
 
     // Key values for saving preferences and conversion() method
     private String key1, key2;
@@ -36,7 +36,7 @@ public class ConversionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_conversion);
+        setContentView(R.layout.activity_units_conversion_screen);
 
         // Keys and spinner items array initialization
         key1 = getIntent().getExtras().getString("stringExtra1");
@@ -263,37 +263,37 @@ public class ConversionActivity extends AppCompatActivity {
         double outputValue = 0.0;
         switch (key1) {
             case "overskyet.unicon.TIME_SPINNER_1":
-                outputValue = TimeMethods.convert(inputValue, spinnerItemName, spinner2ItemName);
+                outputValue = TimeUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
                 break;
             case "overskyet.unicon.FUEL_CONSUMPTION_SPINNER_1":
-                outputValue = FuelConsumptionMethods.convert(inputValue, spinnerItemName, spinner2ItemName);
+                outputValue = FuelConsumptionUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
                 break;
             case "overskyet.unicon.PRESSURE_SPINNER_1":
-                outputValue = PressureMethods.convert(inputValue, spinnerItemName, spinner2ItemName);
+                outputValue = PressureUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
                 break;
             case "overskyet.unicon.ENERGY_SPINNER_1":
-                outputValue = EnergyMethods.convert(inputValue, spinnerItemName, spinner2ItemName);
+                outputValue = EnergyUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
                 break;
             case "overskyet.unicon.TEMPERATURE_SPINNER_1":
-                outputValue = TemperatureMethods.convert(inputValue, spinnerItemName, spinner2ItemName);
+                outputValue = TemperatureUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
                 break;
             case "overskyet.unicon.LENGTH_SPINNER_1":
-                outputValue = LengthMethods.convert(inputValue, spinnerItemName, spinner2ItemName);
+                outputValue = LengthUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
                 break;
             case "overskyet.unicon.WEIGHT_SPINNER_1":
-                outputValue = WeightMethods.convert(inputValue, spinnerItemName, spinner2ItemName);
+                outputValue = WeightUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
                 break;
             case "overskyet.unicon.VOLUME_SPINNER_1":
-                outputValue = VolumeMethods.convert(inputValue, spinnerItemName, spinner2ItemName);
+                outputValue = VolumeUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
                 break;
             case "overskyet.unicon.AREA_SPINNER_1":
-                outputValue = AreaMethods.convert(inputValue, spinnerItemName, spinner2ItemName);
+                outputValue = AreaUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
                 break;
             case "overskyet.unicon.ANGLE_SPINNER_1":
-                outputValue = AngleMethods.convert(inputValue, spinnerItemName, spinner2ItemName);
+                outputValue = AngleUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
                 break;
             case "overskyet.unicon.SPEED_SPINNER_1":
-                outputValue = SpeedMethods.convert(inputValue, spinnerItemName, spinner2ItemName);
+                outputValue = SpeedUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
                 break;
             default:
                 break;

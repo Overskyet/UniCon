@@ -1,6 +1,6 @@
 package overskyet.unicon;
 
-final class LengthMethods {
+final class LengthUnitsCalculation {
 
     static double convert (double inputValue, String spinnerItemName, String spinner2ItemName) {
 

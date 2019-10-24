@@ -1,6 +1,6 @@
 package overskyet.unicon;
 
-final class WeightMethods {
+final class WeightUnitsCalculation {
 
     static double convert(double inputValue, String spinnerItemName, String spinner2ItemName) {
 

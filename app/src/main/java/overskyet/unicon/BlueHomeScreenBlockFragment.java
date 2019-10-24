@@ -13,11 +13,11 @@ import android.widget.Button;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BlueMainActivityBlockFragment extends Fragment {
+public class BlueHomeScreenBlockFragment extends Fragment {
 
     private Intent myIntent;
 
-    public BlueMainActivityBlockFragment() {
+    public BlueHomeScreenBlockFragment() {
         // Required empty public constructor
     }
 
@@ -26,7 +26,7 @@ public class BlueMainActivityBlockFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_blue_main_activity_block, container, false);
+        View v = inflater.inflate(R.layout.fragment_blue_home_screen_block, container, false);
 
         Button buttonLength = v.findViewById(R.id.button_length);
         Button buttonWeight = v.findViewById(R.id.button_weight);
@@ -38,7 +38,7 @@ public class BlueMainActivityBlockFragment extends Fragment {
         buttonLength.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myIntent = new Intent(getActivity(), ConversionActivity.class);
+                myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
                 String activityTitle = getResources().getString(R.string.length_button);
                 String key1 = getResources().getString(R.string.preference_key_1_length_conversion);
                 String key2 = getResources().getString(R.string.preference_key_2_length_conversion);
@@ -54,7 +54,7 @@ public class BlueMainActivityBlockFragment extends Fragment {
         buttonWeight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myIntent = new Intent(getActivity(), ConversionActivity.class);
+                myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
                 String activityTitle = getResources().getString(R.string.weight_button);
                 String key1 = getResources().getString(R.string.preference_key_1_weight_conversion);
                 String key2 = getResources().getString(R.string.preference_key_2_weight_conversion);
@@ -70,7 +70,7 @@ public class BlueMainActivityBlockFragment extends Fragment {
         buttonVolume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myIntent = new Intent(getActivity(), ConversionActivity.class);
+                myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
                 String activityTitle = getResources().getString(R.string.volume_button);
                 String key1 = getResources().getString(R.string.preference_key_1_volume_conversion);
                 String key2 = getResources().getString(R.string.preference_key_2_volume_conversion);
@@ -86,7 +86,7 @@ public class BlueMainActivityBlockFragment extends Fragment {
         buttonArea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myIntent = new Intent(getActivity(), ConversionActivity.class);
+                myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
                 String activityTitle = getResources().getString(R.string.area_button);
                 String key1 = getResources().getString(R.string.preference_key_1_area_conversion);
                 String key2 = getResources().getString(R.string.preference_key_2_area_conversion);
@@ -102,7 +102,7 @@ public class BlueMainActivityBlockFragment extends Fragment {
         buttonAngle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myIntent = new Intent(getActivity(), ConversionActivity.class);
+                myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
                 String activityTitle = getResources().getString(R.string.angle_button);
                 String key1 = getResources().getString(R.string.preference_key_1_angle_conversion);
                 String key2 = getResources().getString(R.string.preference_key_2_angle_conversion);
@@ -118,7 +118,7 @@ public class BlueMainActivityBlockFragment extends Fragment {
         buttonSpeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myIntent = new Intent(getActivity(), ConversionActivity.class);
+                myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
                 String activityTitle = getResources().getString(R.string.speed_button);
                 String key1 = getResources().getString(R.string.preference_key_1_speed_conversion);
                 String key2 = getResources().getString(R.string.preference_key_2_speed_conversion);

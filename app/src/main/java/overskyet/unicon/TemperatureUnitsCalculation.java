@@ -1,6 +1,6 @@
 package overskyet.unicon;
 
-final class TemperatureMethods {
+final class TemperatureUnitsCalculation {
 
     static double convert (double inputValue, String spinnerItemName, String spinner2ItemName) {
 

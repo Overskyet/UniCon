@@ -1,6 +1,6 @@
 package overskyet.unicon;
 
-final class AngleMethods {
+final class AngleUnitsCalculation {
 
     static double convert(double inputValue, String spinnerItemName, String spinner2ItemName) {
 

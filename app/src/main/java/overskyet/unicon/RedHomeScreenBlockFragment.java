@@ -13,11 +13,11 @@ import android.widget.Button;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RedMainActivityBlockFragment extends Fragment {
+public class RedHomeScreenBlockFragment extends Fragment {
 
     private Intent myIntent;
 
-    public RedMainActivityBlockFragment() {
+    public RedHomeScreenBlockFragment() {
         // Required empty public constructor
     }
 
@@ -26,7 +26,7 @@ public class RedMainActivityBlockFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_red_main_activity_block, container, false);
+        View v = inflater.inflate(R.layout.fragment_red_home_screen_block, container, false);
 
         Button buttonCurrency = v.findViewById(R.id.button_currency);
         Button buttonTime = v.findViewById(R.id.button_time);
@@ -38,7 +38,7 @@ public class RedMainActivityBlockFragment extends Fragment {
         buttonCurrency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myIntent = new Intent(getActivity(), CurrencyExchangeRatesActivity.class);
+                myIntent = new Intent(getActivity(), CurrencyExchangeScreen.class);
                 startActivity(myIntent);
             }
         });
@@ -46,7 +46,7 @@ public class RedMainActivityBlockFragment extends Fragment {
         buttonTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myIntent = new Intent(getActivity(), ConversionActivity.class);
+                myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
                 String activityTitle = getResources().getString(R.string.time_button);
                 String key1 = getResources().getString(R.string.preference_key_1_time_conversion);
                 String key2 = getResources().getString(R.string.preference_key_2_time_conversion);
@@ -62,7 +62,7 @@ public class RedMainActivityBlockFragment extends Fragment {
         buttonFuelConsumption.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myIntent = new Intent(getActivity(), ConversionActivity.class);
+                myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
                 String activityTitle = getResources().getString(R.string.fuel_consumption_button);
                 String key1 = getResources().getString(R.string.preference_key_1_fuel_consumption_conversion);
                 String key2 = getResources().getString(R.string.preference_key_2_fuel_consumption_conversion);
@@ -78,7 +78,7 @@ public class RedMainActivityBlockFragment extends Fragment {
         buttonPressure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myIntent = new Intent(getActivity(), ConversionActivity.class);
+                myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
                 String activityTitle = getResources().getString(R.string.pressure_button);
                 String key1 = getResources().getString(R.string.preference_key_1_pressure_conversion);
                 String key2 = getResources().getString(R.string.preference_key_2_pressure_conversion);
@@ -94,7 +94,7 @@ public class RedMainActivityBlockFragment extends Fragment {
         buttonEnergy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myIntent = new Intent(getActivity(), ConversionActivity.class);
+                myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
                 String activityTitle = getResources().getString(R.string.energy_button);
                 String key1 = getResources().getString(R.string.preference_key_1_energy_conversion);
                 String key2 = getResources().getString(R.string.preference_key_2_energy_conversion);
@@ -110,7 +110,7 @@ public class RedMainActivityBlockFragment extends Fragment {
         buttonTemperature.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myIntent = new Intent(getActivity(), ConversionActivity.class);
+                myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
                 String activityTitle = getResources().getString(R.string.temperature_button);
                 String key1 = getResources().getString(R.string.preference_key_1_temperature_conversion);
                 String key2 = getResources().getString(R.string.preference_key_2_temperature_conversion);

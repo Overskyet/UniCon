@@ -1,6 +1,6 @@
 package overskyet.unicon;
 
-final class AreaMethods {
+final class AreaUnitsCalculation {
 
     static double convert(double inputValue, String spinnerItemName, String spinner2ItemName) {
 

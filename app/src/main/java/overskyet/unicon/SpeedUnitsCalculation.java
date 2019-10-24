@@ -1,6 +1,6 @@
 package overskyet.unicon;
 
-final class SpeedMethods {
+final class SpeedUnitsCalculation {
 
     static double convert(double inputValue, String spinnerItemName, String spinner2ItemName) {
 
