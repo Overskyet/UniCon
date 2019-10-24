@@ -39,6 +39,14 @@ public class BlueMainActivityBlockFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 myIntent = new Intent(getActivity(), ConversionActivity.class);
+                String activityTitle = getResources().getString(R.string.length_button);
+                String key1 = getResources().getString(R.string.preference_key_1_length_conversion);
+                String key2 = getResources().getString(R.string.preference_key_2_length_conversion);
+                String[] spinnerItems = getResources().getStringArray(R.array.length_block);
+                myIntent.putExtra("stringExtra1", key1);
+                myIntent.putExtra("stringExtra2", key2);
+                myIntent.putExtra("stringExtra3", activityTitle);
+                myIntent.putExtra("stringArrayExtra", spinnerItems);
                 startActivity(myIntent);
             }
         });
@@ -47,6 +55,14 @@ public class BlueMainActivityBlockFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 myIntent = new Intent(getActivity(), ConversionActivity.class);
+                String activityTitle = getResources().getString(R.string.weight_button);
+                String key1 = getResources().getString(R.string.preference_key_1_weight_conversion);
+                String key2 = getResources().getString(R.string.preference_key_2_weight_conversion);
+                String[] spinnerItems = getResources().getStringArray(R.array.weight_block);
+                myIntent.putExtra("stringExtra1", key1);
+                myIntent.putExtra("stringExtra2", key2);
+                myIntent.putExtra("stringExtra3", activityTitle);
+                myIntent.putExtra("stringArrayExtra", spinnerItems);
                 startActivity(myIntent);
             }
         });
@@ -55,6 +71,14 @@ public class BlueMainActivityBlockFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 myIntent = new Intent(getActivity(), ConversionActivity.class);
+                String activityTitle = getResources().getString(R.string.volume_button);
+                String key1 = getResources().getString(R.string.preference_key_1_volume_conversion);
+                String key2 = getResources().getString(R.string.preference_key_2_volume_conversion);
+                String[] spinnerItems = getResources().getStringArray(R.array.volume_block);
+                myIntent.putExtra("stringExtra1", key1);
+                myIntent.putExtra("stringExtra2", key2);
+                myIntent.putExtra("stringExtra3", activityTitle);
+                myIntent.putExtra("stringArrayExtra", spinnerItems);
                 startActivity(myIntent);
             }
         });
@@ -63,6 +87,14 @@ public class BlueMainActivityBlockFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 myIntent = new Intent(getActivity(), ConversionActivity.class);
+                String activityTitle = getResources().getString(R.string.area_button);
+                String key1 = getResources().getString(R.string.preference_key_1_area_conversion);
+                String key2 = getResources().getString(R.string.preference_key_2_area_conversion);
+                String[] spinnerItems = getResources().getStringArray(R.array.area_block);
+                myIntent.putExtra("stringExtra1", key1);
+                myIntent.putExtra("stringExtra2", key2);
+                myIntent.putExtra("stringExtra3", activityTitle);
+                myIntent.putExtra("stringArrayExtra", spinnerItems);
                 startActivity(myIntent);
             }
         });
@@ -71,6 +103,14 @@ public class BlueMainActivityBlockFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 myIntent = new Intent(getActivity(), ConversionActivity.class);
+                String activityTitle = getResources().getString(R.string.angle_button);
+                String key1 = getResources().getString(R.string.preference_key_1_angle_conversion);
+                String key2 = getResources().getString(R.string.preference_key_2_angle_conversion);
+                String[] spinnerItems = getResources().getStringArray(R.array.angle_block);
+                myIntent.putExtra("stringExtra1", key1);
+                myIntent.putExtra("stringExtra2", key2);
+                myIntent.putExtra("stringExtra3", activityTitle);
+                myIntent.putExtra("stringArrayExtra", spinnerItems);
                 startActivity(myIntent);
             }
         });
@@ -79,11 +119,18 @@ public class BlueMainActivityBlockFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 myIntent = new Intent(getActivity(), ConversionActivity.class);
+                String activityTitle = getResources().getString(R.string.speed_button);
+                String key1 = getResources().getString(R.string.preference_key_1_speed_conversion);
+                String key2 = getResources().getString(R.string.preference_key_2_speed_conversion);
+                String[] spinnerItems = getResources().getStringArray(R.array.speed_block);
+                myIntent.putExtra("stringExtra1", key1);
+                myIntent.putExtra("stringExtra2", key2);
+                myIntent.putExtra("stringExtra3", activityTitle);
+                myIntent.putExtra("stringArrayExtra", spinnerItems);
                 startActivity(myIntent);
             }
         });
 
         return v;
     }
-
 }

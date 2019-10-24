@@ -20,12 +20,13 @@ import java.util.regex.Pattern;
 
 public class ConversionActivity extends AppCompatActivity {
 
-    private static final String SPINNER_1_PREFERENCE_KEY = "overskyet.unicon.spinner1SelectedItem",
-            SPINNER_2_PREFERENCE_KEY = "overskyet.unicon.spinner2SelectedItem",
-            FIRST_LAUNCH = "overskyet.unicon.FIRST_LAUNCH_CHECK";
+    // Key values for saving preferences and conversion() method
+    private String key1, key2;
 
+    // Instance of SharedPreferences object for setting up spinner items
     private SharedPreferences mySettingsForSpinners;
-    private SharedPreferences firstLaunch;
+
+    // Clipboard manager for copy and paste operations
     private ClipboardManager clipboard;
 
     // Widgets
@@ -37,26 +38,41 @@ public class ConversionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conversion);
 
-        this.setTitle("");
+        // Keys and spinner items array initialization
+        key1 = getIntent().getExtras().getString("stringExtra1");
+        key2 = getIntent().getExtras().getString("stringExtra2");
+        String[] spinnerItems = getIntent().getExtras().getStringArray("stringArrayExtra");
 
+        // Set the title of activity
+        this.setTitle(getIntent().getExtras().getString("stringExtra3"));
+
+        // Clipboard manager initialization
         clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
 
-        firstLaunch = this.getPreferences(Context.MODE_PRIVATE);
+        // SharedPreferences instance initialization
         mySettingsForSpinners = this.getPreferences(Context.MODE_PRIVATE);
 
+        // Widget initialization
+        editTextInput = findViewById(R.id.input_converter);
+        editTextOutput = findViewById(R.id.output_converter);
+
+        // Disable input option for EditText views
+        editTextInput.setKeyListener(null);
+        editTextOutput.setKeyListener(null);
+
+        // Spinners block initialization
         spinner = findViewById(R.id.spinner);
         spinner2 = findViewById(R.id.spinner2);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.angle_block,R.layout.spinner_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item, spinnerItems);
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner2.setAdapter(adapter);
 
-
+        // Spinners listeners
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                digitsCheck();
+                checkDigits();
             }
 
             @Override
@@ -66,7 +82,7 @@ public class ConversionActivity extends AppCompatActivity {
         spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                digitsCheck();
+                checkDigits();
             }
 
             @Override
@@ -74,13 +90,7 @@ public class ConversionActivity extends AppCompatActivity {
             }
         });
 
-        editTextInput = findViewById(R.id.input_converter);
-        editTextOutput = findViewById(R.id.output_converter);
-
-        // disable input for EditText view
-        editTextInput.setKeyListener(null);
-        editTextOutput.setKeyListener(null);
-
+        // Copy button initialization and listeners
         final Button copyButton = findViewById(R.id.button_copy);
         copyButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,121 +105,89 @@ public class ConversionActivity extends AppCompatActivity {
                 return true;
             }
         });
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        if (firstLaunch.getBoolean(FIRST_LAUNCH, true)) {
-
-            spinner.setSelection(0);
-            spinner2.setSelection(1);
-
-            firstLaunch.edit().putBoolean(FIRST_LAUNCH, false).apply();
-
-        } else {
-
-            spinner.setSelection(mySettingsForSpinners.getInt(SPINNER_1_PREFERENCE_KEY, 0));
-            spinner2.setSelection(mySettingsForSpinners.getInt(SPINNER_2_PREFERENCE_KEY, 1));
-
-        }
-
+        spinner.setSelection(mySettingsForSpinners.getInt(key1, 0));
+        spinner2.setSelection(mySettingsForSpinners.getInt(key2, 1));
     }
 
     @Override
-    protected void onPause(){
+    protected void onPause() {
         super.onPause();
-
         SharedPreferences.Editor editor = mySettingsForSpinners.edit();
-        editor.putInt(SPINNER_1_PREFERENCE_KEY, spinner.getSelectedItemPosition());
-        editor.putInt(SPINNER_2_PREFERENCE_KEY, spinner2.getSelectedItemPosition());
+        editor.putInt(key1, spinner.getSelectedItemPosition());
+        editor.putInt(key2, spinner2.getSelectedItemPosition());
         editor.apply();
     }
 
-    public void onClickDigitsBtn(View v) {
-
+    public void onClickDigitButtons(View v) {
         Button btn = (Button) v;
         editTextInput.setText(editTextInput.getText().append(btn.getText()));
         checkAmountOfDigits();
         conversion();
-
     }
 
-    public void onClickFuncBtn(View v) {
-
+    public void onClickFunctionButtons(View v) {
         switch (v.getId()) {
-
             // Dot block
             case R.id.button_dot:
-                dotCheck();
+                setDotSign();
                 break;
-
             // Delete and Clear block
             case R.id.button_delete:
-                fieldIsEmptyCheck();
-                digitsCheck();
+                checkEmptyInputField();
+                checkDigits();
                 break;
             case R.id.button_clear:
                 editTextInput.getText().clear();
                 editTextOutput.getText().clear();
                 break;
-
             // Sign block
             case R.id.button_sign:
-                signCheck();
-                digitsCheck();
+                setMinusSign();
+                checkDigits();
                 break;
-
             // Reverse block
             case R.id.button_reverse:
                 reverse();
                 break;
-
             // Default block
             default:
                 break;
-
         }
-
     }
 
-    private void dotCheck() {
-
+    private void setDotSign() {
         String text = editTextInput.getText().toString();
         if (text.contains(".")) {
             editTextInput.setText(editTextInput.getText());
         } else {
             editTextInput.setText(editTextInput.getText().append('.'));
         }
-
     }
 
-    private void fieldIsEmptyCheck() {
-
+    private void checkEmptyInputField() {
         String text = editTextInput.getText().toString();
         if (text.isEmpty()) {
             editTextInput.setText(editTextInput.getText());
         } else {
             editTextInput.setText(text.substring(0, text.length() - 1));
         }
-
     }
 
-    private void signCheck() {
-
+    private void setMinusSign() {
         String text = editTextInput.getText().toString();
         if (text.contains("-")) {
             editTextInput.setText(editTextInput.getText().delete(0, 1));
         } else {
             editTextInput.setText(editTextInput.getText().insert(0, "-"));
         }
-
     }
 
-    private void digitsCheck() {
-
+    private void checkDigits() {
         String inputText = editTextInput.getText().toString();
         Pattern regEx = Pattern.compile("^-|\\.|-\\.$");
         Matcher match = regEx.matcher(inputText);
@@ -219,7 +197,6 @@ public class ConversionActivity extends AppCompatActivity {
         } else {
             conversion();
         }
-
     }
 
     private void checkAmountOfDigits() {
@@ -241,7 +218,6 @@ public class ConversionActivity extends AppCompatActivity {
     private void copy() {
         ClipData clip = ClipData.newPlainText("Output", editTextOutput.getText());
         clipboard.setPrimaryClip(clip);
-
         String str = getResources().getString(R.string.copy_notification);
         showInfoText(str);
     }
@@ -266,18 +242,14 @@ public class ConversionActivity extends AppCompatActivity {
     }
 
     private void reverse() {
-
         int temp;
         int selected = spinner.getSelectedItemPosition();
         int selected2 = spinner2.getSelectedItemPosition();
-
         temp = selected;
         selected = selected2;
         selected2 = temp;
-
         spinner.setSelection(selected);
         spinner2.setSelection(selected2);
-
     }
 
     private void showInfoText(String infoMsg) {
@@ -285,14 +257,47 @@ public class ConversionActivity extends AppCompatActivity {
     }
 
     private void conversion() {
-
-        double inputValue = Double.valueOf(editTextInput.getText().toString());
         String spinnerItemName = spinner.getSelectedItem().toString();
         String spinner2ItemName = spinner2.getSelectedItem().toString();
-
-        double output = AngleMethods.convert(inputValue, spinnerItemName, spinner2ItemName);
-        editTextOutput.setText(String.valueOf(output));
-
+        double inputValue = Double.valueOf(editTextInput.getText().toString());
+        double outputValue = 0.0;
+        switch (key1) {
+            case "overskyet.unicon.TIME_SPINNER_1":
+                outputValue = TimeMethods.convert(inputValue, spinnerItemName, spinner2ItemName);
+                break;
+            case "overskyet.unicon.FUEL_CONSUMPTION_SPINNER_1":
+                outputValue = FuelConsumptionMethods.convert(inputValue, spinnerItemName, spinner2ItemName);
+                break;
+            case "overskyet.unicon.PRESSURE_SPINNER_1":
+                outputValue = PressureMethods.convert(inputValue, spinnerItemName, spinner2ItemName);
+                break;
+            case "overskyet.unicon.ENERGY_SPINNER_1":
+                outputValue = EnergyMethods.convert(inputValue, spinnerItemName, spinner2ItemName);
+                break;
+            case "overskyet.unicon.TEMPERATURE_SPINNER_1":
+                outputValue = TemperatureMethods.convert(inputValue, spinnerItemName, spinner2ItemName);
+                break;
+            case "overskyet.unicon.LENGTH_SPINNER_1":
+                outputValue = LengthMethods.convert(inputValue, spinnerItemName, spinner2ItemName);
+                break;
+            case "overskyet.unicon.WEIGHT_SPINNER_1":
+                outputValue = WeightMethods.convert(inputValue, spinnerItemName, spinner2ItemName);
+                break;
+            case "overskyet.unicon.VOLUME_SPINNER_1":
+                outputValue = VolumeMethods.convert(inputValue, spinnerItemName, spinner2ItemName);
+                break;
+            case "overskyet.unicon.AREA_SPINNER_1":
+                outputValue = AreaMethods.convert(inputValue, spinnerItemName, spinner2ItemName);
+                break;
+            case "overskyet.unicon.ANGLE_SPINNER_1":
+                outputValue = AngleMethods.convert(inputValue, spinnerItemName, spinner2ItemName);
+                break;
+            case "overskyet.unicon.SPEED_SPINNER_1":
+                outputValue = SpeedMethods.convert(inputValue, spinnerItemName, spinner2ItemName);
+                break;
+            default:
+                break;
+        }
+        editTextOutput.setText(String.valueOf(outputValue));
     }
-
 }

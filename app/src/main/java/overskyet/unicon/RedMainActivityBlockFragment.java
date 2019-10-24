@@ -47,6 +47,14 @@ public class RedMainActivityBlockFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 myIntent = new Intent(getActivity(), ConversionActivity.class);
+                String activityTitle = getResources().getString(R.string.time_button);
+                String key1 = getResources().getString(R.string.preference_key_1_time_conversion);
+                String key2 = getResources().getString(R.string.preference_key_2_time_conversion);
+                String[] spinnerItems = getResources().getStringArray(R.array.time_block);
+                myIntent.putExtra("stringExtra1", key1);
+                myIntent.putExtra("stringExtra2", key2);
+                myIntent.putExtra("stringExtra3", activityTitle);
+                myIntent.putExtra("stringArrayExtra", spinnerItems);
                 startActivity(myIntent);
             }
         });
@@ -55,6 +63,14 @@ public class RedMainActivityBlockFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 myIntent = new Intent(getActivity(), ConversionActivity.class);
+                String activityTitle = getResources().getString(R.string.fuel_consumption_button);
+                String key1 = getResources().getString(R.string.preference_key_1_fuel_consumption_conversion);
+                String key2 = getResources().getString(R.string.preference_key_2_fuel_consumption_conversion);
+                String[] spinnerItems = getResources().getStringArray(R.array.fuel_consumption_block);
+                myIntent.putExtra("stringExtra1", key1);
+                myIntent.putExtra("stringExtra2", key2);
+                myIntent.putExtra("stringExtra3", activityTitle);
+                myIntent.putExtra("stringArrayExtra", spinnerItems);
                 startActivity(myIntent);
             }
         });
@@ -63,6 +79,14 @@ public class RedMainActivityBlockFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 myIntent = new Intent(getActivity(), ConversionActivity.class);
+                String activityTitle = getResources().getString(R.string.pressure_button);
+                String key1 = getResources().getString(R.string.preference_key_1_pressure_conversion);
+                String key2 = getResources().getString(R.string.preference_key_2_pressure_conversion);
+                String[] spinnerItems = getResources().getStringArray(R.array.pressure_block);
+                myIntent.putExtra("stringExtra1", key1);
+                myIntent.putExtra("stringExtra2", key2);
+                myIntent.putExtra("stringExtra3", activityTitle);
+                myIntent.putExtra("stringArrayExtra", spinnerItems);
                 startActivity(myIntent);
             }
         });
@@ -71,6 +95,14 @@ public class RedMainActivityBlockFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 myIntent = new Intent(getActivity(), ConversionActivity.class);
+                String activityTitle = getResources().getString(R.string.energy_button);
+                String key1 = getResources().getString(R.string.preference_key_1_energy_conversion);
+                String key2 = getResources().getString(R.string.preference_key_2_energy_conversion);
+                String[] spinnerItems = getResources().getStringArray(R.array.energy_block);
+                myIntent.putExtra("stringExtra1", key1);
+                myIntent.putExtra("stringExtra2", key2);
+                myIntent.putExtra("stringExtra3", activityTitle);
+                myIntent.putExtra("stringArrayExtra", spinnerItems);
                 startActivity(myIntent);
             }
         });
@@ -79,11 +111,18 @@ public class RedMainActivityBlockFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 myIntent = new Intent(getActivity(), ConversionActivity.class);
+                String activityTitle = getResources().getString(R.string.temperature_button);
+                String key1 = getResources().getString(R.string.preference_key_1_temperature_conversion);
+                String key2 = getResources().getString(R.string.preference_key_2_temperature_conversion);
+                String[] spinnerItems = getResources().getStringArray(R.array.temperature_block);
+                myIntent.putExtra("stringExtra1", key1);
+                myIntent.putExtra("stringExtra2", key2);
+                myIntent.putExtra("stringExtra3", activityTitle);
+                myIntent.putExtra("stringArrayExtra", spinnerItems);
                 startActivity(myIntent);
             }
         });
 
         return v;
     }
-
 }
