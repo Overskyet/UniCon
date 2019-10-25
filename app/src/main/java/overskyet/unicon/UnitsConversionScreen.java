@@ -261,43 +261,34 @@ public class UnitsConversionScreen extends AppCompatActivity {
         String spinner2ItemName = spinner2.getSelectedItem().toString();
         double inputValue = Double.valueOf(editTextInput.getText().toString());
         double outputValue = 0.0;
-        switch (key1) {
-            case "overskyet.unicon.TIME_SPINNER_1":
-                outputValue = TimeUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
-                break;
-            case "overskyet.unicon.FUEL_CONSUMPTION_SPINNER_1":
-                outputValue = FuelConsumptionUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
-                break;
-            case "overskyet.unicon.PRESSURE_SPINNER_1":
-                outputValue = PressureUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
-                break;
-            case "overskyet.unicon.ENERGY_SPINNER_1":
-                outputValue = EnergyUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
-                break;
-            case "overskyet.unicon.TEMPERATURE_SPINNER_1":
-                outputValue = TemperatureUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
-                break;
-            case "overskyet.unicon.LENGTH_SPINNER_1":
-                outputValue = LengthUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
-                break;
-            case "overskyet.unicon.WEIGHT_SPINNER_1":
-                outputValue = WeightUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
-                break;
-            case "overskyet.unicon.VOLUME_SPINNER_1":
-                outputValue = VolumeUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
-                break;
-            case "overskyet.unicon.AREA_SPINNER_1":
-                outputValue = AreaUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
-                break;
-            case "overskyet.unicon.ANGLE_SPINNER_1":
-                outputValue = AngleUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
-                break;
-            case "overskyet.unicon.SPEED_SPINNER_1":
-                outputValue = SpeedUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
-                break;
-            default:
-                break;
-        }
+
+        if (inputValue == 0) editTextOutput.setText(String.valueOf(outputValue));
+        else if (key1.equals(getString(R.string.preference_key_1_time_conversion))) outputValue =
+                TimeUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
+        else if (key1.equals(getString(R.string.preference_key_1_fuel_consumption_conversion)))
+            outputValue =
+                    FuelConsumptionUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
+        else if (key1.equals(getString(R.string.preference_key_1_pressure_conversion)))
+            outputValue =
+                    PressureUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
+        else if (key1.equals(getString(R.string.preference_key_1_energy_conversion))) outputValue =
+                EnergyUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
+        else if (key1.equals(getString(R.string.preference_key_1_temperature_conversion)))
+            outputValue =
+                    TemperatureUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
+        else if (key1.equals(getString(R.string.preference_key_1_length_conversion))) outputValue =
+                LengthUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
+        else if (key1.equals(getString(R.string.preference_key_1_weight_conversion))) outputValue =
+                WeightUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
+        else if (key1.equals(getString(R.string.preference_key_1_volume_conversion))) outputValue =
+                VolumeUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
+        else if (key1.equals(getString(R.string.preference_key_1_area_conversion))) outputValue =
+                AreaUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
+        else if (key1.equals(getString(R.string.preference_key_1_angle_conversion))) outputValue =
+                AngleUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
+        else if (key1.equals(getString(R.string.preference_key_1_speed_conversion))) outputValue =
+                SpeedUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
+
         editTextOutput.setText(String.valueOf(outputValue));
     }
 }
