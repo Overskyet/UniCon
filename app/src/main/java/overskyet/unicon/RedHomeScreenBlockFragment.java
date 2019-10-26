@@ -39,6 +39,12 @@ public class RedHomeScreenBlockFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 myIntent = new Intent(getActivity(), CurrencyExchangeScreen.class);
+                String activityTitle = getResources().getString(R.string.currency_button);
+                String key1 = getResources().getString(R.string.preference_key_1_currency_conversion);
+                String key2 = getResources().getString(R.string.preference_key_2_currency_conversion);
+                myIntent.putExtra("stringExtra1", key1);
+                myIntent.putExtra("stringExtra2", key2);
+                myIntent.putExtra("stringExtra3", activityTitle);
                 startActivity(myIntent);
             }
         });
