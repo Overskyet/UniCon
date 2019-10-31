@@ -2,32 +2,6 @@
 
     <string name="app_name">UniCon</string>
 
-    <string name="preference_key_1_currency_conversion">overskyet.unicon.CURRENCY_SPINNER_1</string>
-    <string name="preference_key_1_time_conversion">overskyet.unicon.TIME_SPINNER_1</string>
-    <string name="preference_key_1_fuel_consumption_conversion">overskyet.unicon.FUEL_CONSUMPTION_SPINNER_1</string>
-    <string name="preference_key_1_pressure_conversion">overskyet.unicon.PRESSURE_SPINNER_1</string>
-    <string name="preference_key_1_energy_conversion">overskyet.unicon.ENERGY_SPINNER_1</string>
-    <string name="preference_key_1_temperature_conversion">overskyet.unicon.TEMPERATURE_SPINNER_1</string>
-    <string name="preference_key_1_length_conversion">overskyet.unicon.LENGTH_SPINNER_1</string>
-    <string name="preference_key_1_weight_conversion">overskyet.unicon.WEIGHT_SPINNER_1</string>
-    <string name="preference_key_1_volume_conversion">overskyet.unicon.VOLUME_SPINNER_1</string>
-    <string name="preference_key_1_area_conversion">overskyet.unicon.AREA_SPINNER_1</string>
-    <string name="preference_key_1_angle_conversion">overskyet.unicon.ANGLE_SPINNER_1</string>
-    <string name="preference_key_1_speed_conversion">overskyet.unicon.SPEED_SPINNER_1</string>
-
-    <string name="preference_key_2_currency_conversion">overskyet.unicon.CURRENCY_SPINNER_2</string>
-    <string name="preference_key_2_time_conversion">overskyet.unicon.TIME_SPINNER_2</string>
-    <string name="preference_key_2_fuel_consumption_conversion">overskyet.unicon.FUEL_CONSUMPTION_SPINNER_2</string>
-    <string name="preference_key_2_pressure_conversion">overskyet.unicon.PRESSURE_SPINNER_2</string>
-    <string name="preference_key_2_energy_conversion">overskyet.unicon.ENERGY_SPINNER_2</string>
-    <string name="preference_key_2_temperature_conversion">overskyet.unicon.TEMPERATURE_SPINNER_2</string>
-    <string name="preference_key_2_length_conversion">overskyet.unicon.LENGTH_SPINNER_2</string>
-    <string name="preference_key_2_weight_conversion">overskyet.unicon.WEIGHT_SPINNER_2</string>
-    <string name="preference_key_2_volume_conversion">overskyet.unicon.VOLUME_SPINNER_2</string>
-    <string name="preference_key_2_area_conversion">overskyet.unicon.AREA_SPINNER_2</string>
-    <string name="preference_key_2_angle_conversion">overskyet.unicon.ANGLE_SPINNER_2</string>
-    <string name="preference_key_2_speed_conversion">overskyet.unicon.SPEED_SPINNER_2</string>
-
     <string name="currency_button">CURRENCY</string>
     <string name="weight_button">WEIGHT</string>
     <string name="volume_button">VOLUME</string>

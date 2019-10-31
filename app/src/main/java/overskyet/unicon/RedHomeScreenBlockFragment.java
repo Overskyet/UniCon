@@ -40,10 +40,8 @@ public class RedHomeScreenBlockFragment extends Fragment {
             public void onClick(View v) {
                 myIntent = new Intent(getActivity(), CurrencyExchangeScreen.class);
                 String activityTitle = getResources().getString(R.string.currency_button);
-                String key1 = getResources().getString(R.string.preference_key_1_currency_conversion);
-                String key2 = getResources().getString(R.string.preference_key_2_currency_conversion);
-                myIntent.putExtra("stringExtra1", key1);
-                myIntent.putExtra("stringExtra2", key2);
+                myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_CURRENCY_CONVERSION);
+                myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_CURRENCY_CONVERSION);
                 myIntent.putExtra("stringExtra3", activityTitle);
                 startActivity(myIntent);
             }
@@ -54,11 +52,9 @@ public class RedHomeScreenBlockFragment extends Fragment {
             public void onClick(View v) {
                 myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
                 String activityTitle = getResources().getString(R.string.time_button);
-                String key1 = getResources().getString(R.string.preference_key_1_time_conversion);
-                String key2 = getResources().getString(R.string.preference_key_2_time_conversion);
                 String[] spinnerItems = getResources().getStringArray(R.array.time_block);
-                myIntent.putExtra("stringExtra1", key1);
-                myIntent.putExtra("stringExtra2", key2);
+                myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_TIME_CONVERSION);
+                myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_TIME_CONVERSION);
                 myIntent.putExtra("stringExtra3", activityTitle);
                 myIntent.putExtra("stringArrayExtra", spinnerItems);
                 startActivity(myIntent);
@@ -70,11 +66,9 @@ public class RedHomeScreenBlockFragment extends Fragment {
             public void onClick(View v) {
                 myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
                 String activityTitle = getResources().getString(R.string.fuel_consumption_button);
-                String key1 = getResources().getString(R.string.preference_key_1_fuel_consumption_conversion);
-                String key2 = getResources().getString(R.string.preference_key_2_fuel_consumption_conversion);
                 String[] spinnerItems = getResources().getStringArray(R.array.fuel_consumption_block);
-                myIntent.putExtra("stringExtra1", key1);
-                myIntent.putExtra("stringExtra2", key2);
+                myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_FUEL_CONSUMPTION_CONVERSION);
+                myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_FUEL_CONSUMPTION_CONVERSION);
                 myIntent.putExtra("stringExtra3", activityTitle);
                 myIntent.putExtra("stringArrayExtra", spinnerItems);
                 startActivity(myIntent);
@@ -86,11 +80,9 @@ public class RedHomeScreenBlockFragment extends Fragment {
             public void onClick(View v) {
                 myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
                 String activityTitle = getResources().getString(R.string.pressure_button);
-                String key1 = getResources().getString(R.string.preference_key_1_pressure_conversion);
-                String key2 = getResources().getString(R.string.preference_key_2_pressure_conversion);
                 String[] spinnerItems = getResources().getStringArray(R.array.pressure_block);
-                myIntent.putExtra("stringExtra1", key1);
-                myIntent.putExtra("stringExtra2", key2);
+                myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_PRESSURE_CONVERSION);
+                myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_PRESSURE_CONVERSION);
                 myIntent.putExtra("stringExtra3", activityTitle);
                 myIntent.putExtra("stringArrayExtra", spinnerItems);
                 startActivity(myIntent);
@@ -102,11 +94,9 @@ public class RedHomeScreenBlockFragment extends Fragment {
             public void onClick(View v) {
                 myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
                 String activityTitle = getResources().getString(R.string.energy_button);
-                String key1 = getResources().getString(R.string.preference_key_1_energy_conversion);
-                String key2 = getResources().getString(R.string.preference_key_2_energy_conversion);
                 String[] spinnerItems = getResources().getStringArray(R.array.energy_block);
-                myIntent.putExtra("stringExtra1", key1);
-                myIntent.putExtra("stringExtra2", key2);
+                myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_ENERGY_CONVERSION);
+                myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_ENERGY_CONVERSION);
                 myIntent.putExtra("stringExtra3", activityTitle);
                 myIntent.putExtra("stringArrayExtra", spinnerItems);
                 startActivity(myIntent);
@@ -118,11 +108,9 @@ public class RedHomeScreenBlockFragment extends Fragment {
             public void onClick(View v) {
                 myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
                 String activityTitle = getResources().getString(R.string.temperature_button);
-                String key1 = getResources().getString(R.string.preference_key_1_temperature_conversion);
-                String key2 = getResources().getString(R.string.preference_key_2_temperature_conversion);
                 String[] spinnerItems = getResources().getStringArray(R.array.temperature_block);
-                myIntent.putExtra("stringExtra1", key1);
-                myIntent.putExtra("stringExtra2", key2);
+                myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_TEMPERATURE_CONVERSION);
+                myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_TEMPERATURE_CONVERSION);
                 myIntent.putExtra("stringExtra3", activityTitle);
                 myIntent.putExtra("stringArrayExtra", spinnerItems);
                 startActivity(myIntent);

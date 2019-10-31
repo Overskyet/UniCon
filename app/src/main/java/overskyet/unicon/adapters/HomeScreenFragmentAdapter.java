@@ -1,4 +1,4 @@
-package overskyet.unicon;
+package overskyet.unicon.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -6,11 +6,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.List;
 
-class MyPageAdapter extends FragmentPagerAdapter {
+public class HomeScreenFragmentAdapter extends FragmentPagerAdapter {
 
     private List<Fragment> fragments;
 
-    public MyPageAdapter(FragmentManager fm, List<Fragment> fragments) {
+    public HomeScreenFragmentAdapter(FragmentManager fm, List<Fragment> fragments) {
 
         super(fm);
         this.fragments = fragments;

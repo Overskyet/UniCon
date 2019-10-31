@@ -40,11 +40,9 @@ public class BlueHomeScreenBlockFragment extends Fragment {
             public void onClick(View v) {
                 myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
                 String activityTitle = getResources().getString(R.string.length_button);
-                String key1 = getResources().getString(R.string.preference_key_1_length_conversion);
-                String key2 = getResources().getString(R.string.preference_key_2_length_conversion);
                 String[] spinnerItems = getResources().getStringArray(R.array.length_block);
-                myIntent.putExtra("stringExtra1", key1);
-                myIntent.putExtra("stringExtra2", key2);
+                myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_LENGTH_CONVERSION);
+                myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_LENGTH_CONVERSION);
                 myIntent.putExtra("stringExtra3", activityTitle);
                 myIntent.putExtra("stringArrayExtra", spinnerItems);
                 startActivity(myIntent);
@@ -56,11 +54,9 @@ public class BlueHomeScreenBlockFragment extends Fragment {
             public void onClick(View v) {
                 myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
                 String activityTitle = getResources().getString(R.string.weight_button);
-                String key1 = getResources().getString(R.string.preference_key_1_weight_conversion);
-                String key2 = getResources().getString(R.string.preference_key_2_weight_conversion);
                 String[] spinnerItems = getResources().getStringArray(R.array.weight_block);
-                myIntent.putExtra("stringExtra1", key1);
-                myIntent.putExtra("stringExtra2", key2);
+                myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_WEIGHT_CONVERSION);
+                myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_WEIGHT_CONVERSION);
                 myIntent.putExtra("stringExtra3", activityTitle);
                 myIntent.putExtra("stringArrayExtra", spinnerItems);
                 startActivity(myIntent);
@@ -72,11 +68,9 @@ public class BlueHomeScreenBlockFragment extends Fragment {
             public void onClick(View v) {
                 myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
                 String activityTitle = getResources().getString(R.string.volume_button);
-                String key1 = getResources().getString(R.string.preference_key_1_volume_conversion);
-                String key2 = getResources().getString(R.string.preference_key_2_volume_conversion);
                 String[] spinnerItems = getResources().getStringArray(R.array.volume_block);
-                myIntent.putExtra("stringExtra1", key1);
-                myIntent.putExtra("stringExtra2", key2);
+                myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_VOLUME_CONVERSION);
+                myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_VOLUME_CONVERSION);
                 myIntent.putExtra("stringExtra3", activityTitle);
                 myIntent.putExtra("stringArrayExtra", spinnerItems);
                 startActivity(myIntent);
@@ -88,11 +82,9 @@ public class BlueHomeScreenBlockFragment extends Fragment {
             public void onClick(View v) {
                 myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
                 String activityTitle = getResources().getString(R.string.area_button);
-                String key1 = getResources().getString(R.string.preference_key_1_area_conversion);
-                String key2 = getResources().getString(R.string.preference_key_2_area_conversion);
                 String[] spinnerItems = getResources().getStringArray(R.array.area_block);
-                myIntent.putExtra("stringExtra1", key1);
-                myIntent.putExtra("stringExtra2", key2);
+                myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_AREA_CONVERSION);
+                myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_AREA_CONVERSION);
                 myIntent.putExtra("stringExtra3", activityTitle);
                 myIntent.putExtra("stringArrayExtra", spinnerItems);
                 startActivity(myIntent);
@@ -104,11 +96,9 @@ public class BlueHomeScreenBlockFragment extends Fragment {
             public void onClick(View v) {
                 myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
                 String activityTitle = getResources().getString(R.string.angle_button);
-                String key1 = getResources().getString(R.string.preference_key_1_angle_conversion);
-                String key2 = getResources().getString(R.string.preference_key_2_angle_conversion);
                 String[] spinnerItems = getResources().getStringArray(R.array.angle_block);
-                myIntent.putExtra("stringExtra1", key1);
-                myIntent.putExtra("stringExtra2", key2);
+                myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_ANGLE_CONVERSION);
+                myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_ANGLE_CONVERSION);
                 myIntent.putExtra("stringExtra3", activityTitle);
                 myIntent.putExtra("stringArrayExtra", spinnerItems);
                 startActivity(myIntent);
@@ -120,11 +110,9 @@ public class BlueHomeScreenBlockFragment extends Fragment {
             public void onClick(View v) {
                 myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
                 String activityTitle = getResources().getString(R.string.speed_button);
-                String key1 = getResources().getString(R.string.preference_key_1_speed_conversion);
-                String key2 = getResources().getString(R.string.preference_key_2_speed_conversion);
                 String[] spinnerItems = getResources().getStringArray(R.array.speed_block);
-                myIntent.putExtra("stringExtra1", key1);
-                myIntent.putExtra("stringExtra2", key2);
+                myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_SPEED_CONVERSION);
+                myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_SPEED_CONVERSION);
                 myIntent.putExtra("stringExtra3", activityTitle);
                 myIntent.putExtra("stringArrayExtra", spinnerItems);
                 startActivity(myIntent);

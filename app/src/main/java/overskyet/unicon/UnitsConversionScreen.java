@@ -260,35 +260,7 @@ public class UnitsConversionScreen extends AppCompatActivity {
         String spinnerItemName = spinner.getSelectedItem().toString();
         String spinner2ItemName = spinner2.getSelectedItem().toString();
         double inputValue = Double.valueOf(editTextInput.getText().toString());
-        double outputValue = 0.0;
-
-        if (inputValue == 0) editTextOutput.setText(String.valueOf(outputValue));
-        else if (key1.equals(getString(R.string.preference_key_1_time_conversion))) outputValue =
-                TimeUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
-        else if (key1.equals(getString(R.string.preference_key_1_fuel_consumption_conversion)))
-            outputValue =
-                    FuelConsumptionUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
-        else if (key1.equals(getString(R.string.preference_key_1_pressure_conversion)))
-            outputValue =
-                    PressureUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
-        else if (key1.equals(getString(R.string.preference_key_1_energy_conversion))) outputValue =
-                EnergyUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
-        else if (key1.equals(getString(R.string.preference_key_1_temperature_conversion)))
-            outputValue =
-                    TemperatureUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
-        else if (key1.equals(getString(R.string.preference_key_1_length_conversion))) outputValue =
-                LengthUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
-        else if (key1.equals(getString(R.string.preference_key_1_weight_conversion))) outputValue =
-                WeightUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
-        else if (key1.equals(getString(R.string.preference_key_1_volume_conversion))) outputValue =
-                VolumeUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
-        else if (key1.equals(getString(R.string.preference_key_1_area_conversion))) outputValue =
-                AreaUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
-        else if (key1.equals(getString(R.string.preference_key_1_angle_conversion))) outputValue =
-                AngleUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
-        else if (key1.equals(getString(R.string.preference_key_1_speed_conversion))) outputValue =
-                SpeedUnitsCalculation.convert(inputValue, spinnerItemName, spinner2ItemName);
-
+        double outputValue = CalculationMethods.convert(inputValue, spinnerItemName, spinner2ItemName, key1);
         editTextOutput.setText(String.valueOf(outputValue));
     }
 }
