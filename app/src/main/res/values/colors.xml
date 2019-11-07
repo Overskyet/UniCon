@@ -2,22 +2,24 @@
 <resources>
 
     <color name="colorPrimary">#393939</color>
-    <color name="colorPrimaryDark">#393939</color>
-    <color name="colorAccent">#ffffff</color>
+    <color name="colorPrimaryDark">#131313</color>
+    <color name="colorAccent">#FF7B7B</color>
 
-    <color name="main_activity_background_color">#E4393939</color>
-    <color name="conversion_activity_background_color">#393939</color>
-    <color name="spinner_popup_background_color">#2C2C2C</color>
+    <color name="home_screen_background_color">@color/colorPrimary</color>
+    <color name="units_conversion_screen_background_color">@color/colorPrimary</color>
+    <color name="home_screen_tab_indicators_color">#70FFFFFF</color>
 
-    <color name="conversion_activity_digit_button_background">#ff8112</color>
-    <color name="conversion_activity_digit_button_background_onPressed">#E76C00</color>
-    <color name="conversion_activity_func_button_background">#DD2C00</color>
-    <color name="conversion_activity_func_button_background_onPressed">#BE2600</color>
+    <color name="units_conversion_screen_digit_button_background">#ff8112</color>
+    <color name="units_conversion_screen_digit_button_background_onPressed">#E76C00</color>
+    <color name="units_conversion_screen_func_button_background">#DD2C00</color>
+    <color name="units_conversion_screen_func_button_background_onPressed">#BE2600</color>
+    <color name="units_conversion_screen_spinner_popup_background_color">#2C2C2C</color>
 
-    <color name="main_activity_buttons_background_color">#E9310A</color>
-    <color name="main_activity_buttons_background_color_onPressed">#DD2C00</color>
-    <color name="main_activity_buttons_background_color_2">#003CE4</color>
-    <color name="main_activity_buttons_background_color_2_onPressed">#0037D1</color>
+    <color name="home_screen_fragments_buttons_text_color">#FFFFFF</color>
+    <color name="home_screen_fragment_red_buttons_background_color">#E9310A</color>
+    <color name="home_screen_fragment_red_buttons_background_color_onPressed">#DD2C00</color>
+    <color name="home_screen_fragment_blue_buttons_background_color">#003CE4</color>
+    <color name="home_screen_fragment_blue_buttons_background_color_onPressed">#0037D1</color>
 
     <color name="text_color">#B5FFFFFF</color>
     <color name="hint_color">#70FFFFFF</color>

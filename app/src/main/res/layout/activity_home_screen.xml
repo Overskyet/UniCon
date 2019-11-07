@@ -1,15 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mainActivityLayout"
+    android:id="@+id/home_screen_linear_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".HomeScreen">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/home_screen_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/AppTheme"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.ActionBar" />
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/home_screen_tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/home_screen_tab_indicators_color"
+        app:tabMaxWidth="0dp"
+        app:tabMode="fixed" />
+
+    <View
+        android:id="@+id/divider3"
+        style="@style/units_conversion_toolbar_divider" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/home_screen_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+</LinearLayout>

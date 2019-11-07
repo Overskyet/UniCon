@@ -2,12 +2,12 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="false">
         <shape>
-            <solid android:color="@color/main_activity_buttons_background_color" />
+            <solid android:color="@color/home_screen_fragment_red_buttons_background_color" />
         </shape>
     </item>
     <item android:state_pressed="true">
         <shape>
-            <solid android:color="@color/main_activity_buttons_background_color_onPressed" />
+            <solid android:color="@color/home_screen_fragment_red_buttons_background_color_onPressed" />
         </shape>
     </item>
 </selector>

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="overskyet.unicon">
 
     <application
+        tools:ignore="GoogleAppIndexingWarning"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,12 +19,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UnitsConversionScreen">
+        <activity
+            android:name=".UnitsConversionScreen"
+            android:parentActivityName=".HomeScreen">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeScreen" />
         </activity>
-        <activity android:name=".CurrencyExchangeScreen">
+        <activity
+            android:name=".CurrencyExchangeScreen"
+            android:parentActivityName=".HomeScreen">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeScreen" />

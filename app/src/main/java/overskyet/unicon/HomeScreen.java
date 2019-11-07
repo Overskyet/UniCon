@@ -1,9 +1,15 @@
 package overskyet.unicon;
 
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,23 +43,40 @@ public class HomeScreen extends AppCompatActivity {
     public static final String KEY_2_ANGLE_CONVERSION = "overskyet.unicon.ANGLE_SPINNER_2";
     public static final String KEY_2_SPEED_CONVERSION = "overskyet.unicon.SPEED_SPINNER_2";
 
-    HomeScreenFragmentAdapter pageAdapter;
+    DialogFragment disclaimerDialogFragment;
     RedHomeScreenBlockFragment redBlockFragment;
     BlueHomeScreenBlockFragment blueBlockFragment;
+    HomeScreenFragmentAdapter pageAdapter;
+    TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
+        initActionBar();
+
         redBlockFragment = new RedHomeScreenBlockFragment();
         blueBlockFragment = new BlueHomeScreenBlockFragment();
 
         List<Fragment> fragments = getFragments();
         pageAdapter = new HomeScreenFragmentAdapter(getSupportFragmentManager(), fragments);
-        ViewPager viewPager = findViewById(R.id.viewPager);
+        ViewPager viewPager = findViewById(R.id.home_screen_view_pager);
         viewPager.setAdapter(pageAdapter);
 
+        tabLayout = findViewById(R.id.home_screen_tab_layout);
+        tabLayout.setupWithViewPager(viewPager);
+
+    }
+
+    private void initActionBar() {
+        Toolbar toolbar = findViewById(R.id.home_screen_toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setIcon(R.drawable.ic_home_screen_toolbar_icon);
+            actionBar.setTitle("");
+        }
     }
 
     private List<Fragment> getFragments() {
@@ -64,4 +87,25 @@ public class HomeScreen extends AppCompatActivity {
         return fragments;
     }
 
+    private void openDialogWindow() {
+        disclaimerDialogFragment = new HomeScreenCreditsDialogFragment();
+        disclaimerDialogFragment.show(getSupportFragmentManager(), getResources().getString(R.string.credits_header));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int i = item.getItemId();
+
+        if (i == R.id.item_credits) {
+            openDialogWindow();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

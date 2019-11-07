@@ -4,7 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/conversion_activity_background_color"
+    android:background="@color/units_conversion_screen_background_color"
     tools:context=".CurrencyExchangeScreen">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/currency_exchange_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/AppTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.ActionBar" />
+
+    <View
+        android:id="@+id/divider2"
+        style="@style/units_conversion_toolbar_divider"
+        app:layout_constraintTop_toBottomOf="@id/currency_exchange_toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

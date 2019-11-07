@@ -1,13 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="conversion_activity_vertical_layout_height">65dp</dimen>
-    <dimen name="conversion_activity_button_margin">0.5dp</dimen>
-    <dimen name="conversion_activity_textview_text_size">20sp</dimen>
-    <dimen name="main_activity_buttons_text_size">8pt</dimen>
-    <dimen name="main_activity_buttons_height">60dp</dimen>
+    <!-- ACTIVITY_UNITS_CONVERSION DIMENS -->
+    <dimen name="units_conversion_button_container_height">65dp</dimen>
+    <dimen name="units_conversion_buttons_margin">0.5dp</dimen>
+    <dimen name="units_conversion_buttons_text_size">25sp</dimen>
 
-    <dimen name="text_size">25sp</dimen>
-    <dimen name="spinner_items_text_size">16sp</dimen>
+    <dimen name="units_conversion_text_view_marginStart">4dp</dimen>
+    <dimen name="units_conversion_text_view_marginTop">16dp</dimen>
+    <dimen name="units_conversion_edit_text_marginBottom">8dp</dimen>
+    <dimen name="units_conversion_edit_text_marginEnd">4dp</dimen>
+
+    <dimen name="units_conversion_toolbar_divider_height">6dp</dimen>
+
+    <dimen name="units_conversion_spinner_margin">8dp</dimen>
+
+    <dimen name="units_conversion_text_size">20sp</dimen>
+
+    <!-- HOME_SCREEN FRAGMENTS DIMENS -->
+    <dimen name="home_screen_buttons_height">60dp</dimen>
+    <dimen name="home_screen_buttons_text_size">15sp</dimen>
+    <dimen name="home_screen_button_padding_10dp">10dp</dimen>
+    <dimen name="home_screen_button_padding_15dp">15dp</dimen>
+    <dimen name="home_screen_button_margin">8dp</dimen>
+    <dimen name="home_screen_credits_dialog_header_padding">5dp</dimen>
+    <dimen name="home_screen_credits_dialog_body_padding">10dp</dimen>
+    <dimen name="home_screen_credits_dialog_header_text_size">20sp</dimen>
+    <dimen name="home_screen_credits_dialog_body_text_size">18sp</dimen>
+
+    <!-- SPINNER ITEM DIMENS -->
+    <dimen name="spinner_item_text_size">16sp</dimen>
+    <dimen name="spinner_item_padding">6dp</dimen>
 
 </resources>

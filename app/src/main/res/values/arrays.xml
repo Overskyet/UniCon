@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="weight_block">
+        <item>Tonne</item>
+        <item>Kilogram</item>
+        <item>Gram</item>
+        <item>Milligram</item>
+        <item>Microgram</item>
+        <item>Long ton (UK)</item>
+        <item>Short ton (US)</item>
+        <item>Stone</item>
+        <item>Pound</item>
+        <item>Ounce</item>
+    </string-array>
+
+    <string-array name="volume_block">
+        <item>Liter</item>
+        <item>Milliliter</item>
+        <item>Gallon (US)</item>
+        <item>Gallon (UK)</item>
+        <item>Cubic Meter</item>
+        <item>Cubic foot</item>
+        <item>Cubic inch</item>
+        <item>Fluid ounce (US)</item>
+        <item>Fluid ounce (UK)</item>
+        <item>Liquid pint (US)</item>
+        <item>Imperial Pint (UK)</item>
+    </string-array>
+
+    <string-array name="speed_block">
+        <item>Kilometer per hour (Km/h)</item>
+        <item>Mile per hour (Mi/h)</item>
+        <item>Meter per second (M/s)</item>
+        <item>Foot per second (Ft/s)</item>
+        <item>Knot (Kt)</item>
+    </string-array>
+
+    <string-array name="length_block">
+        <item>Kilometer</item>
+        <item>Meter</item>
+        <item>Centimeter</item>
+        <item>Millimeter</item>
+        <item>Micrometer</item>
+        <item>Nanometer</item>
+        <item>Mile</item>
+        <item>Yard</item>
+        <item>Foot</item>
+        <item>Inch</item>
+        <item>Nautical mile</item>
+    </string-array>
+
+    <string-array name="temperature_block">
+        <item>Celsius</item>
+        <item>Fahrenheit</item>
+        <item>Kelvin</item>
+    </string-array>
+
+    <string-array name="area_block">
+        <item>Square kilometer</item>
+        <item>Square meter</item>
+        <item>Square mile</item>
+        <item>Square yard</item>
+        <item>Square foot</item>
+        <item>Square inch</item>
+        <item>Hectare</item>
+        <item>Acre</item>
+    </string-array>
+
+    <string-array name="angle_block">
+        <item>Gradian</item>
+        <item>Degree</item>
+        <item>Arcminute</item>
+        <item>Radian</item>
+        <item>Milliradian</item>
+        <item>Arcsecond</item>
+    </string-array>
+
+    <string-array name="time_block">
+        <item>Nanosecond</item>
+        <item>Microsecond</item>
+        <item>Millisecond</item>
+        <item>Second</item>
+        <item>Minute</item>
+        <item>Hour</item>
+        <item>Day</item>
+        <item>Week</item>
+        <item>Month</item>
+        <item>Year</item>
+        <item>Decade</item>
+        <item>Century</item>
+    </string-array>
+
+    <string-array name="fuel_consumption_block">
+        <item>Miles per gallon (US)</item>
+        <item>Miles per gallon (UK)</item>
+        <item>Kilometers per liter</item>
+        <item>Liters per 100 kilometers</item>
+    </string-array>
+
+    <string-array name="pressure_block">
+        <item>Standard atmosphere</item>
+        <item>Bar</item>
+        <item>Pascal</item>
+        <item>Torr</item>
+        <item>Pound per square inch (PSI)</item>
+    </string-array>
+
+    <string-array name="energy_block">
+        <item>Joule</item>
+        <item>Kilojoule</item>
+        <item>Calorie</item>
+        <item>Kilocalorie</item>
+        <item>Watt hour</item>
+        <item>Kilowatt hour</item>
+        <item>Electron-volt</item>
+        <item>British thermal unit</item>
+        <item>Therm</item>
+        <item>Foot pound</item>
+    </string-array>
+
+</resources>

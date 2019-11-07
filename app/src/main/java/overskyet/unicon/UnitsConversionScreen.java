@@ -5,8 +5,11 @@ import android.content.ClipDescription;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -38,13 +41,13 @@ public class UnitsConversionScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_units_conversion_screen);
 
+        // Action bar initialization
+        initActionBar(getIntent().getExtras().getInt("intExtra", 0));
+
         // Keys and spinner items array initialization
         key1 = getIntent().getExtras().getString("stringExtra1");
         key2 = getIntent().getExtras().getString("stringExtra2");
         String[] spinnerItems = getIntent().getExtras().getStringArray("stringArrayExtra");
-
-        // Set the title of activity
-        this.setTitle(getIntent().getExtras().getString("stringExtra3"));
 
         // Clipboard manager initialization
         clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
@@ -121,6 +124,20 @@ public class UnitsConversionScreen extends AppCompatActivity {
         editor.putInt(key1, spinner.getSelectedItemPosition());
         editor.putInt(key2, spinner2.getSelectedItemPosition());
         editor.apply();
+    }
+
+    private void initActionBar(int icon) {
+        Toolbar toolbar = findViewById(R.id.units_conversion_toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            if (icon != 0) {
+                actionBar.setIcon(icon);
+                actionBar.setTitle("");
+                return;
+            }
+            actionBar.setTitle(getIntent().getExtras().getString("stringExtra3"));
+        }
     }
 
     public void onClickDigitButtons(View v) {
@@ -238,6 +255,7 @@ public class UnitsConversionScreen extends AppCompatActivity {
             String str = getResources().getString(R.string.incorrect_paste_value_notification);
             showInfoText(str);
             editTextInput.getText().clear();
+            editTextOutput.getText().clear();
         }
     }
 

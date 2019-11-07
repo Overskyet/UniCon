@@ -820,18 +820,18 @@ final class CalculationMethods {
 
     private static void calculateFuelConsumption() {
         switch (itemName1) {
-            case "mile per gallon (us)": {
+            case "miles per gallon (us)": {
                 switch (itemName2) {
-                    case "mile per gallon (us)":
+                    case "miles per gallon (us)":
                         output = input;
                         break;
-                    case "mile per gallon (uk)":
+                    case "miles per gallon (uk)":
                         output = input * 1.201;
                         break;
-                    case "kilometer per liter":
+                    case "kilometers per liter":
                         output = input / 2.352;
                         break;
-                    case "liter per 100 kilometers":
+                    case "liters per 100 kilometers":
                         output = 235.215 / input;
                         break;
                     default:
@@ -839,18 +839,18 @@ final class CalculationMethods {
                 }
                 break;
             }
-            case "mile per gallon (uk)": {
+            case "miles per gallon (uk)": {
                 switch (itemName2) {
-                    case "mile per gallon (uk)":
+                    case "miles per gallon (uk)":
                         output = input;
                         break;
-                    case "mile per gallon (us)":
+                    case "miles per gallon (us)":
                         output = input / 1.201;
                         break;
-                    case "kilometer per liter":
+                    case "kilometers per liter":
                         output = input / 2.825;
                         break;
-                    case "liter per 100 kilometers":
+                    case "liters per 100 kilometers":
                         output = 282.481 / input;
                         break;
                     default:
@@ -858,18 +858,18 @@ final class CalculationMethods {
                 }
                 break;
             }
-            case "kilometer per liter": {
+            case "kilometers per liter": {
                 switch (itemName2) {
-                    case "kilometer per liter":
+                    case "kilometers per liter":
                         output = input;
                         break;
-                    case "mile per gallon (us)":
+                    case "miles per gallon (us)":
                         output = input * 2.352;
                         break;
-                    case "mile per gallon (uk)":
+                    case "miles per gallon (uk)":
                         output = input * 2.825;
                         break;
-                    case "liter per 100 kilometers":
+                    case "liters per 100 kilometers":
                         output = 100 / input;
                         break;
                     default:
@@ -877,18 +877,18 @@ final class CalculationMethods {
                 }
                 break;
             }
-            case "liter per 100 kilometers": {
+            case "liters per 100 kilometers": {
                 switch (itemName2) {
-                    case "liter per 100 kilometers":
+                    case "liters per 100 kilometers":
                         output = input;
                         break;
-                    case "mile per gallon (us)":
+                    case "miles per gallon (us)":
                         output = 235.215 / input;
                         break;
-                    case "mile per gallon (uk)":
+                    case "miles per gallon (uk)":
                         output = 282.481 / input;
                         break;
-                    case "kilometer per liter":
+                    case "kilometers per liter":
                         output = 100 / input;
                         break;
                     default:

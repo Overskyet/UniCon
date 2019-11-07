@@ -1,11 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textSize="@dimen/spinner_items_text_size"
-    android:gravity="start"
-    android:textColor="@color/text_color"
-    android:padding="5dp"
-    android:background="@color/spinner_popup_background_color">
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/spinner_item">
 </TextView>
