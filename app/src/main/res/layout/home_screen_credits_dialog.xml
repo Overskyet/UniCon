@@ -14,7 +14,9 @@
 
         <View
             android:id="@+id/divider4"
-            style="@style/units_conversion_toolbar_divider" />
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/units_conversion_toolbar_elevation"
+            android:background="@drawable/units_conversion_screen_toolbar_bottom_shadow" />
 
         <TextView
             android:id="@+id/home_screen_credits_dialog_body"

@@ -48,13 +48,14 @@ public class HomeScreen extends AppCompatActivity {
     BlueHomeScreenBlockFragment blueBlockFragment;
     HomeScreenFragmentAdapter pageAdapter;
     TabLayout tabLayout;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
-        initActionBar();
+        initToolbar();
 
         redBlockFragment = new RedHomeScreenBlockFragment();
         blueBlockFragment = new BlueHomeScreenBlockFragment();
@@ -69,14 +70,21 @@ public class HomeScreen extends AppCompatActivity {
 
     }
 
-    private void initActionBar() {
-        Toolbar toolbar = findViewById(R.id.home_screen_toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setIcon(R.drawable.ic_home_screen_toolbar_icon);
-            actionBar.setTitle("");
-        }
+    private void initToolbar() {
+        toolbar = findViewById(R.id.home_screen_toolbar);
+        toolbar.inflateMenu(R.menu.home_screen_toolbar_menu);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                int i = menuItem.getItemId();
+
+                if (i == R.id.item_credits) {
+                    openDialogWindow();
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     private List<Fragment> getFragments() {
@@ -90,22 +98,5 @@ public class HomeScreen extends AppCompatActivity {
     private void openDialogWindow() {
         disclaimerDialogFragment = new HomeScreenCreditsDialogFragment();
         disclaimerDialogFragment.show(getSupportFragmentManager(), getResources().getString(R.string.credits_header));
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int i = item.getItemId();
-
-        if (i == R.id.item_credits) {
-            openDialogWindow();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

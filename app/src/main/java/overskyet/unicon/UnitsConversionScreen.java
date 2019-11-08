@@ -5,7 +5,6 @@ import android.content.ClipDescription;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -42,7 +42,7 @@ public class UnitsConversionScreen extends AppCompatActivity {
         setContentView(R.layout.activity_units_conversion_screen);
 
         // Action bar initialization
-        initActionBar(getIntent().getExtras().getInt("intExtra", 0));
+        initToolbar(getIntent().getExtras().getInt("intExtra", 0));
 
         // Keys and spinner items array initialization
         key1 = getIntent().getExtras().getString("stringExtra1");
@@ -126,18 +126,17 @@ public class UnitsConversionScreen extends AppCompatActivity {
         editor.apply();
     }
 
-    private void initActionBar(int icon) {
+    private void initToolbar(int icon) {
         Toolbar toolbar = findViewById(R.id.units_conversion_toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            if (icon != 0) {
-                actionBar.setIcon(icon);
-                actionBar.setTitle("");
-                return;
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
-            actionBar.setTitle(getIntent().getExtras().getString("stringExtra3"));
-        }
+        });
+        ImageView toolbarImage = findViewById(R.id.units_conversion_toolbar_image);
+        toolbarImage.setImageResource(icon);
     }
 
     public void onClickDigitButtons(View v) {

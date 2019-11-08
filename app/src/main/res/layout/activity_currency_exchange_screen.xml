@@ -12,18 +12,19 @@
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
         android:background="?attr/colorPrimary"
+        android:elevation="@dimen/units_conversion_toolbar_elevation"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/AppTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.ActionBar" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <View
-        android:id="@+id/divider2"
-        style="@style/units_conversion_toolbar_divider"
-        app:layout_constraintTop_toBottomOf="@id/currency_exchange_toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <ImageView
+            android:id="@+id/currency_exchange_toolbar_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/home_screen_button_padding_10dp"
+            android:layout_gravity="end" />
+    </android.support.v7.widget.Toolbar>
 
 </android.support.constraint.ConstraintLayout>

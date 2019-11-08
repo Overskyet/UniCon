@@ -3,7 +3,7 @@
 
     <color name="colorPrimary">#393939</color>
     <color name="colorPrimaryDark">#131313</color>
-    <color name="colorAccent">#FF7B7B</color>
+    <color name="colorAccent">#FF4444</color>
 
     <color name="home_screen_background_color">@color/colorPrimary</color>
     <color name="units_conversion_screen_background_color">@color/colorPrimary</color>

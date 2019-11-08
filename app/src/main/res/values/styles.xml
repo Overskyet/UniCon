@@ -6,32 +6,10 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/colorPrimary</item>
-        <item name="actionBarStyle">@style/MyActionBar</item>
-    </style>
-
-    <!-- Title name stylisation -->
-    <style name="MyActionBar" parent="@style/Widget.AppCompat.ActionBar">
-        <item name="android:titleTextStyle">@style/MyTitleTextStyle</item>
-        <item name="titleTextStyle">@style/MyTitleTextStyle</item>
-    </style>
-
-    <style name="MyTitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/text_color</item>
     </style>
 
     <!--  ACTIVITY_UNITS_CONVERSION COMPONENTS STYLIZATION  -->
 
-    <!-- activity_units_conversion toolbar divider style -->
-    <style name="units_conversion_toolbar_divider">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/units_conversion_toolbar_divider_height</item>
-        <item name="android:background">@drawable/units_conversion_screen_toolbar_bottom_shadow
-        </item>
-    </style>
-    <!-- activity_units_conversion input field tint style  -->
-    <style name="units_conversion_edit_text_tint">
-        <item name="backgroundTint">@color/units_conversion_edit_text_tint_color</item>
-    </style>
     <!-- activity_units_conversion text_view style -->
     <style name="units_conversion_text_view">
         <item name="android:layout_width">wrap_content</item>
@@ -47,7 +25,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginBottom">@dimen/units_conversion_edit_text_marginBottom
         </item>
-        <item name="android:backgroundTint">@color/units_conversion_edit_text_tint_color</item>
+        <item name="android:backgroundTint">@color/hint_color</item>
         <item name="android:enabled">false</item>
         <item name="android:inputType">none</item>
         <item name="android:singleLine">true</item>
@@ -113,6 +91,7 @@
     <style name="home_screen_dialog_header">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:elevation">@dimen/units_conversion_toolbar_elevation</item>
         <item name="android:padding">@dimen/home_screen_credits_dialog_header_padding</item>
         <item name="android:paddingStart">@dimen/home_screen_credits_dialog_body_padding</item>
         <item name="android:text">@string/credits_header</item>

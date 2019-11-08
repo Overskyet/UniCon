@@ -43,7 +43,7 @@
         Make sure you copy either integer or floating-point number, such as: \u201c123 or 123.45\u201d</string>
     <string name="max_length_of_pasted_value_exceeded_notification">The maximum amount of characters in the input field is 30</string>
 
-    <string name="credits_header">Disclaimer</string>
+    <string name="credits_header">Credits</string>
     <string name="credits_body">Icons made by <a href='https://www.flaticon.com/authors/freepik'>Freepik</a>,
         <a href='https://www.flaticon.com/authors/those-icons'>Those Icons</a>,
         <a href='https://www.flaticon.com/authors/gregor-cresnar'>Gregor Cresnar</a> from <a href='https://www.flaticon.com/'>www.flaticon.com</a>

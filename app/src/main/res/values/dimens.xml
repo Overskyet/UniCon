@@ -11,7 +11,7 @@
     <dimen name="units_conversion_edit_text_marginBottom">8dp</dimen>
     <dimen name="units_conversion_edit_text_marginEnd">4dp</dimen>
 
-    <dimen name="units_conversion_toolbar_divider_height">6dp</dimen>
+    <dimen name="units_conversion_toolbar_elevation">4dp</dimen>
 
     <dimen name="units_conversion_spinner_margin">8dp</dimen>
 
