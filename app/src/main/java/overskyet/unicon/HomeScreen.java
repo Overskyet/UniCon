@@ -1,14 +1,12 @@
 package overskyet.unicon;
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
@@ -60,8 +58,7 @@ public class HomeScreen extends AppCompatActivity {
         redBlockFragment = new RedHomeScreenBlockFragment();
         blueBlockFragment = new BlueHomeScreenBlockFragment();
 
-        List<Fragment> fragments = getFragments();
-        pageAdapter = new HomeScreenFragmentAdapter(getSupportFragmentManager(), fragments);
+        pageAdapter = new HomeScreenFragmentAdapter(getSupportFragmentManager(), getFragments());
         ViewPager viewPager = findViewById(R.id.home_screen_view_pager);
         viewPager.setAdapter(pageAdapter);
 
