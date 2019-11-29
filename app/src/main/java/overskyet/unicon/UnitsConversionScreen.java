@@ -5,9 +5,8 @@ import android.content.ClipDescription;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,10 +22,12 @@ import java.util.regex.Pattern;
 
 public class UnitsConversionScreen extends AppCompatActivity {
 
+    private static final String TAG = UnitsConversionScreen.class.getSimpleName();
+
     // Key values for saving preferences and conversion() method
     private String key1, key2;
 
-    // Instance of SharedPreferences object for setting up spinner items
+    // Instance of SharedPreferences object for setting up spinnerFrom items
     private SharedPreferences mySettingsForSpinners;
 
     // Clipboard manager for copy and paste operations
@@ -34,7 +35,7 @@ public class UnitsConversionScreen extends AppCompatActivity {
 
     // Widgets
     private EditText editTextInput, editTextOutput;
-    private Spinner spinner, spinner2;
+    private Spinner spinnerFrom, spinnerTo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,7 @@ public class UnitsConversionScreen extends AppCompatActivity {
         // Action bar initialization
         initToolbar(getIntent().getExtras().getInt("intExtra", 0));
 
-        // Keys and spinner items array initialization
+        // Keys and spinnerFrom items array initialization
         key1 = getIntent().getExtras().getString("stringExtra1");
         key2 = getIntent().getExtras().getString("stringExtra2");
         String[] spinnerItems = getIntent().getExtras().getStringArray("stringArrayExtra");
@@ -64,15 +65,15 @@ public class UnitsConversionScreen extends AppCompatActivity {
         editTextOutput.setKeyListener(null);
 
         // Spinners block initialization
-        spinner = findViewById(R.id.spinner);
-        spinner2 = findViewById(R.id.spinner2);
+        spinnerFrom = findViewById(R.id.units_conversion_spinnerFrom);
+        spinnerTo = findViewById(R.id.units_conversion_spinnerTo);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item, spinnerItems);
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner2.setAdapter(adapter);
+        spinnerFrom.setAdapter(adapter);
+        spinnerTo.setAdapter(adapter);
 
         // Spinners listeners
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerFrom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 checkDigits();
@@ -82,7 +83,7 @@ public class UnitsConversionScreen extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerTo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 checkDigits();
@@ -113,16 +114,18 @@ public class UnitsConversionScreen extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        spinner.setSelection(mySettingsForSpinners.getInt(key1, 0));
-        spinner2.setSelection(mySettingsForSpinners.getInt(key2, 1));
+        spinnerFrom.setSelection(mySettingsForSpinners.getInt(key1, 0));
+        spinnerTo.setSelection(mySettingsForSpinners.getInt(key2, 1));
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         SharedPreferences.Editor editor = mySettingsForSpinners.edit();
-        editor.putInt(key1, spinner.getSelectedItemPosition());
-        editor.putInt(key2, spinner2.getSelectedItemPosition());
+        editor.remove(key1).apply();
+        editor.remove(key2).apply();
+        editor.putInt(key1, spinnerFrom.getSelectedItemPosition());
+        editor.putInt(key2, spinnerTo.getSelectedItemPosition());
         editor.apply();
     }
 
@@ -260,13 +263,13 @@ public class UnitsConversionScreen extends AppCompatActivity {
 
     private void reverse() {
         int temp;
-        int selected = spinner.getSelectedItemPosition();
-        int selected2 = spinner2.getSelectedItemPosition();
+        int selected = spinnerFrom.getSelectedItemPosition();
+        int selected2 = spinnerTo.getSelectedItemPosition();
         temp = selected;
         selected = selected2;
         selected2 = temp;
-        spinner.setSelection(selected);
-        spinner2.setSelection(selected2);
+        spinnerFrom.setSelection(selected);
+        spinnerTo.setSelection(selected2);
     }
 
     private void showInfoText(String infoMsg) {
@@ -274,8 +277,8 @@ public class UnitsConversionScreen extends AppCompatActivity {
     }
 
     private void conversion() {
-        String spinnerItemName = spinner.getSelectedItem().toString();
-        String spinner2ItemName = spinner2.getSelectedItem().toString();
+        String spinnerItemName = spinnerFrom.getSelectedItem().toString();
+        String spinner2ItemName = spinnerTo.getSelectedItem().toString();
         double inputValue = Double.valueOf(editTextInput.getText().toString());
         double outputValue = CalculationMethods.convert(inputValue, spinnerItemName, spinner2ItemName, key1);
         editTextOutput.setText(String.valueOf(outputValue));

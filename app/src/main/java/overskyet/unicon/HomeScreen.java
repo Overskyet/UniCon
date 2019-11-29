@@ -13,9 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import overskyet.unicon.adapters.HomeScreenFragmentAdapter;
+import overskyet.unicon.exchangerates.ExchangeRatesAsync;
 
 public class HomeScreen extends AppCompatActivity {
 
+    public static final String KEY_LIST_OF_CURRENCIES = "overskyet.unicon.LIST_OF_CURRENCIES";
+    public static final String KEY_MAP_OF_RATES = "overskyet.unicon.MAP_OF_RATES";
+    public static final String KEY_TIME_OF_UPDATE = "overskyet.unicon.TIME_OF_UPDATE";
+    public static final String KEY_NAME_OF_SHARED_PREFERENCES = "overskyet.unicon.EXCHANGE_RATES";
     public static final String KEY_1_CURRENCY_CONVERSION = "overskyet.unicon.CURRENCY_SPINNER_1";
     public static final String KEY_1_TIME_CONVERSION = "overskyet.unicon.TIME_SPINNER_1";
     public static final String KEY_1_FUEL_CONSUMPTION_CONVERSION = "overskyet.unicon.FUEL_CONSUMPTION_SPINNER_1";
@@ -55,6 +60,9 @@ public class HomeScreen extends AppCompatActivity {
 
         initToolbar();
 
+        //Start Scheduler here
+        checkScheduler();
+
         redBlockFragment = new RedHomeScreenBlockFragment();
         blueBlockFragment = new BlueHomeScreenBlockFragment();
 
@@ -82,6 +90,12 @@ public class HomeScreen extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    private void checkScheduler() {
+        ExchangeRatesAsync exchangeRatesAsync = new ExchangeRatesAsync(HomeScreen.this);
+        exchangeRatesAsync.checkScheduleForAsync();
+        //exchangeRatesAsync.setDate(HomeScreen.this);
     }
 
     private List<Fragment> getFragments() {
