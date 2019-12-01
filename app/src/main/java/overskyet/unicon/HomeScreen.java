@@ -1,12 +1,12 @@
 package overskyet.unicon;
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.tabs.TabLayout;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
@@ -18,7 +18,8 @@ import overskyet.unicon.exchangerates.ExchangeRatesAsync;
 public class HomeScreen extends AppCompatActivity {
 
     public static final String KEY_MAP_OF_RATES = "overskyet.unicon.MAP_OF_RATES";
-    public static final String KEY_TIME_OF_UPDATE = "overskyet.unicon.TIME_OF_UPDATE";
+    public static final String KEY_ECB_TIME_OF_UPDATE = "overskyet.unicon.TIME_OF_UPDATE";
+    public static final String KEY_NEXT_UPDATE_TIME = "overskyet.unicon.NEXT_UPDATE_TIME";
     public static final String KEY_NAME_OF_SHARED_PREFERENCES = "overskyet.unicon.EXCHANGE_RATES";
     public static final String KEY_1_CURRENCY_CONVERSION = "overskyet.unicon.CURRENCY_SPINNER_1";
     public static final String KEY_1_TIME_CONVERSION = "overskyet.unicon.TIME_SPINNER_1";
@@ -94,7 +95,6 @@ public class HomeScreen extends AppCompatActivity {
     private void checkScheduler() {
         ExchangeRatesAsync exchangeRatesAsync = new ExchangeRatesAsync(HomeScreen.this);
         exchangeRatesAsync.checkScheduleForAsync();
-        //exchangeRatesAsync.setDate(HomeScreen.this);
     }
 
     private List<Fragment> getFragments() {

@@ -6,8 +6,8 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -281,7 +281,6 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
     private void showInfoText(String infoMsg) {
         Toast.makeText(getApplicationContext(), infoMsg, Toast.LENGTH_LONG).show();
     }
-
     // TODO Handle output
     private void startConvert() {
         String spinnerItemNameFrom = spinnerFrom.getSelectedItem().toString().substring(0, 3);

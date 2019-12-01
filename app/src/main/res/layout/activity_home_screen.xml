@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context=".HomeScreen">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/home_screen_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
@@ -22,9 +22,9 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_home_screen_toolbar_icon" />
 
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
-    <android.support.design.widget.TabLayout
+    <com.google.android.material.tabs.TabLayout
         android:id="@+id/home_screen_tab_layout"
         android:layout_width="match_parent"
         android:layout_height="2dp"
@@ -34,7 +34,7 @@
         app:tabMode="fixed" />
 
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/home_screen_view_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"

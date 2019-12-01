@@ -5,7 +5,14 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.jakewharton.threetenabp.AndroidThreeTen;
+
 import org.json.JSONObject;
+import org.threeten.bp.DateTimeUtils;
+import org.threeten.bp.Instant;
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.ZoneId;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -21,6 +28,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -32,8 +40,12 @@ public class ExchangeRatesAsync {
 
     private Context mContext;
 
+    private SharedPreferences preferences;
+
     public ExchangeRatesAsync(Context context) {
         mContext = context;
+        preferences = context.getApplicationContext().getSharedPreferences(
+                HomeScreen.KEY_NAME_OF_SHARED_PREFERENCES, Context.MODE_PRIVATE);
     }
 
     private static final String TAG = ExchangeRatesAsync.class.getSimpleName();
@@ -44,18 +56,28 @@ public class ExchangeRatesAsync {
     }
 
     private void setSharedPreferences(Map<String, Double> rates, String time) {
-        SharedPreferences preferences = mContext.getApplicationContext().getSharedPreferences(HomeScreen.KEY_NAME_OF_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         if (preferences != null) {
             JSONObject jsonMapObject = new JSONObject(rates);
             String jsonMapString = jsonMapObject.toString();
             SharedPreferences.Editor editor = preferences.edit();
             editor.remove(HomeScreen.KEY_MAP_OF_RATES).apply();
-            editor.remove(HomeScreen.KEY_TIME_OF_UPDATE).apply();
+            editor.remove(HomeScreen.KEY_ECB_TIME_OF_UPDATE).apply();
             editor.putString(HomeScreen.KEY_MAP_OF_RATES, jsonMapString);
-            editor.putString(HomeScreen.KEY_TIME_OF_UPDATE, time);
+            editor.putString(HomeScreen.KEY_ECB_TIME_OF_UPDATE, time);
             editor.apply();
         }
 
+    }
+
+    private void updateTime() {
+        if (preferences != null) {
+            LocalDateTime nextUpdateTime = LocalDate.now(ZoneId.of("Europe/Berlin")).plusDays(1).atTime(17, 0);
+            long timeInSeconds = nextUpdateTime.toEpochSecond(ZoneId.of("Europe/Berlin").getRules().getOffset(nextUpdateTime));
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.remove(HomeScreen.KEY_NEXT_UPDATE_TIME);
+            editor.putLong(HomeScreen.KEY_NEXT_UPDATE_TIME, timeInSeconds);
+            editor.apply();
+        }
     }
 
     private class DownloadExchangeRatesTask extends AsyncTask<String, Void, ExchangeRates> {
@@ -68,11 +90,11 @@ public class ExchangeRatesAsync {
 
         @Override
         protected void onPostExecute(ExchangeRates exchangeRates) {
-           if (exchangeRates == null) return;
+            if (exchangeRates == null) return;
 
-            // Init mCurrencies after background task is complete
             // TODO Handle spinner adapter clear, add new data, and refresh
             setSharedPreferences(exchangeRates.getRates(), exchangeRates.getTime());
+            updateTime();
         }
 
         private URL createUrl(String strUrl) {
@@ -119,7 +141,6 @@ public class ExchangeRatesAsync {
             return exchangeRates;
         }
 
-        // TODO Need to set up scheduler for rates updates
         private ExchangeRates parseXml(InputStream is) {
 
             List<String> currencies = new ArrayList<>();
@@ -158,18 +179,18 @@ public class ExchangeRatesAsync {
         }
     }
 
-    //TODO Create static method to check whether the data is old or not and to start asynctask
     public void checkScheduleForAsync() {
-        startAsyncTask();
-    }
-    /*
-    public void setDate(Context context) {
-        AndroidThreeTen.init(context);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");
+        AndroidThreeTen.init(mContext);
 
         LocalDateTime myCurrentDateInCETtimeZone = LocalDateTime.now(ZoneId.of("Europe/Berlin"));
-        String e = formatter.format(myCurrentDateInCETtimeZone);
-        Log.i(TAG, "setDate: " + e);
+        LocalDateTime defaultUpdateTime = LocalDate.now(ZoneId.of("Europe/Berlin")).atTime(17, 0);
+
+        long updateTimeInSeconds = preferences.getLong(
+                HomeScreen.KEY_NEXT_UPDATE_TIME, defaultUpdateTime.toEpochSecond(
+                        ZoneId.of("Europe/Berlin").getRules().getOffset(defaultUpdateTime)));
+        LocalDateTime nextUpdateTime = LocalDateTime.ofInstant(Instant.ofEpochSecond(updateTimeInSeconds),
+                DateTimeUtils.toZoneId(TimeZone.getTimeZone("Europe/Berlin")));
+
+        if (myCurrentDateInCETtimeZone.compareTo(nextUpdateTime) >= 0) startAsyncTask();
     }
-    */
 }
