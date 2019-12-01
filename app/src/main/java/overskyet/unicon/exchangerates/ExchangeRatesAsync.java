@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -44,19 +43,15 @@ public class ExchangeRatesAsync {
         new DownloadExchangeRatesTask().execute(ECB_URL);
     }
 
-    private void setSharedPreferences(List<String> currencies, Map<String, Double> rates, String time) {
+    private void setSharedPreferences(Map<String, Double> rates, String time) {
         SharedPreferences preferences = mContext.getApplicationContext().getSharedPreferences(HomeScreen.KEY_NAME_OF_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         if (preferences != null) {
             JSONObject jsonMapObject = new JSONObject(rates);
-            JSONArray jsonListArray = new JSONArray(currencies);
             String jsonMapString = jsonMapObject.toString();
-            String jsonListString = jsonListArray.toString();
             SharedPreferences.Editor editor = preferences.edit();
             editor.remove(HomeScreen.KEY_MAP_OF_RATES).apply();
-            editor.remove(HomeScreen.KEY_LIST_OF_CURRENCIES).apply();
             editor.remove(HomeScreen.KEY_TIME_OF_UPDATE).apply();
             editor.putString(HomeScreen.KEY_MAP_OF_RATES, jsonMapString);
-            editor.putString(HomeScreen.KEY_LIST_OF_CURRENCIES, jsonListString);
             editor.putString(HomeScreen.KEY_TIME_OF_UPDATE, time);
             editor.apply();
         }
@@ -77,7 +72,7 @@ public class ExchangeRatesAsync {
 
             // Init mCurrencies after background task is complete
             // TODO Handle spinner adapter clear, add new data, and refresh
-            setSharedPreferences(exchangeRates.getCurrencies(), exchangeRates.getRates(), exchangeRates.getTime());
+            setSharedPreferences(exchangeRates.getRates(), exchangeRates.getTime());
         }
 
         private URL createUrl(String strUrl) {

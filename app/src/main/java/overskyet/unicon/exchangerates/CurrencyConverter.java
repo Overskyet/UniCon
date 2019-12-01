@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -23,7 +24,7 @@ public class CurrencyConverter {
     private String mFromCurrency;
     private String mToCurrency;
     private BigDecimal mAmount;
-    private int mCalculationAccuracy = 6;
+    private int mCalculationAccuracy = 4;
 
     private BigDecimal mResult = new BigDecimal(0.0);
 
@@ -48,18 +49,25 @@ public class CurrencyConverter {
 
     private BigDecimal startConversion() {
         Map<String, Double> rates = getRates();
+        BigDecimal baseRate, targetRate;
         if (rates != null) {
             if (rates.containsKey(mFromCurrency) && rates.containsKey(mToCurrency)) {
-                BigDecimal baseRate = new BigDecimal(rates.get(mFromCurrency));
-                BigDecimal targetRate = new BigDecimal(rates.get(mToCurrency));
-                if (mFromCurrency.equals("EUR")) {
-                    mResult = mAmount.multiply(targetRate);
-                } else if (mToCurrency.equals("EUR")) {
-                    mResult = mAmount.divide(baseRate, mCalculationAccuracy);
-                } else if (baseRate.compareTo(targetRate) < 0) {
-                    mResult = mAmount.multiply(targetRate).divide(baseRate, mCalculationAccuracy);
+                baseRate = new BigDecimal(rates.get(mFromCurrency));
+                targetRate = new BigDecimal(rates.get(mToCurrency));
+                if (baseRate.compareTo(targetRate) < 0) {
+                    mResult = mAmount.multiply(targetRate).divide(baseRate, mCalculationAccuracy, RoundingMode.HALF_UP);
                 } else if (baseRate.compareTo(targetRate) > 0) {
-                    mResult = mAmount.divide(baseRate, mCalculationAccuracy).multiply(targetRate);
+                    mResult = mAmount.divide(baseRate, mCalculationAccuracy, RoundingMode.HALF_UP).multiply(targetRate).setScale(mCalculationAccuracy, RoundingMode.HALF_UP);
+                } else {
+                    mResult = mAmount;
+                }
+            } else {
+                if (mFromCurrency.equals("EUR") && !mToCurrency.equals("EUR")) {
+                    targetRate = new BigDecimal(rates.get(mToCurrency));
+                    mResult = mAmount.multiply(targetRate).setScale(mCalculationAccuracy, RoundingMode.HALF_UP);
+                } else if (mToCurrency.equals("EUR") && !mFromCurrency.equals("EUR")) {
+                    baseRate = new BigDecimal(rates.get(mFromCurrency));
+                    mResult = mAmount.divide(baseRate, mCalculationAccuracy, RoundingMode.HALF_UP);
                 } else {
                     mResult = mAmount;
                 }

@@ -8,7 +8,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,12 +17,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -80,7 +74,7 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
         // Spinners block initialization
         spinnerFrom = findViewById(R.id.currency_exchange_spinnerFrom);
         spinnerTo = findViewById(R.id.currency_exchange_spinnerTo);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item, getCurrencies());
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item, getResources().getStringArray(R.array.currencies));
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinnerFrom.setAdapter(adapter);
         spinnerTo.setAdapter(adapter);
@@ -155,25 +149,6 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
         toolbarImage.setImageResource(icon);
     }
 
-    private List<String> getCurrencies() {
-        List<String> currencies = new ArrayList<>();
-        SharedPreferences preferences = getApplicationContext().getSharedPreferences(HomeScreen.KEY_NAME_OF_SHARED_PREFERENCES, Context.MODE_PRIVATE);
-        if (preferences != null) {
-            try {
-                String jsonListString = preferences.getString(HomeScreen.KEY_LIST_OF_CURRENCIES, new JSONArray().toString());
-                JSONArray jsonListArray = new JSONArray(jsonListString);
-                if (!jsonListArray.isNull(0)) {
-                    for (int i = 0; i < jsonListArray.length(); i++) {
-                        currencies.add(jsonListArray.getString(i));
-                    }
-                }
-            } catch (JSONException e) {
-                Log.e(TAG, "getCurrencies: ", e);
-            }
-        }
-        return currencies;
-    }
-
     public void onClickDigitButtons(View v) {
         Button btn = (Button) v;
         editTextInput.setText(editTextInput.getText().append(btn.getText()));
@@ -240,10 +215,8 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
 
     private void checkDigits() {
         String inputText = editTextInput.getText().toString();
-        Pattern regEx = Pattern.compile("^-|\\.|-\\.$");
-        Matcher match = regEx.matcher(inputText);
-
-        if (match.matches() || inputText.isEmpty()) {
+        Matcher matcher = Pattern.compile("^-|\\.|-\\.$").matcher(inputText);
+        if (matcher.matches() || inputText.isEmpty()) {
             editTextOutput.getText().clear();
         } else {
             startConvert();
@@ -252,7 +225,8 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
 
     private void checkAmountOfDigits() {
         String textInput = editTextInput.getText().toString();
-        if (textInput.length() > 30) {
+        Matcher matcher = Pattern.compile("^[0-9\\-.]{0,30}(\\.\\d{3})$").matcher(textInput);
+        if (textInput.length() > 30 || matcher.matches()) {
             editTextInput.setText(textInput.substring(0, textInput.length() - 1));
         }
     }
@@ -310,13 +284,13 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
 
     // TODO Handle output
     private void startConvert() {
-        String spinnerItemNameFrom = spinnerFrom.getSelectedItem().toString();
-        String spinnerItemNameTo = spinnerTo.getSelectedItem().toString();
+        String spinnerItemNameFrom = spinnerFrom.getSelectedItem().toString().substring(0, 3);
+        String spinnerItemNameTo = spinnerTo.getSelectedItem().toString().substring(0, 3);
         BigDecimal amount = new BigDecimal(editTextInput.getText().toString());
         // Use values from spinners and input field
         BigDecimal bigDecimalOutput = currencyConverter.convert(spinnerItemNameFrom, spinnerItemNameTo, amount);
         // Init output field
-        String output = bigDecimalOutput.toString();
+        String output = bigDecimalOutput == null ? "0.0" : bigDecimalOutput.toString();
         editTextOutput.setText(output);
     }
 }

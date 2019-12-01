@@ -17,7 +17,6 @@ import overskyet.unicon.exchangerates.ExchangeRatesAsync;
 
 public class HomeScreen extends AppCompatActivity {
 
-    public static final String KEY_LIST_OF_CURRENCIES = "overskyet.unicon.LIST_OF_CURRENCIES";
     public static final String KEY_MAP_OF_RATES = "overskyet.unicon.MAP_OF_RATES";
     public static final String KEY_TIME_OF_UPDATE = "overskyet.unicon.TIME_OF_UPDATE";
     public static final String KEY_NAME_OF_SHARED_PREFERENCES = "overskyet.unicon.EXCHANGE_RATES";
