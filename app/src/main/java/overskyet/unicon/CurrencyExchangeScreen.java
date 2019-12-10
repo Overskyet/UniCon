@@ -13,8 +13,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.math.BigDecimal;
@@ -38,6 +42,9 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
     private ClipboardManager clipboard;
 
     // Widgets
+    private LinearLayout updateTimeBlock;
+    private ScrollView scrollView;
+    private TextView updateTime;
     private EditText editTextInput, editTextOutput;
     private Spinner spinnerFrom, spinnerTo;
 
@@ -64,8 +71,14 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
         mySettingsForSpinners = this.getPreferences(Context.MODE_PRIVATE);
 
         // Widget initialization
+        updateTimeBlock = findViewById(R.id.currency_exchange_time_of_update_block);
+        scrollView = findViewById(R.id.currency_exchange_scroll_view);
+        updateTime = findViewById(R.id.currency_exchange_update_time_text_view);
         editTextInput = findViewById(R.id.currency_exchange_input);
         editTextOutput = findViewById(R.id.currency_exchange_output);
+
+        // Invoke SharedPreferences method to get last update time and write it to updateTime TextView
+        getLastUpdateTime();
 
         // Disable input option for EditText views
         editTextInput.setKeyListener(null);
@@ -116,6 +129,21 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
                 return true;
             }
         });
+
+        // Show keyboard button initialization and listener with anonymous method
+        final ImageButton showKeyboardButton = findViewById(R.id.currency_exchange_image_button_show_keyboard);
+        showKeyboardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showKeyboard();
+            }
+
+            private void showKeyboard() {
+                updateTimeBlock.setVisibility(View.GONE);
+                updateTime.setVisibility(View.GONE);
+                scrollView.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     @Override
@@ -147,6 +175,14 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
         });
         ImageView toolbarImage = findViewById(R.id.currency_exchange_toolbar_image);
         toolbarImage.setImageResource(icon);
+    }
+
+    private void getLastUpdateTime() {
+        SharedPreferences preferences = CurrencyExchangeScreen.this.getApplicationContext().getSharedPreferences(HomeScreen.KEY_NAME_OF_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        if (preferences != null) {
+            String time = preferences.getString(HomeScreen.KEY_ECB_TIME_OF_UPDATE, "No data available");
+            updateTime.setText(time);
+        }
     }
 
     public void onClickDigitButtons(View v) {
