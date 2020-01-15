@@ -12,20 +12,42 @@ final class CalculationMethods {
         itemName1 = spinnerItemName.toLowerCase();
         itemName2 = spinner2ItemName.toLowerCase();
 
-        if (inputValue == 0) return output = 0.0;
-        else if (key1.equals(HomeScreen.KEY_1_TIME_CONVERSION)) calculateTime();
-        else if (key1.equals(HomeScreen.KEY_1_FUEL_CONSUMPTION_CONVERSION))
-            calculateFuelConsumption();
-        else if (key1.equals(HomeScreen.KEY_1_PRESSURE_CONVERSION)) calculatePressure();
-        else if (key1.equals(HomeScreen.KEY_1_ENERGY_CONVERSION)) calculateEnergy();
-        else if (key1.equals(HomeScreen.KEY_1_TEMPERATURE_CONVERSION)) calculateTemperature();
-        else if (key1.equals(HomeScreen.KEY_1_LENGTH_CONVERSION)) calculateLength();
-        else if (key1.equals(HomeScreen.KEY_1_WEIGHT_CONVERSION)) calculateWeight();
-        else if (key1.equals(HomeScreen.KEY_1_VOLUME_CONVERSION)) calculateVolume();
-        else if (key1.equals(HomeScreen.KEY_1_AREA_CONVERSION)) calculateArea();
-        else if (key1.equals(HomeScreen.KEY_1_ANGLE_CONVERSION)) calculateAngle();
-        else if (key1.equals(HomeScreen.KEY_1_SPEED_CONVERSION)) calculateSpeed();
-
+        switch (key1) {
+            case HomeScreen.KEY_1_TIME_CONVERSION:
+                calculateTime();
+                break;
+            case HomeScreen.KEY_1_FUEL_CONSUMPTION_CONVERSION:
+                calculateFuelConsumption();
+                break;
+            case HomeScreen.KEY_1_PRESSURE_CONVERSION:
+                calculatePressure();
+                break;
+            case HomeScreen.KEY_1_ENERGY_CONVERSION:
+                calculateEnergy();
+                break;
+            case HomeScreen.KEY_1_TEMPERATURE_CONVERSION:
+                calculateTemperature();
+                break;
+            case HomeScreen.KEY_1_LENGTH_CONVERSION:
+                calculateLength();
+                break;
+            case HomeScreen.KEY_1_WEIGHT_CONVERSION:
+                calculateWeight();
+                break;
+            case HomeScreen.KEY_1_VOLUME_CONVERSION:
+                calculateVolume();
+                break;
+            case HomeScreen.KEY_1_AREA_CONVERSION:
+                calculateArea();
+                break;
+            case HomeScreen.KEY_1_ANGLE_CONVERSION:
+                calculateAngle();
+                break;
+            case HomeScreen.KEY_1_SPEED_CONVERSION:
+                calculateSpeed();
+                break;
+            default: return 0.0;
+        }
         return output;
     }
 
