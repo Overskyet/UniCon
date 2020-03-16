@@ -4,6 +4,7 @@ import android.os.Bundle;
 import com.google.android.material.tabs.TabLayout;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -93,8 +94,8 @@ public class HomeScreen extends AppCompatActivity {
     }
 
     private void checkScheduler() {
-        ExchangeRatesAsync exchangeRatesAsync = new ExchangeRatesAsync(HomeScreen.this);
-        exchangeRatesAsync.checkScheduleForAsync();
+        ExchangeRatesAsync exchangeRatesAsync = new ViewModelProvider(HomeScreen.this).get(ExchangeRatesAsync.class);
+        exchangeRatesAsync.checkScheduleForAsync(HomeScreen.this);
     }
 
     private List<Fragment> getFragments() {

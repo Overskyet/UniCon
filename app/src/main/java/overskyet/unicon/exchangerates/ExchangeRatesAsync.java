@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import androidx.lifecycle.ViewModel;
+
 import com.jakewharton.threetenabp.AndroidThreeTen;
 
 import org.json.JSONObject;
@@ -36,17 +38,9 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import overskyet.unicon.HomeScreen;
 
-public class ExchangeRatesAsync {
-
-    private Context mContext;
+public class ExchangeRatesAsync extends ViewModel {
 
     private SharedPreferences preferences;
-
-    public ExchangeRatesAsync(Context context) {
-        mContext = context;
-        preferences = context.getApplicationContext().getSharedPreferences(
-                HomeScreen.KEY_NAME_OF_SHARED_PREFERENCES, Context.MODE_PRIVATE);
-    }
 
     private static final String TAG = ExchangeRatesAsync.class.getSimpleName();
     private static final String ECB_URL = "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml";
@@ -92,7 +86,6 @@ public class ExchangeRatesAsync {
         protected void onPostExecute(ExchangeRates exchangeRates) {
             if (exchangeRates == null) return;
 
-            // TODO Handle spinner adapter clear, add new data, and refresh
             setSharedPreferences(exchangeRates.getRates(), exchangeRates.getTime());
             updateTime();
         }
@@ -179,8 +172,11 @@ public class ExchangeRatesAsync {
         }
     }
 
-    public void checkScheduleForAsync() {
-        AndroidThreeTen.init(mContext);
+    public void checkScheduleForAsync(Context context) {
+        preferences = context.getApplicationContext().getSharedPreferences(
+                HomeScreen.KEY_NAME_OF_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+
+        AndroidThreeTen.init(context);
 
         LocalDateTime myCurrentDateInCETtimeZone = LocalDateTime.now(ZoneId.of("Europe/Berlin"));
         LocalDateTime defaultUpdateTime = LocalDate.now(ZoneId.of("Europe/Berlin")).atTime(17, 0);
