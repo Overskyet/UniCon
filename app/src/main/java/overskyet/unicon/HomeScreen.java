@@ -2,13 +2,20 @@ package overskyet.unicon;
 
 import android.os.Bundle;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
+import com.jakewharton.threetenabp.AndroidThreeTen;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager2.widget.ViewPager2;
+
+import android.os.SystemClock;
 import android.view.MenuItem;
+import android.widget.Chronometer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,32 +55,36 @@ public class HomeScreen extends AppCompatActivity {
     public static final String KEY_2_SPEED_CONVERSION = "overskyet.unicon.SPEED_SPINNER_2";
 
     DialogFragment disclaimerDialogFragment;
-    RedHomeScreenBlockFragment redBlockFragment;
-    BlueHomeScreenBlockFragment blueBlockFragment;
     HomeScreenFragmentAdapter pageAdapter;
     TabLayout tabLayout;
     Toolbar toolbar;
+
+
+    Chronometer chronometer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
+        AndroidThreeTen.init(HomeScreen.this);
+
         initToolbar();
 
         //Start Scheduler here
         checkScheduler();
 
-        redBlockFragment = new RedHomeScreenBlockFragment();
-        blueBlockFragment = new BlueHomeScreenBlockFragment();
-
-        pageAdapter = new HomeScreenFragmentAdapter(getSupportFragmentManager(), getFragments());
-        ViewPager viewPager = findViewById(R.id.home_screen_view_pager);
+        pageAdapter = new HomeScreenFragmentAdapter(HomeScreen.this, getFragments());
+        ViewPager2 viewPager = findViewById(R.id.home_screen_view_pager);
         viewPager.setAdapter(pageAdapter);
 
         tabLayout = findViewById(R.id.home_screen_tab_layout);
-        tabLayout.setupWithViewPager(viewPager);
-
+        new TabLayoutMediator(tabLayout, viewPager,
+                new TabLayoutMediator.TabConfigurationStrategy() {
+                    @Override
+                    public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                    }
+                }).attach();
     }
 
     private void initToolbar() {
@@ -95,14 +106,23 @@ public class HomeScreen extends AppCompatActivity {
 
     private void checkScheduler() {
         ExchangeRatesAsync exchangeRatesAsync = new ViewModelProvider(HomeScreen.this).get(ExchangeRatesAsync.class);
+        chronometer = findViewById(R.id.home_screen_test_chronometer);
+        if (exchangeRatesAsync.getStartTime() == null) {
+            long startTime = SystemClock.elapsedRealtime();
+            exchangeRatesAsync.setStartTime(startTime);
+            chronometer.setBase(startTime);
+        } else {
+            chronometer.setBase(exchangeRatesAsync.getStartTime());
+        }
+        chronometer.start();
         exchangeRatesAsync.checkScheduleForAsync(HomeScreen.this);
     }
 
     private List<Fragment> getFragments() {
         List<Fragment> fragments = new ArrayList<>();
 
-        fragments.add(redBlockFragment);
-        fragments.add(blueBlockFragment);
+        fragments.add(new RedHomeScreenBlockFragment());
+        fragments.add(new BlueHomeScreenBlockFragment());
         return fragments;
     }
 

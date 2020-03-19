@@ -1,30 +1,29 @@
 package overskyet.unicon.adapters;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import java.util.List;
 
-public class HomeScreenFragmentAdapter extends FragmentPagerAdapter {
+public class HomeScreenFragmentAdapter extends FragmentStateAdapter {
 
     private List<Fragment> fragments;
 
-    public HomeScreenFragmentAdapter(FragmentManager fm, List<Fragment> fragments) {
-
-        super(fm);
+    public HomeScreenFragmentAdapter(@NonNull FragmentActivity fragmentActivity, List<Fragment> fragments) {
+        super(fragmentActivity);
         this.fragments = fragments;
+    }
 
+    @NonNull
+    @Override
+    public Fragment createFragment(int position) {
+        return fragments.get(position);
     }
 
     @Override
-    public Fragment getItem(int position) {
-        return this.fragments.get(position);
-    }
-
-    @Override
-    public int getCount() {
+    public int getItemCount() {
         return this.fragments.size();
     }
-
 }

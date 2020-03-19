@@ -40,6 +40,8 @@ import overskyet.unicon.HomeScreen;
 
 public class ExchangeRatesAsync extends ViewModel {
 
+    private Long mStartTime;
+
     private SharedPreferences preferences;
 
     private static final String TAG = ExchangeRatesAsync.class.getSimpleName();
@@ -176,8 +178,6 @@ public class ExchangeRatesAsync extends ViewModel {
         preferences = context.getApplicationContext().getSharedPreferences(
                 HomeScreen.KEY_NAME_OF_SHARED_PREFERENCES, Context.MODE_PRIVATE);
 
-        AndroidThreeTen.init(context);
-
         LocalDateTime myCurrentDateInCETtimeZone = LocalDateTime.now(ZoneId.of("Europe/Berlin"));
         LocalDateTime defaultUpdateTime = LocalDate.now(ZoneId.of("Europe/Berlin")).atTime(17, 0);
 
@@ -187,6 +187,15 @@ public class ExchangeRatesAsync extends ViewModel {
         LocalDateTime nextUpdateTime = LocalDateTime.ofInstant(Instant.ofEpochSecond(updateTimeInSeconds),
                 DateTimeUtils.toZoneId(TimeZone.getTimeZone("Europe/Berlin")));
 
-        if (myCurrentDateInCETtimeZone.compareTo(nextUpdateTime) >= 0) startAsyncTask();
+        if (myCurrentDateInCETtimeZone.compareTo(nextUpdateTime) >= 0)
+        startAsyncTask();
+
+    }
+
+    public Long getStartTime() {
+        return mStartTime;
+    }
+    public void setStartTime(final Long startTime) {
+        this.mStartTime = startTime;
     }
 }

@@ -9,9 +9,9 @@ class ExchangeRates {
     private String mTime;
 
     ExchangeRates(List<String> currencies, Map<String, Double> rates, String time) {
-        mCurrencies = currencies;
-        mRates = rates;
-        mTime = time;
+        this.mCurrencies = currencies;
+        this.mRates = rates;
+        this.mTime = time;
     }
 
     Map<String, Double> getRates() {
