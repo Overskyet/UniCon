@@ -4,9 +4,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
@@ -81,18 +85,9 @@ public class CurrencyConverter {
         SharedPreferences preferences = mContext.getApplicationContext().getSharedPreferences(HomeScreen.KEY_NAME_OF_SHARED_PREFERENCES,
                 Context.MODE_PRIVATE);
         if (preferences != null) {
-            try {
-                String jsonString = preferences.getString(HomeScreen.KEY_MAP_OF_RATES, new JSONObject().toString());
-                JSONObject jsonObject = new JSONObject(jsonString);
-                Iterator<String> keyItr = jsonObject.keys();
-                while (keyItr.hasNext()) {
-                    String key = keyItr.next();
-                    rates.put(key, jsonObject.getDouble(key));
-                }
-            } catch (JSONException e) {
-                Log.e(TAG, "getRates: ", e);
-                return null;
-            }
+            String jsonString = preferences.getString(HomeScreen.KEY_MAP_OF_RATES, new JSONObject().toString());
+            Type typeOfHashMap = new TypeToken<Map<String, Double>>() {}.getType();
+            rates = new Gson().fromJson(jsonString, typeOfHashMap);
         }
         return rates;
     }

@@ -7,6 +7,8 @@ import android.util.Log;
 
 import androidx.lifecycle.ViewModel;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 
 import org.json.JSONObject;
@@ -53,8 +55,8 @@ public class ExchangeRatesAsync extends ViewModel {
 
     private void setSharedPreferences(Map<String, Double> rates, String time) {
         if (preferences != null) {
-            JSONObject jsonMapObject = new JSONObject(rates);
-            String jsonMapString = jsonMapObject.toString();
+            Gson gson = new GsonBuilder().enableComplexMapKeySerialization().create();
+            String jsonMapString = gson.toJson(rates);
             SharedPreferences.Editor editor = preferences.edit();
             editor.remove(HomeScreen.KEY_MAP_OF_RATES).apply();
             editor.remove(HomeScreen.KEY_ECB_TIME_OF_UPDATE).apply();

@@ -5,7 +5,6 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -14,7 +13,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.SystemClock;
-import android.view.MenuItem;
 import android.widget.Chronometer;
 
 import java.util.ArrayList;
@@ -80,27 +78,21 @@ public class HomeScreen extends AppCompatActivity {
 
         tabLayout = findViewById(R.id.home_screen_tab_layout);
         new TabLayoutMediator(tabLayout, viewPager,
-                new TabLayoutMediator.TabConfigurationStrategy() {
-                    @Override
-                    public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                    }
+                (tab, position) -> {
                 }).attach();
     }
 
     private void initToolbar() {
         toolbar = findViewById(R.id.home_screen_toolbar);
         toolbar.inflateMenu(R.menu.home_screen_toolbar_menu);
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                int i = menuItem.getItemId();
+        toolbar.setOnMenuItemClickListener(menuItem -> {
+            int i = menuItem.getItemId();
 
-                if (i == R.id.item_credits) {
-                    openDialogWindow();
-                    return true;
-                }
-                return false;
+            if (i == R.id.item_credits) {
+                openDialogWindow();
+                return true;
             }
+            return false;
         });
     }
 

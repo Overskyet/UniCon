@@ -8,7 +8,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -24,12 +23,7 @@ public class HomeScreenCreditsDialogFragment extends DialogFragment {
         alertDialog.show();
 
         Button okBtn = alertDialog.findViewById(R.id.home_screen_ok_dialog_button);
-        okBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getDialog().dismiss();
-            }
-        });
+        okBtn.setOnClickListener(v -> getDialog().dismiss());
 
         TextView creditsBody = alertDialog.findViewById(R.id.home_screen_credits_dialog_body);
         creditsBody.setMovementMethod(LinkMovementMethod.getInstance());

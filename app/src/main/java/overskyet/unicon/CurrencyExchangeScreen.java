@@ -167,12 +167,7 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
     private void initToolbar(int icon) {
         Toolbar toolbar = findViewById(R.id.currency_exchange_toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> finish());
         ImageView toolbarImage = findViewById(R.id.currency_exchange_toolbar_image);
         toolbarImage.setImageResource(icon);
     }
