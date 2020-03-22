@@ -55,6 +55,8 @@ public class ExchangeRatesAsync extends ViewModel {
 
     private void setSharedPreferences(Map<String, Double> rates, String time) {
         if (preferences != null) {
+            String sharedPrefTime = preferences.getString(HomeScreen.KEY_ECB_TIME_OF_UPDATE, time);
+            if (sharedPrefTime.equalsIgnoreCase(time)) return;
             Gson gson = new GsonBuilder().enableComplexMapKeySerialization().create();
             String jsonMapString = gson.toJson(rates);
             SharedPreferences.Editor editor = preferences.edit();
@@ -63,6 +65,7 @@ public class ExchangeRatesAsync extends ViewModel {
             editor.putString(HomeScreen.KEY_MAP_OF_RATES, jsonMapString);
             editor.putString(HomeScreen.KEY_ECB_TIME_OF_UPDATE, time);
             editor.apply();
+            updateTime();
         }
 
     }
@@ -91,7 +94,6 @@ public class ExchangeRatesAsync extends ViewModel {
             if (exchangeRates == null || exchangeRates.isRatesEmpty()) return;
 
             setSharedPreferences(exchangeRates.getRates(), exchangeRates.getTime());
-            updateTime();
         }
 
         private URL createUrl(String strUrl) {
