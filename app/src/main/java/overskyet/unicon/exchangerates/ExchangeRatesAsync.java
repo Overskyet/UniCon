@@ -88,7 +88,7 @@ public class ExchangeRatesAsync extends ViewModel {
 
         @Override
         protected void onPostExecute(ExchangeRates exchangeRates) {
-            if (exchangeRates == null) return;
+            if (exchangeRates == null || exchangeRates.isRatesEmpty()) return;
 
             setSharedPreferences(exchangeRates.getRates(), exchangeRates.getTime());
             updateTime();
@@ -181,11 +181,10 @@ public class ExchangeRatesAsync extends ViewModel {
                 HomeScreen.KEY_NAME_OF_SHARED_PREFERENCES, Context.MODE_PRIVATE);
 
         LocalDateTime myCurrentDateInCETtimeZone = LocalDateTime.now(ZoneId.of("Europe/Berlin"));
-        LocalDateTime defaultUpdateTime = LocalDate.now(ZoneId.of("Europe/Berlin")).atTime(17, 0);
 
         long updateTimeInSeconds = preferences.getLong(
-                HomeScreen.KEY_NEXT_UPDATE_TIME, defaultUpdateTime.toEpochSecond(
-                        ZoneId.of("Europe/Berlin").getRules().getOffset(defaultUpdateTime)));
+                HomeScreen.KEY_NEXT_UPDATE_TIME, myCurrentDateInCETtimeZone.toEpochSecond(
+                        ZoneId.of("Europe/Berlin").getRules().getOffset(myCurrentDateInCETtimeZone)));
         LocalDateTime nextUpdateTime = LocalDateTime.ofInstant(Instant.ofEpochSecond(updateTimeInSeconds),
                 DateTimeUtils.toZoneId(TimeZone.getTimeZone("Europe/Berlin")));
 

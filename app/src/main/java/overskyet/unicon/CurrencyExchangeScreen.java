@@ -122,12 +122,9 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
                 copy();
             }
         });
-        copyButton.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                paste();
-                return true;
-            }
+        copyButton.setOnLongClickListener(v -> {
+            paste();
+            return true;
         });
 
         // Show keyboard button initialization and listener with anonymous method
@@ -148,20 +145,20 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        super.onResume();
         spinnerFrom.setSelection(mySettingsForSpinners.getInt(key1, 0));
         spinnerTo.setSelection(mySettingsForSpinners.getInt(key2, 1));
+        super.onResume();
     }
 
     @Override
     protected void onPause() {
-        super.onPause();
         SharedPreferences.Editor editor = mySettingsForSpinners.edit();
         editor.remove(key1).apply();
         editor.remove(key2).apply();
         editor.putInt(key1, spinnerFrom.getSelectedItemPosition());
         editor.putInt(key2, spinnerTo.getSelectedItemPosition());
         editor.apply();
+        super.onPause();
     }
 
     private void initToolbar(int icon) {

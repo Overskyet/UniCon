@@ -26,6 +26,10 @@ class ExchangeRates {
         return mTime;
     }
 
+    Boolean isRatesEmpty() {
+        return mCurrencies.isEmpty() || mRates.isEmpty() || mTime.isEmpty();
+    }
+
     @Override
     public String toString() {
         return "ExchangeRates{" +
