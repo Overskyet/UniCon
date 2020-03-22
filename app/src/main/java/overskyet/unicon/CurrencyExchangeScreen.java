@@ -6,8 +6,10 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -31,22 +33,22 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
 
     private static final String TAG = CurrencyExchangeScreen.class.getSimpleName();
 
-    private CurrencyConverter currencyConverter;
+    private CurrencyConverter mCurrencyConverter;
 
-    private String key1, key2;
+    private String mKey1, mKey2;
 
-    // Instance of SharedPreferences object for setting up spinnerFrom items
-    private SharedPreferences mySettingsForSpinners;
+    // Instance of SharedPreferences object for setting up spinners items
+    private SharedPreferences mSpinnersSettings;
 
     // Clipboard manager for copy and paste operations
-    private ClipboardManager clipboard;
+    private ClipboardManager mClipboard;
 
     // Widgets
-    private LinearLayout updateTimeBlock;
-    private ScrollView scrollView;
-    private TextView updateTime;
-    private EditText editTextInput, editTextOutput;
-    private Spinner spinnerFrom, spinnerTo;
+    private LinearLayout mUpdateTimeBlock;
+    private ScrollView mScrollView;
+    private TextView mUpdateTime;
+    private EditText mEditTextInput, mEditTextOutput;
+    private Spinner mSpinnerFrom, mSpinnerTo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,44 +58,44 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
         // Action bar initialization
         initToolbar(getIntent().getExtras().getInt("intExtra", 0));
 
-        // Keys and spinnerFrom items array initialization
-        key1 = getIntent().getExtras().getString("stringExtra1");
-        key2 = getIntent().getExtras().getString("stringExtra2");
+        // Keys and spinners items array initialization
+        mKey1 = getIntent().getExtras().getString("stringExtra1");
+        mKey2 = getIntent().getExtras().getString("stringExtra2");
         String[] spinnerItems = getIntent().getExtras().getStringArray("stringArrayExtra");
 
         // Init CurrencyConverter object
-        currencyConverter = new CurrencyConverter(CurrencyExchangeScreen.this);
+        mCurrencyConverter = new CurrencyConverter();
 
         // Clipboard manager initialization
-        clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        mClipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
 
         // SharedPreferences instance initialization
-        mySettingsForSpinners = this.getPreferences(Context.MODE_PRIVATE);
+        mSpinnersSettings = this.getPreferences(Context.MODE_PRIVATE);
 
         // Widget initialization
-        updateTimeBlock = findViewById(R.id.currency_exchange_time_of_update_block);
-        scrollView = findViewById(R.id.currency_exchange_scroll_view);
-        updateTime = findViewById(R.id.currency_exchange_update_time_text_view);
-        editTextInput = findViewById(R.id.currency_exchange_input);
-        editTextOutput = findViewById(R.id.currency_exchange_output);
+        mUpdateTimeBlock = findViewById(R.id.currency_exchange_time_of_update_block);
+        mScrollView = findViewById(R.id.currency_exchange_scroll_view);
+        mUpdateTime = findViewById(R.id.currency_exchange_update_time_text_view);
+        mEditTextInput = findViewById(R.id.currency_exchange_input);
+        mEditTextOutput = findViewById(R.id.currency_exchange_output);
 
         // Invoke SharedPreferences method to get last update time and write it to updateTime TextView
         getLastUpdateTime();
 
         // Disable input option for EditText views
-        editTextInput.setKeyListener(null);
-        editTextOutput.setKeyListener(null);
+        mEditTextInput.setKeyListener(null);
+        mEditTextOutput.setKeyListener(null);
 
         // Spinners block initialization
-        spinnerFrom = findViewById(R.id.currency_exchange_spinnerFrom);
-        spinnerTo = findViewById(R.id.currency_exchange_spinnerTo);
+        mSpinnerFrom = findViewById(R.id.currency_exchange_spinnerFrom);
+        mSpinnerTo = findViewById(R.id.currency_exchange_spinnerTo);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item, getResources().getStringArray(R.array.currencies));
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        spinnerFrom.setAdapter(adapter);
-        spinnerTo.setAdapter(adapter);
+        mSpinnerFrom.setAdapter(adapter);
+        mSpinnerTo.setAdapter(adapter);
 
         // Spinners listeners
-        spinnerFrom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mSpinnerFrom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 checkDigits();
@@ -103,7 +105,7 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        spinnerTo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mSpinnerTo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 checkDigits();
@@ -116,12 +118,7 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
 
         // Copy button initialization and listeners
         final Button copyButton = findViewById(R.id.button_copy);
-        copyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                copy();
-            }
-        });
+        copyButton.setOnClickListener(v -> copy());
         copyButton.setOnLongClickListener(v -> {
             paste();
             return true;
@@ -129,35 +126,24 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
 
         // Show keyboard button initialization and listener with anonymous method
         final ImageButton showKeyboardButton = findViewById(R.id.currency_exchange_image_button_show_keyboard);
-        showKeyboardButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showKeyboard();
-            }
-
-            private void showKeyboard() {
-                updateTimeBlock.setVisibility(View.GONE);
-                updateTime.setVisibility(View.GONE);
-                scrollView.setVisibility(View.VISIBLE);
-            }
-        });
+        showKeyboardButton.setOnClickListener(v -> showKeyboard());
     }
 
     @Override
     protected void onResume() {
-        spinnerFrom.setSelection(mySettingsForSpinners.getInt(key1, 0));
-        spinnerTo.setSelection(mySettingsForSpinners.getInt(key2, 1));
+        mSpinnerFrom.setSelection(mSpinnersSettings.getInt(mKey1, 0));
+        mSpinnerTo.setSelection(mSpinnersSettings.getInt(mKey2, 1));
         super.onResume();
     }
 
     @Override
     protected void onPause() {
-        SharedPreferences.Editor editor = mySettingsForSpinners.edit();
-        editor.remove(key1).apply();
-        editor.remove(key2).apply();
-        editor.putInt(key1, spinnerFrom.getSelectedItemPosition());
-        editor.putInt(key2, spinnerTo.getSelectedItemPosition());
-        editor.apply();
+        mSpinnersSettings.edit()
+                .remove(mKey1)
+                .remove(mKey2)
+                .putInt(mKey1, mSpinnerFrom.getSelectedItemPosition())
+                .putInt(mKey2, mSpinnerTo.getSelectedItemPosition())
+                .apply();
         super.onPause();
     }
 
@@ -170,16 +156,22 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
     }
 
     private void getLastUpdateTime() {
-        SharedPreferences preferences = CurrencyExchangeScreen.this.getApplicationContext().getSharedPreferences(HomeScreen.KEY_NAME_OF_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences preferences = this.getSharedPreferences(HomeScreen.KEY_NAME_OF_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         if (preferences != null) {
             String time = preferences.getString(HomeScreen.KEY_ECB_TIME_OF_UPDATE, "No data available");
-            updateTime.setText(time);
+            mUpdateTime.setText(time);
         }
+    }
+
+    private void showKeyboard() {
+        mUpdateTimeBlock.setVisibility(View.GONE);
+        mUpdateTime.setVisibility(View.GONE);
+        mScrollView.setVisibility(View.VISIBLE);
     }
 
     public void onClickDigitButtons(View v) {
         Button btn = (Button) v;
-        editTextInput.setText(editTextInput.getText().append(btn.getText()));
+        mEditTextInput.setText(mEditTextInput.getText().append(btn.getText()));
         checkAmountOfDigits();
         startConvert();
     }
@@ -196,8 +188,8 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
                 checkDigits();
                 break;
             case R.id.button_clear:
-                editTextInput.getText().clear();
-                editTextOutput.getText().clear();
+                mEditTextInput.getText().clear();
+                mEditTextOutput.getText().clear();
                 break;
             // Sign block
             case R.id.button_sign:
@@ -215,74 +207,76 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
     }
 
     private void setDotSign() {
-        String text = editTextInput.getText().toString();
+        String text = mEditTextInput.getText().toString();
         if (text.contains(".")) {
-            editTextInput.setText(editTextInput.getText());
+            mEditTextInput.setText(mEditTextInput.getText());
         } else {
-            editTextInput.setText(editTextInput.getText().append('.'));
+            mEditTextInput.setText(mEditTextInput.getText().append('.'));
         }
     }
 
     private void checkEmptyInputField() {
-        String text = editTextInput.getText().toString();
+        String text = mEditTextInput.getText().toString();
         if (text.isEmpty()) {
-            editTextInput.setText(editTextInput.getText());
+            mEditTextInput.setText(mEditTextInput.getText());
         } else {
-            editTextInput.setText(text.substring(0, text.length() - 1));
+            mEditTextInput.setText(text.substring(0, text.length() - 1));
         }
     }
 
     private void setMinusSign() {
-        String text = editTextInput.getText().toString();
+        String text = mEditTextInput.getText().toString();
         if (text.contains("-")) {
-            editTextInput.setText(editTextInput.getText().delete(0, 1));
+            mEditTextInput.setText(mEditTextInput.getText().delete(0, 1));
         } else {
-            editTextInput.setText(editTextInput.getText().insert(0, "-"));
+            mEditTextInput.setText(mEditTextInput.getText().insert(0, "-"));
         }
     }
 
     private void checkDigits() {
-        String inputText = editTextInput.getText().toString();
-        Matcher matcher = Pattern.compile("^-|\\.|-\\.$").matcher(inputText);
+        String inputText = mEditTextInput.getText().toString();
+        //Matcher matcher = Pattern.compile("^-|\\.|-\\.$").matcher(inputText);
+        Matcher matcher = Pattern.compile(getResources().getString(R.string.digits_regexp)).matcher(inputText);
         if (matcher.matches() || inputText.isEmpty()) {
-            editTextOutput.getText().clear();
+            mEditTextOutput.getText().clear();
         } else {
             startConvert();
         }
     }
 
     private void checkAmountOfDigits() {
-        String textInput = editTextInput.getText().toString();
-        Matcher matcher = Pattern.compile("^[0-9\\-.]{0,30}(\\.\\d{3})$").matcher(textInput);
+        String textInput = mEditTextInput.getText().toString();
+        //Matcher matcher = Pattern.compile("^[0-9\\-.]{0,30}(\\.\\d{3})$").matcher(textInput);
+        Matcher matcher = Pattern.compile(getResources().getString(R.string.max_amount_of_chars_regexp)).matcher(textInput);
         if (textInput.length() > 30 || matcher.matches()) {
-            editTextInput.setText(textInput.substring(0, textInput.length() - 1));
+            mEditTextInput.setText(textInput.substring(0, textInput.length() - 1));
         }
     }
 
     private void checkAmountOfDigitsForPasteValue() {
-        String textInput = editTextInput.getText().toString();
+        String textInput = mEditTextInput.getText().toString();
         if (textInput.length() > 30) {
             String str = getResources().getString(R.string.max_length_of_pasted_value_exceeded_notification);
-            editTextInput.setText(textInput.substring(0, 30));
+            mEditTextInput.setText(textInput.substring(0, 30));
             showInfoText(str);
         }
     }
 
     private void copy() {
-        ClipData clip = ClipData.newPlainText("Output", editTextOutput.getText());
-        clipboard.setPrimaryClip(clip);
+        ClipData clip = ClipData.newPlainText("Output", mEditTextOutput.getText());
+        mClipboard.setPrimaryClip(clip);
         String str = getResources().getString(R.string.copy_notification);
         showInfoText(str);
     }
 
     private void paste() {
-        String pasteData;
+        String pasteData = "";
         try {
-            if (clipboard.hasPrimaryClip()) {
-                if (clipboard.getPrimaryClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
-                    ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
+            if (mClipboard.hasPrimaryClip()) {
+                if (mClipboard.getPrimaryClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
+                    ClipData.Item item = mClipboard.getPrimaryClip().getItemAt(0);
                     pasteData = item.getText().toString();
-                    editTextInput.setText(pasteData);
+                    mEditTextInput.setText(pasteData);
                     checkAmountOfDigitsForPasteValue();
                     startConvert();
                 }
@@ -290,34 +284,30 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
         } catch (NumberFormatException e) {
             String str = getResources().getString(R.string.incorrect_paste_value_notification);
             showInfoText(str);
-            editTextInput.getText().clear();
-            editTextOutput.getText().clear();
+            mEditTextInput.getText().clear();
+            mEditTextOutput.getText().clear();
         }
     }
 
     private void reverse() {
-        int temp;
-        int selected = spinnerFrom.getSelectedItemPosition();
-        int selected2 = spinnerTo.getSelectedItemPosition();
-        temp = selected;
-        selected = selected2;
-        selected2 = temp;
-        spinnerFrom.setSelection(selected);
-        spinnerTo.setSelection(selected2);
+        int selectedFrom = mSpinnerFrom.getSelectedItemPosition();
+        int selectedTo = mSpinnerTo.getSelectedItemPosition();
+        mSpinnerFrom.setSelection(selectedTo);
+        mSpinnerTo.setSelection(selectedFrom);
     }
 
     private void showInfoText(String infoMsg) {
         Toast.makeText(getApplicationContext(), infoMsg, Toast.LENGTH_LONG).show();
     }
-    // TODO Handle output
+
     private void startConvert() {
-        String spinnerItemNameFrom = spinnerFrom.getSelectedItem().toString().substring(0, 3);
-        String spinnerItemNameTo = spinnerTo.getSelectedItem().toString().substring(0, 3);
-        BigDecimal amount = new BigDecimal(editTextInput.getText().toString());
+        String spinnerItemFrom = mSpinnerFrom.getSelectedItem().toString().substring(0, 3);
+        String spinnerItemTo = mSpinnerTo.getSelectedItem().toString().substring(0, 3);
+        BigDecimal amount = new BigDecimal(mEditTextInput.getText().toString());
         // Use values from spinners and input field
-        BigDecimal bigDecimalOutput = currencyConverter.convert(spinnerItemNameFrom, spinnerItemNameTo, amount);
+        BigDecimal bigDecimalOutput = mCurrencyConverter.convert(spinnerItemFrom, spinnerItemTo, amount);
         // Init output field
         String output = bigDecimalOutput == null ? "0.0" : bigDecimalOutput.toString();
-        editTextOutput.setText(output);
+        mEditTextOutput.setText(output);
     }
 }

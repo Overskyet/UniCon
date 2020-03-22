@@ -6,8 +6,10 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,17 +27,17 @@ public class UnitsConversionScreen extends AppCompatActivity {
     private static final String TAG = UnitsConversionScreen.class.getSimpleName();
 
     // Key values for saving preferences and conversion() method
-    private String key1, key2;
+    private String mKey1, mKey2;
 
-    // Instance of SharedPreferences object for setting up spinnerFrom items
-    private SharedPreferences mySettingsForSpinners;
+    // Instance of SharedPreferences object for setting up spinners items
+    private SharedPreferences mSpinnersSettings;
 
     // Clipboard manager for copy and paste operations
-    private ClipboardManager clipboard;
+    private ClipboardManager mClipboard;
 
     // Widgets
-    private EditText editTextInput, editTextOutput;
-    private Spinner spinnerFrom, spinnerTo;
+    private EditText mEditTextInput, mEditTextOutput;
+    private Spinner mSpinnerFrom, mSpinnerTo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,35 +47,35 @@ public class UnitsConversionScreen extends AppCompatActivity {
         // Action bar initialization
         initToolbar(getIntent().getExtras().getInt("intExtra", 0));
 
-        // Keys and spinnerFrom items array initialization
-        key1 = getIntent().getExtras().getString("stringExtra1");
-        key2 = getIntent().getExtras().getString("stringExtra2");
+        // Keys and spinners items array initialization
+        mKey1 = getIntent().getExtras().getString("stringExtra1");
+        mKey2 = getIntent().getExtras().getString("stringExtra2");
         String[] spinnerItems = getIntent().getExtras().getStringArray("stringArrayExtra");
 
         // Clipboard manager initialization
-        clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        mClipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
 
         // SharedPreferences instance initialization
-        mySettingsForSpinners = this.getPreferences(Context.MODE_PRIVATE);
+        mSpinnersSettings = this.getPreferences(Context.MODE_PRIVATE);
 
         // Widget initialization
-        editTextInput = findViewById(R.id.input_converter);
-        editTextOutput = findViewById(R.id.output_converter);
+        mEditTextInput = findViewById(R.id.input_converter);
+        mEditTextOutput = findViewById(R.id.output_converter);
 
         // Disable input option for EditText views
-        editTextInput.setKeyListener(null);
-        editTextOutput.setKeyListener(null);
+        mEditTextInput.setKeyListener(null);
+        mEditTextOutput.setKeyListener(null);
 
         // Spinners block initialization
-        spinnerFrom = findViewById(R.id.units_conversion_spinnerFrom);
-        spinnerTo = findViewById(R.id.units_conversion_spinnerTo);
+        mSpinnerFrom = findViewById(R.id.units_conversion_spinnerFrom);
+        mSpinnerTo = findViewById(R.id.units_conversion_spinnerTo);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item, spinnerItems);
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        spinnerFrom.setAdapter(adapter);
-        spinnerTo.setAdapter(adapter);
+        mSpinnerFrom.setAdapter(adapter);
+        mSpinnerTo.setAdapter(adapter);
 
         // Spinners listeners
-        spinnerFrom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mSpinnerFrom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 checkDigits();
@@ -83,7 +85,7 @@ public class UnitsConversionScreen extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        spinnerTo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mSpinnerTo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 checkDigits();
@@ -96,55 +98,42 @@ public class UnitsConversionScreen extends AppCompatActivity {
 
         // Copy button initialization and listeners
         final Button copyButton = findViewById(R.id.button_copy);
-        copyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                copy();
-            }
-        });
-        copyButton.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                paste();
-                return true;
-            }
+        copyButton.setOnClickListener(v -> copy());
+        copyButton.setOnLongClickListener(v -> {
+            paste();
+            return true;
         });
     }
 
     @Override
     protected void onResume() {
-        spinnerFrom.setSelection(mySettingsForSpinners.getInt(key1, 0));
-        spinnerTo.setSelection(mySettingsForSpinners.getInt(key2, 1));
+        mSpinnerFrom.setSelection(mSpinnersSettings.getInt(mKey1, 0));
+        mSpinnerTo.setSelection(mSpinnersSettings.getInt(mKey2, 1));
         super.onResume();
     }
 
     @Override
     protected void onPause() {
-        SharedPreferences.Editor editor = mySettingsForSpinners.edit();
-        editor.remove(key1).apply();
-        editor.remove(key2).apply();
-        editor.putInt(key1, spinnerFrom.getSelectedItemPosition());
-        editor.putInt(key2, spinnerTo.getSelectedItemPosition());
-        editor.apply();
+        mSpinnersSettings.edit()
+                .remove(mKey1)
+                .remove(mKey2)
+                .putInt(mKey1, mSpinnerFrom.getSelectedItemPosition())
+                .putInt(mKey2, mSpinnerTo.getSelectedItemPosition())
+                .apply();
         super.onPause();
     }
 
     private void initToolbar(int icon) {
         Toolbar toolbar = findViewById(R.id.units_conversion_toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> finish());
         ImageView toolbarImage = findViewById(R.id.units_conversion_toolbar_image);
         toolbarImage.setImageResource(icon);
     }
 
     public void onClickDigitButtons(View v) {
         Button btn = (Button) v;
-        editTextInput.setText(editTextInput.getText().append(btn.getText()));
+        mEditTextInput.setText(mEditTextInput.getText().append(btn.getText()));
         checkAmountOfDigits();
         conversion();
     }
@@ -161,8 +150,8 @@ public class UnitsConversionScreen extends AppCompatActivity {
                 checkDigits();
                 break;
             case R.id.button_clear:
-                editTextInput.getText().clear();
-                editTextOutput.getText().clear();
+                mEditTextInput.getText().clear();
+                mEditTextOutput.getText().clear();
                 break;
             // Sign block
             case R.id.button_sign:
@@ -180,75 +169,74 @@ public class UnitsConversionScreen extends AppCompatActivity {
     }
 
     private void setDotSign() {
-        String text = editTextInput.getText().toString();
+        String text = mEditTextInput.getText().toString();
         if (text.contains(".")) {
-            editTextInput.setText(editTextInput.getText());
+            mEditTextInput.setText(mEditTextInput.getText());
         } else {
-            editTextInput.setText(editTextInput.getText().append('.'));
+            mEditTextInput.setText(mEditTextInput.getText().append('.'));
         }
     }
 
     private void checkEmptyInputField() {
-        String text = editTextInput.getText().toString();
+        String text = mEditTextInput.getText().toString();
         if (text.isEmpty()) {
-            editTextInput.setText(editTextInput.getText());
+            mEditTextInput.setText(mEditTextInput.getText());
         } else {
-            editTextInput.setText(text.substring(0, text.length() - 1));
+            mEditTextInput.setText(text.substring(0, text.length() - 1));
         }
     }
 
     private void setMinusSign() {
-        String text = editTextInput.getText().toString();
+        String text = mEditTextInput.getText().toString();
         if (text.contains("-")) {
-            editTextInput.setText(editTextInput.getText().delete(0, 1));
+            mEditTextInput.setText(mEditTextInput.getText().delete(0, 1));
         } else {
-            editTextInput.setText(editTextInput.getText().insert(0, "-"));
+            mEditTextInput.setText(mEditTextInput.getText().insert(0, "-"));
         }
     }
 
     private void checkDigits() {
-        String inputText = editTextInput.getText().toString();
-        Pattern regEx = Pattern.compile("^-|\\.|-\\.$");
-        Matcher match = regEx.matcher(inputText);
-
-        if (match.matches() || inputText.isEmpty()) {
-            editTextOutput.getText().clear();
+        String inputText = mEditTextInput.getText().toString();
+        //Pattern regEx = Pattern.compile("^-|\\.|-\\.$");
+        Matcher matcher = Pattern.compile(getResources().getString(R.string.digits_regexp)).matcher(inputText);
+        if (matcher.matches() || inputText.isEmpty()) {
+            mEditTextOutput.getText().clear();
         } else {
             conversion();
         }
     }
 
     private void checkAmountOfDigits() {
-        String textInput = editTextInput.getText().toString();
+        String textInput = mEditTextInput.getText().toString();
         if (textInput.length() > 30) {
-            editTextInput.setText(textInput.substring(0, textInput.length() - 1));
+            mEditTextInput.setText(textInput.substring(0, textInput.length() - 1));
         }
     }
 
     private void checkAmountOfDigitsForPasteValue() {
-        String textInput = editTextInput.getText().toString();
+        String textInput = mEditTextInput.getText().toString();
         if (textInput.length() > 30) {
             String str = getResources().getString(R.string.max_length_of_pasted_value_exceeded_notification);
-            editTextInput.setText(textInput.substring(0, 30));
+            mEditTextInput.setText(textInput.substring(0, 30));
             showInfoText(str);
         }
     }
 
     private void copy() {
-        ClipData clip = ClipData.newPlainText("Output", editTextOutput.getText());
-        clipboard.setPrimaryClip(clip);
+        ClipData clip = ClipData.newPlainText("Output", mEditTextOutput.getText());
+        mClipboard.setPrimaryClip(clip);
         String str = getResources().getString(R.string.copy_notification);
         showInfoText(str);
     }
 
     private void paste() {
-        String pasteData;
+        String pasteData = "";
         try {
-            if (clipboard.hasPrimaryClip()) {
-                if (clipboard.getPrimaryClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
-                    ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
+            if (mClipboard.hasPrimaryClip()) {
+                if (mClipboard.getPrimaryClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
+                    ClipData.Item item = mClipboard.getPrimaryClip().getItemAt(0);
                     pasteData = item.getText().toString();
-                    editTextInput.setText(pasteData);
+                    mEditTextInput.setText(pasteData);
                     checkAmountOfDigitsForPasteValue();
                     conversion();
                 }
@@ -256,20 +244,16 @@ public class UnitsConversionScreen extends AppCompatActivity {
         } catch (NumberFormatException e) {
             String str = getResources().getString(R.string.incorrect_paste_value_notification);
             showInfoText(str);
-            editTextInput.getText().clear();
-            editTextOutput.getText().clear();
+            mEditTextInput.getText().clear();
+            mEditTextOutput.getText().clear();
         }
     }
 
     private void reverse() {
-        int temp;
-        int selected = spinnerFrom.getSelectedItemPosition();
-        int selected2 = spinnerTo.getSelectedItemPosition();
-        temp = selected;
-        selected = selected2;
-        selected2 = temp;
-        spinnerFrom.setSelection(selected);
-        spinnerTo.setSelection(selected2);
+        int selectedFrom = mSpinnerFrom.getSelectedItemPosition();
+        int selectedTo = mSpinnerTo.getSelectedItemPosition();
+        mSpinnerFrom.setSelection(selectedTo);
+        mSpinnerTo.setSelection(selectedFrom);
     }
 
     private void showInfoText(String infoMsg) {
@@ -277,10 +261,10 @@ public class UnitsConversionScreen extends AppCompatActivity {
     }
 
     private void conversion() {
-        String spinnerItemName = spinnerFrom.getSelectedItem().toString();
-        String spinner2ItemName = spinnerTo.getSelectedItem().toString();
-        double inputValue = Double.valueOf(editTextInput.getText().toString());
-        double outputValue = CalculationMethods.convert(inputValue, spinnerItemName, spinner2ItemName, key1);
-        editTextOutput.setText(String.valueOf(outputValue));
+        String spinnerItemFrom = mSpinnerFrom.getSelectedItem().toString();
+        String spinnerItemTo = mSpinnerTo.getSelectedItem().toString();
+        double inputValue = Double.parseDouble(mEditTextInput.getText().toString());
+        double outputValue = CalculationMethods.convert(inputValue, spinnerItemFrom, spinnerItemTo, mKey1);
+        mEditTextOutput.setText(String.valueOf(outputValue));
     }
 }

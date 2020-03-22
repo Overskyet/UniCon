@@ -39,6 +39,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import overskyet.unicon.HomeScreen;
+import overskyet.unicon.MyApplication;
 
 public class ExchangeRatesAsync extends ViewModel {
 
@@ -59,26 +60,23 @@ public class ExchangeRatesAsync extends ViewModel {
             if (sharedPrefTime.equalsIgnoreCase(time)) return;
             Gson gson = new GsonBuilder().enableComplexMapKeySerialization().create();
             String jsonMapString = gson.toJson(rates);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.remove(HomeScreen.KEY_MAP_OF_RATES).apply();
-            editor.remove(HomeScreen.KEY_ECB_TIME_OF_UPDATE).apply();
-            editor.putString(HomeScreen.KEY_MAP_OF_RATES, jsonMapString);
-            editor.putString(HomeScreen.KEY_ECB_TIME_OF_UPDATE, time);
-            editor.apply();
+            preferences.edit()
+                    .remove(HomeScreen.KEY_MAP_OF_RATES)
+                    .remove(HomeScreen.KEY_ECB_TIME_OF_UPDATE)
+                    .putString(HomeScreen.KEY_MAP_OF_RATES, jsonMapString)
+                    .putString(HomeScreen.KEY_ECB_TIME_OF_UPDATE, time)
+                    .apply();
             updateTime();
         }
-
     }
 
     private void updateTime() {
-        if (preferences != null) {
-            LocalDateTime nextUpdateTime = LocalDate.now(ZoneId.of("Europe/Berlin")).plusDays(1).atTime(17, 0);
-            long timeInSeconds = nextUpdateTime.toEpochSecond(ZoneId.of("Europe/Berlin").getRules().getOffset(nextUpdateTime));
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.remove(HomeScreen.KEY_NEXT_UPDATE_TIME);
-            editor.putLong(HomeScreen.KEY_NEXT_UPDATE_TIME, timeInSeconds);
-            editor.apply();
-        }
+        LocalDateTime nextUpdateTime = LocalDate.now(ZoneId.of("Europe/Berlin")).plusDays(1).atTime(17, 0);
+        long timeInSeconds = nextUpdateTime.toEpochSecond(ZoneId.of("Europe/Berlin").getRules().getOffset(nextUpdateTime));
+        preferences.edit()
+                .remove(HomeScreen.KEY_NEXT_UPDATE_TIME)
+                .putLong(HomeScreen.KEY_NEXT_UPDATE_TIME, timeInSeconds)
+                .apply();
     }
 
     private class DownloadExchangeRatesTask extends AsyncTask<String, Void, ExchangeRates> {
@@ -178,9 +176,12 @@ public class ExchangeRatesAsync extends ViewModel {
         }
     }
 
-    public void checkScheduleForAsync(Context context) {
-        preferences = context.getApplicationContext().getSharedPreferences(
-                HomeScreen.KEY_NAME_OF_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+    public void checkScheduleForAsync() {
+        Context context = MyApplication.getContext();
+
+        AndroidThreeTen.init(context);
+
+        preferences = context.getSharedPreferences(HomeScreen.KEY_NAME_OF_SHARED_PREFERENCES, Context.MODE_PRIVATE);
 
         LocalDateTime myCurrentDateInCETtimeZone = LocalDateTime.now(ZoneId.of("Europe/Berlin"));
 
@@ -191,13 +192,14 @@ public class ExchangeRatesAsync extends ViewModel {
                 DateTimeUtils.toZoneId(TimeZone.getTimeZone("Europe/Berlin")));
 
         if (myCurrentDateInCETtimeZone.compareTo(nextUpdateTime) >= 0)
-        startAsyncTask();
+            startAsyncTask();
 
     }
 
     public Long getStartTime() {
         return mStartTime;
     }
+
     public void setStartTime(final Long startTime) {
         this.mStartTime = startTime;
     }

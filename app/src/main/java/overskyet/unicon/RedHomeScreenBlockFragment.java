@@ -31,98 +31,80 @@ public class RedHomeScreenBlockFragment extends Fragment {
         Button buttonEnergy = v.findViewById(R.id.button_energy);
         Button buttonTemperature = v.findViewById(R.id.button_temperature);
 
-        buttonCurrency.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myIntent = new Intent(getActivity(), CurrencyExchangeScreen.class);
-                String activityTitle = getResources().getString(R.string.currency_button);
-                int activityImage = R.drawable.ic_currency_white;
-                myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_CURRENCY_CONVERSION);
-                myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_CURRENCY_CONVERSION);
-                myIntent.putExtra("stringExtra3", activityTitle);
-                myIntent.putExtra("intExtra", activityImage);
-                startActivity(myIntent);
-            }
+        buttonCurrency.setOnClickListener(view -> {
+            myIntent = new Intent(getActivity(), CurrencyExchangeScreen.class);
+            String activityTitle = getResources().getString(R.string.currency_button);
+            int activityImage = R.drawable.ic_currency_white;
+            myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_CURRENCY_CONVERSION);
+            myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_CURRENCY_CONVERSION);
+            myIntent.putExtra("stringExtra3", activityTitle);
+            myIntent.putExtra("intExtra", activityImage);
+            startActivity(myIntent);
         });
 
-        buttonTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
-                String activityTitle = getResources().getString(R.string.time_button);
-                int activityImage = R.drawable.ic_time_white;
-                String[] spinnerItems = getResources().getStringArray(R.array.time_block);
-                myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_TIME_CONVERSION);
-                myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_TIME_CONVERSION);
-                myIntent.putExtra("stringExtra3", activityTitle);
-                myIntent.putExtra("intExtra", activityImage);
-                myIntent.putExtra("stringArrayExtra", spinnerItems);
-                startActivity(myIntent);
-            }
+        buttonTime.setOnClickListener(view -> {
+            myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
+            String activityTitle = getResources().getString(R.string.time_button);
+            int activityImage = R.drawable.ic_time_white;
+            String[] spinnerItems = getResources().getStringArray(R.array.time_block);
+            myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_TIME_CONVERSION);
+            myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_TIME_CONVERSION);
+            myIntent.putExtra("stringExtra3", activityTitle);
+            myIntent.putExtra("intExtra", activityImage);
+            myIntent.putExtra("stringArrayExtra", spinnerItems);
+            startActivity(myIntent);
         });
 
-        buttonFuelConsumption.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
-                String activityTitle = getResources().getString(R.string.fuel_consumption_button);
-                int activityImage = R.drawable.ic_fuel_consumption_white;
-                String[] spinnerItems = getResources().getStringArray(R.array.fuel_consumption_block);
-                myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_FUEL_CONSUMPTION_CONVERSION);
-                myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_FUEL_CONSUMPTION_CONVERSION);
-                myIntent.putExtra("stringExtra3", activityTitle);
-                myIntent.putExtra("intExtra", activityImage);
-                myIntent.putExtra("stringArrayExtra", spinnerItems);
-                startActivity(myIntent);
-            }
+        buttonFuelConsumption.setOnClickListener(view -> {
+            myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
+            String activityTitle = getResources().getString(R.string.fuel_consumption_button);
+            int activityImage = R.drawable.ic_fuel_consumption_white;
+            String[] spinnerItems = getResources().getStringArray(R.array.fuel_consumption_block);
+            myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_FUEL_CONSUMPTION_CONVERSION);
+            myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_FUEL_CONSUMPTION_CONVERSION);
+            myIntent.putExtra("stringExtra3", activityTitle);
+            myIntent.putExtra("intExtra", activityImage);
+            myIntent.putExtra("stringArrayExtra", spinnerItems);
+            startActivity(myIntent);
         });
 
-        buttonPressure.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
-                String activityTitle = getResources().getString(R.string.pressure_button);
-                int activityImage = R.drawable.ic_pressure_white;
-                String[] spinnerItems = getResources().getStringArray(R.array.pressure_block);
-                myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_PRESSURE_CONVERSION);
-                myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_PRESSURE_CONVERSION);
-                myIntent.putExtra("stringExtra3", activityTitle);
-                myIntent.putExtra("intExtra", activityImage);
-                myIntent.putExtra("stringArrayExtra", spinnerItems);
-                startActivity(myIntent);
-            }
+        buttonPressure.setOnClickListener(view -> {
+            myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
+            String activityTitle = getResources().getString(R.string.pressure_button);
+            int activityImage = R.drawable.ic_pressure_white;
+            String[] spinnerItems = getResources().getStringArray(R.array.pressure_block);
+            myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_PRESSURE_CONVERSION);
+            myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_PRESSURE_CONVERSION);
+            myIntent.putExtra("stringExtra3", activityTitle);
+            myIntent.putExtra("intExtra", activityImage);
+            myIntent.putExtra("stringArrayExtra", spinnerItems);
+            startActivity(myIntent);
         });
 
-        buttonEnergy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
-                String activityTitle = getResources().getString(R.string.energy_button);
-                int activityImage = R.drawable.ic_energy_white;
-                String[] spinnerItems = getResources().getStringArray(R.array.energy_block);
-                myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_ENERGY_CONVERSION);
-                myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_ENERGY_CONVERSION);
-                myIntent.putExtra("stringExtra3", activityTitle);
-                myIntent.putExtra("intExtra", activityImage);
-                myIntent.putExtra("stringArrayExtra", spinnerItems);
-                startActivity(myIntent);
-            }
+        buttonEnergy.setOnClickListener(view -> {
+            myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
+            String activityTitle = getResources().getString(R.string.energy_button);
+            int activityImage = R.drawable.ic_energy_white;
+            String[] spinnerItems = getResources().getStringArray(R.array.energy_block);
+            myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_ENERGY_CONVERSION);
+            myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_ENERGY_CONVERSION);
+            myIntent.putExtra("stringExtra3", activityTitle);
+            myIntent.putExtra("intExtra", activityImage);
+            myIntent.putExtra("stringArrayExtra", spinnerItems);
+            startActivity(myIntent);
         });
 
-        buttonTemperature.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
-                String activityTitle = getResources().getString(R.string.temperature_button);
-                int activityImage = R.drawable.ic_temperature_white;
-                String[] spinnerItems = getResources().getStringArray(R.array.temperature_block);
-                myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_TEMPERATURE_CONVERSION);
-                myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_TEMPERATURE_CONVERSION);
-                myIntent.putExtra("stringExtra3", activityTitle);
-                myIntent.putExtra("intExtra", activityImage);
-                myIntent.putExtra("stringArrayExtra", spinnerItems);
-                startActivity(myIntent);
-            }
+        buttonTemperature.setOnClickListener(view -> {
+            myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
+            String activityTitle = getResources().getString(R.string.temperature_button);
+            int activityImage = R.drawable.ic_temperature_white;
+            String[] spinnerItems = getResources().getStringArray(R.array.temperature_block);
+            myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_TEMPERATURE_CONVERSION);
+            myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_TEMPERATURE_CONVERSION);
+            myIntent.putExtra("stringExtra3", activityTitle);
+            myIntent.putExtra("intExtra", activityImage);
+            myIntent.putExtra("stringArrayExtra", spinnerItems);
+            startActivity(myIntent);
         });
 
         return v;

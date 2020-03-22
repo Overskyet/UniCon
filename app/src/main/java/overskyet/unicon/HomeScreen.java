@@ -3,8 +3,6 @@ package overskyet.unicon;
 import android.os.Bundle;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-import com.jakewharton.threetenabp.AndroidThreeTen;
-
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -65,8 +63,6 @@ public class HomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
-        AndroidThreeTen.init(HomeScreen.this);
-
         initToolbar();
 
         //Start Scheduler here
@@ -107,7 +103,7 @@ public class HomeScreen extends AppCompatActivity {
             chronometer.setBase(exchangeRatesAsync.getStartTime());
         }
         chronometer.start();
-        exchangeRatesAsync.checkScheduleForAsync(HomeScreen.this);
+        exchangeRatesAsync.checkScheduleForAsync();
     }
 
     private List<Fragment> getFragments() {

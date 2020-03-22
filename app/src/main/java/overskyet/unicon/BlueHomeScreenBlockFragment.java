@@ -31,100 +31,82 @@ public class BlueHomeScreenBlockFragment extends Fragment {
         Button buttonAngle = v.findViewById(R.id.button_angle);
         Button buttonSpeed = v.findViewById(R.id.button_speed);
 
-        buttonLength.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
-                String activityTitle = getResources().getString(R.string.length_button);
-                int activityImage = R.drawable.ic_length_white;
-                String[] spinnerItems = getResources().getStringArray(R.array.length_block);
-                myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_LENGTH_CONVERSION);
-                myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_LENGTH_CONVERSION);
-                myIntent.putExtra("stringExtra3", activityTitle);
-                myIntent.putExtra("intExtra", activityImage);
-                myIntent.putExtra("stringArrayExtra", spinnerItems);
-                startActivity(myIntent);
-            }
+        buttonLength.setOnClickListener(view -> {
+            myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
+            String activityTitle = getResources().getString(R.string.length_button);
+            int activityImage = R.drawable.ic_length_white;
+            String[] spinnerItems = getResources().getStringArray(R.array.length_block);
+            myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_LENGTH_CONVERSION);
+            myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_LENGTH_CONVERSION);
+            myIntent.putExtra("stringExtra3", activityTitle);
+            myIntent.putExtra("intExtra", activityImage);
+            myIntent.putExtra("stringArrayExtra", spinnerItems);
+            startActivity(myIntent);
         });
 
-        buttonWeight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
-                String activityTitle = getResources().getString(R.string.weight_button);
-                int activityImage = R.drawable.ic_weight_white;
-                String[] spinnerItems = getResources().getStringArray(R.array.weight_block);
-                myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_WEIGHT_CONVERSION);
-                myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_WEIGHT_CONVERSION);
-                myIntent.putExtra("stringExtra3", activityTitle);
-                myIntent.putExtra("intExtra", activityImage);
-                myIntent.putExtra("stringArrayExtra", spinnerItems);
-                startActivity(myIntent);
-            }
+        buttonWeight.setOnClickListener(view -> {
+            myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
+            String activityTitle = getResources().getString(R.string.weight_button);
+            int activityImage = R.drawable.ic_weight_white;
+            String[] spinnerItems = getResources().getStringArray(R.array.weight_block);
+            myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_WEIGHT_CONVERSION);
+            myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_WEIGHT_CONVERSION);
+            myIntent.putExtra("stringExtra3", activityTitle);
+            myIntent.putExtra("intExtra", activityImage);
+            myIntent.putExtra("stringArrayExtra", spinnerItems);
+            startActivity(myIntent);
         });
 
-        buttonVolume.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
-                String activityTitle = getResources().getString(R.string.volume_button);
-                int activityImage = R.drawable.ic_volume_white;
-                String[] spinnerItems = getResources().getStringArray(R.array.volume_block);
-                myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_VOLUME_CONVERSION);
-                myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_VOLUME_CONVERSION);
-                myIntent.putExtra("stringExtra3", activityTitle);
-                myIntent.putExtra("intExtra", activityImage);
-                myIntent.putExtra("stringArrayExtra", spinnerItems);
-                startActivity(myIntent);
-            }
+        buttonVolume.setOnClickListener(view -> {
+            myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
+            String activityTitle = getResources().getString(R.string.volume_button);
+            int activityImage = R.drawable.ic_volume_white;
+            String[] spinnerItems = getResources().getStringArray(R.array.volume_block);
+            myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_VOLUME_CONVERSION);
+            myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_VOLUME_CONVERSION);
+            myIntent.putExtra("stringExtra3", activityTitle);
+            myIntent.putExtra("intExtra", activityImage);
+            myIntent.putExtra("stringArrayExtra", spinnerItems);
+            startActivity(myIntent);
         });
 
-        buttonArea.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
-                String activityTitle = getResources().getString(R.string.area_button);
-                int activityImage = R.drawable.ic_area_white;
-                String[] spinnerItems = getResources().getStringArray(R.array.area_block);
-                myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_AREA_CONVERSION);
-                myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_AREA_CONVERSION);
-                myIntent.putExtra("stringExtra3", activityTitle);
-                myIntent.putExtra("intExtra", activityImage);
-                myIntent.putExtra("stringArrayExtra", spinnerItems);
-                startActivity(myIntent);
-            }
+        buttonArea.setOnClickListener(view -> {
+            myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
+            String activityTitle = getResources().getString(R.string.area_button);
+            int activityImage = R.drawable.ic_area_white;
+            String[] spinnerItems = getResources().getStringArray(R.array.area_block);
+            myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_AREA_CONVERSION);
+            myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_AREA_CONVERSION);
+            myIntent.putExtra("stringExtra3", activityTitle);
+            myIntent.putExtra("intExtra", activityImage);
+            myIntent.putExtra("stringArrayExtra", spinnerItems);
+            startActivity(myIntent);
         });
 
-        buttonAngle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
-                String activityTitle = getResources().getString(R.string.angle_button);
-                int activityImage = R.drawable.ic_angle_white;
-                String[] spinnerItems = getResources().getStringArray(R.array.angle_block);
-                myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_ANGLE_CONVERSION);
-                myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_ANGLE_CONVERSION);
-                myIntent.putExtra("stringExtra3", activityTitle);
-                myIntent.putExtra("intExtra", activityImage);
-                myIntent.putExtra("stringArrayExtra", spinnerItems);
-                startActivity(myIntent);
-            }
+        buttonAngle.setOnClickListener(view -> {
+            myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
+            String activityTitle = getResources().getString(R.string.angle_button);
+            int activityImage = R.drawable.ic_angle_white;
+            String[] spinnerItems = getResources().getStringArray(R.array.angle_block);
+            myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_ANGLE_CONVERSION);
+            myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_ANGLE_CONVERSION);
+            myIntent.putExtra("stringExtra3", activityTitle);
+            myIntent.putExtra("intExtra", activityImage);
+            myIntent.putExtra("stringArrayExtra", spinnerItems);
+            startActivity(myIntent);
         });
 
-        buttonSpeed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
-                String activityTitle = getResources().getString(R.string.speed_button);
-                int activityImage = R.drawable.ic_speed_white;
-                String[] spinnerItems = getResources().getStringArray(R.array.speed_block);
-                myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_SPEED_CONVERSION);
-                myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_SPEED_CONVERSION);
-                myIntent.putExtra("stringExtra3", activityTitle);
-                myIntent.putExtra("intExtra", activityImage);
-                myIntent.putExtra("stringArrayExtra", spinnerItems);
-                startActivity(myIntent);
-            }
+        buttonSpeed.setOnClickListener(view -> {
+            myIntent = new Intent(getActivity(), UnitsConversionScreen.class);
+            String activityTitle = getResources().getString(R.string.speed_button);
+            int activityImage = R.drawable.ic_speed_white;
+            String[] spinnerItems = getResources().getStringArray(R.array.speed_block);
+            myIntent.putExtra("stringExtra1", HomeScreen.KEY_1_SPEED_CONVERSION);
+            myIntent.putExtra("stringExtra2", HomeScreen.KEY_2_SPEED_CONVERSION);
+            myIntent.putExtra("stringExtra3", activityTitle);
+            myIntent.putExtra("intExtra", activityImage);
+            myIntent.putExtra("stringArrayExtra", spinnerItems);
+            startActivity(myIntent);
         });
 
         return v;

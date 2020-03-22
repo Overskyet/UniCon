@@ -18,12 +18,11 @@ import java.util.Iterator;
 import java.util.Map;
 
 import overskyet.unicon.HomeScreen;
+import overskyet.unicon.MyApplication;
 
 public class CurrencyConverter {
 
     private static final String TAG = CurrencyConverter.class.getSimpleName();
-
-    private Context mContext;
 
     private String mFromCurrency;
     private String mToCurrency;
@@ -31,10 +30,6 @@ public class CurrencyConverter {
     private int mCalculationAccuracy = 4;
 
     private BigDecimal mResult = new BigDecimal(0.0);
-
-    public CurrencyConverter(Context context) {
-        mContext = context;
-    }
 
     public BigDecimal convert(String fromCurrency, String toCurrency, BigDecimal amount) {
         mFromCurrency = fromCurrency;
@@ -81,8 +76,9 @@ public class CurrencyConverter {
     }
 
     private Map<String, Double> getRates() {
+        Context context = MyApplication.getContext();
         Map<String, Double> rates = new HashMap<>();
-        SharedPreferences preferences = mContext.getApplicationContext().getSharedPreferences(HomeScreen.KEY_NAME_OF_SHARED_PREFERENCES,
+        SharedPreferences preferences = context.getSharedPreferences(HomeScreen.KEY_NAME_OF_SHARED_PREFERENCES,
                 Context.MODE_PRIVATE);
         if (preferences != null) {
             String jsonString = preferences.getString(HomeScreen.KEY_MAP_OF_RATES, new JSONObject().toString());
