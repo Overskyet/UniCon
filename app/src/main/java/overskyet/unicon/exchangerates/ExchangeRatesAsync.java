@@ -11,7 +11,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 
-import org.json.JSONObject;
 import org.threeten.bp.DateTimeUtils;
 import org.threeten.bp.Instant;
 import org.threeten.bp.LocalDate;
@@ -50,7 +49,7 @@ public class ExchangeRatesAsync extends ViewModel {
     private static final String TAG = ExchangeRatesAsync.class.getSimpleName();
     private static final String ECB_URL = "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml";
 
-    private void startAsyncTask() {
+    public void startAsyncTask() {
         new DownloadExchangeRatesTask().execute(ECB_URL);
     }
 
@@ -181,7 +180,7 @@ public class ExchangeRatesAsync extends ViewModel {
 
         AndroidThreeTen.init(context);
 
-        preferences = context.getSharedPreferences(HomeScreen.KEY_NAME_OF_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        preferences = context.getSharedPreferences(HomeScreen.KEY_EXCHANGE_RATES_SHARED_PREFERENCES, Context.MODE_PRIVATE);
 
         LocalDateTime myCurrentDateInCETtimeZone = LocalDateTime.now(ZoneId.of("Europe/Berlin"));
 

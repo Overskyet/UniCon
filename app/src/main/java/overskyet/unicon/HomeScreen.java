@@ -1,8 +1,12 @@
 package overskyet.unicon;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -24,7 +28,7 @@ public class HomeScreen extends AppCompatActivity {
     public static final String KEY_MAP_OF_RATES = "overskyet.unicon.MAP_OF_RATES";
     public static final String KEY_ECB_TIME_OF_UPDATE = "overskyet.unicon.TIME_OF_UPDATE";
     public static final String KEY_NEXT_UPDATE_TIME = "overskyet.unicon.NEXT_UPDATE_TIME";
-    public static final String KEY_NAME_OF_SHARED_PREFERENCES = "overskyet.unicon.EXCHANGE_RATES";
+    public static final String KEY_EXCHANGE_RATES_SHARED_PREFERENCES = "overskyet.unicon.EXCHANGE_RATES";
     public static final String KEY_1_CURRENCY_CONVERSION = "overskyet.unicon.CURRENCY_SPINNER_1";
     public static final String KEY_1_TIME_CONVERSION = "overskyet.unicon.TIME_SPINNER_1";
     public static final String KEY_1_FUEL_CONSUMPTION_CONVERSION = "overskyet.unicon.FUEL_CONSUMPTION_SPINNER_1";
@@ -54,6 +58,7 @@ public class HomeScreen extends AppCompatActivity {
     HomeScreenFragmentAdapter pageAdapter;
     TabLayout tabLayout;
     Toolbar toolbar;
+    private Boolean isFirstLaunch = true;
 
 
     Chronometer chronometer;
@@ -94,16 +99,21 @@ public class HomeScreen extends AppCompatActivity {
 
     private void checkScheduler() {
         ExchangeRatesAsync exchangeRatesAsync = new ViewModelProvider(HomeScreen.this).get(ExchangeRatesAsync.class);
-        chronometer = findViewById(R.id.home_screen_test_chronometer);
-        if (exchangeRatesAsync.getStartTime() == null) {
-            long startTime = SystemClock.elapsedRealtime();
-            exchangeRatesAsync.setStartTime(startTime);
-            chronometer.setBase(startTime);
+        if (isFirstLaunch) {
+            checkFirstLaunch();
+            exchangeRatesAsync.startAsyncTask();
         } else {
-            chronometer.setBase(exchangeRatesAsync.getStartTime());
+            chronometer = findViewById(R.id.home_screen_test_chronometer);
+            if (exchangeRatesAsync.getStartTime() == null) {
+                long startTime = SystemClock.elapsedRealtime();
+                exchangeRatesAsync.setStartTime(startTime);
+                chronometer.setBase(startTime);
+            } else {
+                chronometer.setBase(exchangeRatesAsync.getStartTime());
+            }
+            chronometer.start();
+            exchangeRatesAsync.checkScheduleForAsync();
         }
-        chronometer.start();
-        exchangeRatesAsync.checkScheduleForAsync();
     }
 
     private List<Fragment> getFragments() {
@@ -117,5 +127,9 @@ public class HomeScreen extends AppCompatActivity {
     private void openDialogWindow() {
         disclaimerDialogFragment = new HomeScreenCreditsDialogFragment();
         disclaimerDialogFragment.show(getSupportFragmentManager(), getResources().getString(R.string.credits_header));
+    }
+
+    private void checkFirstLaunch() {
+        isFirstLaunch = false;
     }
 }

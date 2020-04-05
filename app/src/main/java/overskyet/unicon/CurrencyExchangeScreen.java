@@ -156,7 +156,7 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
     }
 
     private void getLastUpdateTime() {
-        SharedPreferences preferences = this.getSharedPreferences(HomeScreen.KEY_NAME_OF_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences preferences = this.getSharedPreferences(HomeScreen.KEY_EXCHANGE_RATES_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         if (preferences != null) {
             String time = preferences.getString(HomeScreen.KEY_ECB_TIME_OF_UPDATE, "No data available");
             mUpdateTime.setText(time);
@@ -270,12 +270,11 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
     }
 
     private void paste() {
-        String pasteData = "";
         try {
             if (mClipboard.hasPrimaryClip()) {
                 if (mClipboard.getPrimaryClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
                     ClipData.Item item = mClipboard.getPrimaryClip().getItemAt(0);
-                    pasteData = item.getText().toString();
+                    String pasteData = item.getText().toString();
                     mEditTextInput.setText(pasteData);
                     checkAmountOfDigitsForPasteValue();
                     startConvert();

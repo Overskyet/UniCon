@@ -2,19 +2,16 @@ package overskyet.unicon.exchangerates;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import overskyet.unicon.HomeScreen;
@@ -78,7 +75,7 @@ public class CurrencyConverter {
     private Map<String, Double> getRates() {
         Context context = MyApplication.getContext();
         Map<String, Double> rates = new HashMap<>();
-        SharedPreferences preferences = context.getSharedPreferences(HomeScreen.KEY_NAME_OF_SHARED_PREFERENCES,
+        SharedPreferences preferences = context.getSharedPreferences(HomeScreen.KEY_EXCHANGE_RATES_SHARED_PREFERENCES,
                 Context.MODE_PRIVATE);
         if (preferences != null) {
             String jsonString = preferences.getString(HomeScreen.KEY_MAP_OF_RATES, new JSONObject().toString());
