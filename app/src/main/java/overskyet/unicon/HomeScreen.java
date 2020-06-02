@@ -2,19 +2,10 @@ package overskyet.unicon;
 
 import android.os.Bundle;
 
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
-
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.viewpager2.widget.ViewPager2;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import overskyet.unicon.adapters.HomeScreenFragmentAdapter;
 import overskyet.unicon.exchangerates.ExchangeRatesAsync;
 
 public class HomeScreen extends AppCompatActivity {
@@ -47,33 +38,21 @@ public class HomeScreen extends AppCompatActivity {
     public static final String KEY_2_ANGLE_CONVERSION = "overskyet.unicon.ANGLE_SPINNER_2";
     public static final String KEY_2_SPEED_CONVERSION = "overskyet.unicon.SPEED_SPINNER_2";
 
-    DialogFragment disclaimerDialogFragment;
-    HomeScreenFragmentAdapter pageAdapter;
-    TabLayout tabLayout;
-    Toolbar toolbar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
         initToolbar();
+        initFragment();
 
         //Start Scheduler here
         startAsync();
 
-        pageAdapter = new HomeScreenFragmentAdapter(HomeScreen.this, getFragments());
-        ViewPager2 viewPager = findViewById(R.id.home_screen_view_pager);
-        viewPager.setAdapter(pageAdapter);
-
-        tabLayout = findViewById(R.id.home_screen_tab_layout);
-        new TabLayoutMediator(tabLayout, viewPager,
-                (tab, position) -> {
-                }).attach();
     }
 
     private void initToolbar() {
-        toolbar = findViewById(R.id.home_screen_toolbar);
+        final Toolbar toolbar = findViewById(R.id.home_screen_toolbar);
         toolbar.inflateMenu(R.menu.home_screen_toolbar_menu);
         toolbar.setOnMenuItemClickListener(menuItem -> {
             int i = menuItem.getItemId();
@@ -86,21 +65,20 @@ public class HomeScreen extends AppCompatActivity {
         });
     }
 
+    private void initFragment() {
+        final HomeScreenFragment homeScreenFragment = new HomeScreenFragment();
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.home_screen_linear_layout, homeScreenFragment)
+                .commit();
+    }
+
     private void startAsync() {
-        ExchangeRatesAsync exchangeRatesAsync = new ExchangeRatesAsync();
+        final ExchangeRatesAsync exchangeRatesAsync = new ExchangeRatesAsync();
         exchangeRatesAsync.startAsyncTask();
         }
 
-    private List<Fragment> getFragments() {
-        List<Fragment> fragments = new ArrayList<>();
-
-        fragments.add(new RedHomeScreenBlockFragment());
-        fragments.add(new BlueHomeScreenBlockFragment());
-        return fragments;
-    }
-
     private void openDialogWindow() {
-        disclaimerDialogFragment = new HomeScreenCreditsDialogFragment();
+        final DialogFragment disclaimerDialogFragment = new HomeScreenCreditsDialogFragment();
         disclaimerDialogFragment.show(getSupportFragmentManager(), getResources().getString(R.string.credits_header));
     }
 }
