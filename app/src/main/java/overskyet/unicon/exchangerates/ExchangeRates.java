@@ -1,5 +1,7 @@
 package overskyet.unicon.exchangerates;
 
+import androidx.annotation.NonNull;
+
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +33,7 @@ class ExchangeRates {
     }
 
     @Override
+    @NonNull
     public String toString() {
         return "ExchangeRates{" +
                 "mCurrencies=" + mCurrencies +

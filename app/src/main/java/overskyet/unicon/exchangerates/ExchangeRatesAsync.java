@@ -9,13 +9,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.jakewharton.threetenabp.AndroidThreeTen;
 
-import org.threeten.bp.DateTimeUtils;
-import org.threeten.bp.Instant;
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.LocalDateTime;
-import org.threeten.bp.ZoneId;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -31,7 +25,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -42,10 +35,6 @@ import overskyet.unicon.MyApplication;
 
 public class ExchangeRatesAsync extends ViewModel {
 
-    private Long mStartTime;
-
-    private SharedPreferences preferences;
-
     private static final String TAG = ExchangeRatesAsync.class.getSimpleName();
     private static final String ECB_URL = "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml";
 
@@ -54,6 +43,7 @@ public class ExchangeRatesAsync extends ViewModel {
     }
 
     private void setSharedPreferences(Map<String, Double> rates, String time) {
+        SharedPreferences preferences = MyApplication.getContext().getSharedPreferences(HomeScreen.KEY_EXCHANGE_RATES_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         if (preferences != null) {
             String sharedPrefTime = preferences.getString(HomeScreen.KEY_ECB_TIME_OF_UPDATE, time);
             if (sharedPrefTime.equalsIgnoreCase(time)) return;
@@ -65,17 +55,7 @@ public class ExchangeRatesAsync extends ViewModel {
                     .putString(HomeScreen.KEY_MAP_OF_RATES, jsonMapString)
                     .putString(HomeScreen.KEY_ECB_TIME_OF_UPDATE, time)
                     .apply();
-            updateTime();
         }
-    }
-
-    private void updateTime() {
-        LocalDateTime nextUpdateTime = LocalDate.now(ZoneId.of("Europe/Berlin")).plusDays(1).atTime(17, 0);
-        long timeInSeconds = nextUpdateTime.toEpochSecond(ZoneId.of("Europe/Berlin").getRules().getOffset(nextUpdateTime));
-        preferences.edit()
-                .remove(HomeScreen.KEY_NEXT_UPDATE_TIME)
-                .putLong(HomeScreen.KEY_NEXT_UPDATE_TIME, timeInSeconds)
-                .apply();
     }
 
     private class DownloadExchangeRatesTask extends AsyncTask<String, Void, ExchangeRates> {
@@ -175,31 +155,4 @@ public class ExchangeRatesAsync extends ViewModel {
         }
     }
 
-    public void checkScheduleForAsync() {
-        Context context = MyApplication.getContext();
-
-        AndroidThreeTen.init(context);
-
-        preferences = context.getSharedPreferences(HomeScreen.KEY_EXCHANGE_RATES_SHARED_PREFERENCES, Context.MODE_PRIVATE);
-
-        LocalDateTime myCurrentDateInCETtimeZone = LocalDateTime.now(ZoneId.of("Europe/Berlin"));
-
-        long updateTimeInSeconds = preferences.getLong(
-                HomeScreen.KEY_NEXT_UPDATE_TIME, myCurrentDateInCETtimeZone.toEpochSecond(
-                        ZoneId.of("Europe/Berlin").getRules().getOffset(myCurrentDateInCETtimeZone)));
-        LocalDateTime nextUpdateTime = LocalDateTime.ofInstant(Instant.ofEpochSecond(updateTimeInSeconds),
-                DateTimeUtils.toZoneId(TimeZone.getTimeZone("Europe/Berlin")));
-
-        if (myCurrentDateInCETtimeZone.compareTo(nextUpdateTime) >= 0)
-            startAsyncTask();
-
-    }
-
-    public Long getStartTime() {
-        return mStartTime;
-    }
-
-    public void setStartTime(final Long startTime) {
-        this.mStartTime = startTime;
-    }
 }
