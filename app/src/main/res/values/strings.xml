@@ -33,6 +33,7 @@
     <string name="button_delete">\u232b</string>
     <string name="button_reverse">\u21c4</string>
     <string name="button_copy">\u2397</string>
+    <string name="button_refresh">\u21bb</string>
 
     <string name="from_string">From</string>
     <string name="to_string">To</string>

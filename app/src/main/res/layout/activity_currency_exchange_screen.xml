@@ -157,7 +157,7 @@
                         android:id="@+id/button_sign"
                         style="@style/units_conversion_func_buttons"
                         android:onClick="onClickFunctionButtons"
-                        android:text="@string/button_plus_minus"
+                        android:text="@string/button_refresh"
                         tools:layout_editor_absoluteX="153dp"
                         tools:layout_editor_absoluteY="518dp" />
 

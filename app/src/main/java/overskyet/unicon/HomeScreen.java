@@ -72,6 +72,7 @@ public class HomeScreen extends AppCompatActivity {
                 .commit();
     }
 
+    //TODO Move http request invoke to @CurrencyExchangeScreen
     private void startAsync() {
         final ExchangeRatesAsync exchangeRatesAsync = new ExchangeRatesAsync();
         exchangeRatesAsync.startAsyncTask();
