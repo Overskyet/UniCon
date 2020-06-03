@@ -22,7 +22,7 @@
     <dimen name="home_screen_buttons_text_size">15sp</dimen>
     <dimen name="home_screen_button_padding_10dp">10dp</dimen>
     <dimen name="home_screen_button_padding_15dp">15dp</dimen>
-    <dimen name="home_screen_button_margin">8dp</dimen>
+    <dimen name="home_screen_button_margin">20dp</dimen>
     <dimen name="home_screen_credits_dialog_header_padding">5dp</dimen>
     <dimen name="home_screen_credits_dialog_body_padding">10dp</dimen>
     <dimen name="home_screen_credits_dialog_header_text_size">20sp</dimen>

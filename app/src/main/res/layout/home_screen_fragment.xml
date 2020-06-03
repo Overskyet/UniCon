@@ -22,12 +22,13 @@
 
         <Button
             android:id="@+id/button_currency"
-            style="@style/red_fragment_button"
+            style="@style/type_of_measurement_button"
             android:layout_marginTop="@dimen/home_screen_button_margin"
             android:drawableEnd="@drawable/ic_currency_white"
             android:paddingStart="@dimen/home_screen_button_padding_15dp"
             android:paddingEnd="@dimen/home_screen_button_padding_10dp"
             android:text="@string/currency_button"
+            android:background="@drawable/home_screen_red_button_background"
             app:layout_constraintBottom_toTopOf="@+id/button_time"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintHorizontal_bias="0.5"
@@ -36,12 +37,13 @@
 
         <Button
             android:id="@+id/button_temperature"
-            style="@style/red_fragment_button"
-            android:layout_marginBottom="@dimen/home_screen_button_margin"
+            style="@style/type_of_measurement_button"
+            android:layout_marginTop="@dimen/home_screen_button_margin"
             android:drawableStart="@drawable/ic_temperature_white"
             android:paddingStart="@dimen/home_screen_button_padding_10dp"
             android:paddingEnd="@dimen/home_screen_button_padding_15dp"
             android:text="@string/temperature_button"
+            android:background="@drawable/home_screen_red_button_background"
             app:layout_constraintBottom_toTopOf="@+id/button_length"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -50,11 +52,13 @@
 
         <Button
             android:id="@+id/button_time"
-            style="@style/red_fragment_button"
+            style="@style/type_of_measurement_button"
             android:drawableStart="@drawable/ic_time_white"
+            android:layout_marginTop="@dimen/home_screen_button_margin"
             android:paddingStart="@dimen/home_screen_button_padding_10dp"
             android:paddingEnd="@dimen/home_screen_button_padding_15dp"
             android:text="@string/time_button"
+            android:background="@drawable/home_screen_red_button_background"
             app:layout_constraintBottom_toTopOf="@+id/button_fuel_consumption"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -63,11 +67,13 @@
 
         <Button
             android:id="@+id/button_fuel_consumption"
-            style="@style/red_fragment_button"
+            style="@style/type_of_measurement_button"
             android:drawableEnd="@drawable/ic_fuel_consumption_white"
+            android:layout_marginTop="@dimen/home_screen_button_margin"
             android:paddingStart="@dimen/home_screen_button_padding_15dp"
             android:paddingEnd="@dimen/home_screen_button_padding_10dp"
             android:text="@string/fuel_consumption_button"
+            android:background="@drawable/home_screen_red_button_background"
             app:layout_constraintBottom_toTopOf="@+id/button_pressure"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintHorizontal_bias="0.5"
@@ -76,11 +82,13 @@
 
         <Button
             android:id="@+id/button_pressure"
-            style="@style/red_fragment_button"
+            style="@style/type_of_measurement_button"
             android:drawableStart="@drawable/ic_pressure_white"
+            android:layout_marginTop="@dimen/home_screen_button_margin"
             android:paddingStart="@dimen/home_screen_button_padding_10dp"
             android:paddingEnd="@dimen/home_screen_button_padding_15dp"
             android:text="@string/pressure_button"
+            android:background="@drawable/home_screen_red_button_background"
             app:layout_constraintBottom_toTopOf="@+id/button_energy"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -89,11 +97,13 @@
 
         <Button
             android:id="@+id/button_energy"
-            style="@style/red_fragment_button"
+            style="@style/type_of_measurement_button"
             android:drawableEnd="@drawable/ic_energy_white"
+            android:layout_marginTop="@dimen/home_screen_button_margin"
             android:paddingStart="@dimen/home_screen_button_padding_15dp"
             android:paddingEnd="@dimen/home_screen_button_padding_10dp"
             android:text="@string/energy_button"
+            android:background="@drawable/home_screen_red_button_background"
             app:layout_constraintBottom_toTopOf="@+id/button_temperature"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintHorizontal_bias="0.5"
@@ -102,11 +112,13 @@
 
         <Button
             android:id="@+id/button_area"
-            style="@style/blue_fragment_button"
+            style="@style/type_of_measurement_button"
             android:drawableStart="@drawable/ic_area_white"
+            android:layout_marginTop="@dimen/home_screen_button_margin"
             android:paddingStart="@dimen/home_screen_button_padding_10dp"
             android:paddingEnd="@dimen/home_screen_button_padding_15dp"
             android:text="@string/area_button"
+            android:background="@drawable/home_screen_blue_button_background"
             app:layout_constraintBottom_toTopOf="@+id/button_angle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -115,11 +127,13 @@
 
         <Button
             android:id="@+id/button_angle"
-            style="@style/blue_fragment_button"
+            style="@style/type_of_measurement_button"
             android:drawableEnd="@drawable/ic_angle_white"
+            android:layout_marginTop="@dimen/home_screen_button_margin"
             android:paddingStart="@dimen/home_screen_button_padding_15dp"
             android:paddingEnd="@dimen/home_screen_button_padding_10dp"
             android:text="@string/angle_button"
+            android:background="@drawable/home_screen_blue_button_background"
             app:layout_constraintBottom_toTopOf="@+id/button_speed"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintHorizontal_bias="0.5"
@@ -128,12 +142,13 @@
 
         <Button
             android:id="@+id/button_length"
-            style="@style/blue_fragment_button"
+            style="@style/type_of_measurement_button"
             android:layout_marginTop="@dimen/home_screen_button_margin"
             android:drawableEnd="@drawable/ic_length_white"
             android:paddingStart="@dimen/home_screen_button_padding_15dp"
             android:paddingEnd="@dimen/home_screen_button_padding_10dp"
             android:text="@string/length_button"
+            android:background="@drawable/home_screen_blue_button_background"
             app:layout_constraintBottom_toTopOf="@+id/button_weight"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintHorizontal_bias="0.5"
@@ -142,12 +157,14 @@
 
         <Button
             android:id="@+id/button_speed"
-            style="@style/blue_fragment_button"
+            style="@style/type_of_measurement_button"
+            android:layout_marginTop="@dimen/home_screen_button_margin"
             android:layout_marginBottom="@dimen/home_screen_button_margin"
             android:drawableStart="@drawable/ic_speed_white"
             android:paddingStart="@dimen/home_screen_button_padding_10dp"
             android:paddingEnd="@dimen/home_screen_button_padding_15dp"
             android:text="@string/speed_button"
+            android:background="@drawable/home_screen_blue_button_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -156,11 +173,13 @@
 
         <Button
             android:id="@+id/button_volume"
-            style="@style/blue_fragment_button"
+            style="@style/type_of_measurement_button"
             android:drawableEnd="@drawable/ic_volume_white"
+            android:layout_marginTop="@dimen/home_screen_button_margin"
             android:paddingStart="@dimen/home_screen_button_padding_15dp"
             android:paddingEnd="@dimen/home_screen_button_padding_10dp"
             android:text="@string/volume_button"
+            android:background="@drawable/home_screen_blue_button_background"
             app:layout_constraintBottom_toTopOf="@+id/button_area"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintHorizontal_bias="0.5"
@@ -169,11 +188,13 @@
 
         <Button
             android:id="@+id/button_weight"
-            style="@style/blue_fragment_button"
+            style="@style/type_of_measurement_button"
             android:drawableStart="@drawable/ic_weight_white"
+            android:layout_marginTop="@dimen/home_screen_button_margin"
             android:paddingStart="@dimen/home_screen_button_padding_10dp"
             android:paddingEnd="@dimen/home_screen_button_padding_15dp"
             android:text="@string/weight_button"
+            android:background="@drawable/home_screen_blue_button_background"
             app:layout_constraintBottom_toTopOf="@+id/button_volume"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

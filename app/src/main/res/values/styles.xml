@@ -87,7 +87,7 @@
 
     <!-- HOME SCREEN COMPONENTS STYLIZATION -->
 
-    <!-- Home_screen credits dialog header style -->
+    <!-- Home screen credits dialog header style -->
     <style name="home_screen_dialog_header">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -98,7 +98,7 @@
         <item name="android:textSize">@dimen/home_screen_credits_dialog_header_text_size</item>
         <item name="android:textStyle">bold</item>
     </style>
-    <!-- Home_screen credits dialog body style -->
+    <!-- Home screen credits dialog body style -->
     <style name="home_screen_dialog_body">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -106,7 +106,7 @@
         <item name="android:text">@string/credits_body</item>
         <item name="android:textSize">@dimen/home_screen_credits_dialog_body_text_size</item>
     </style>
-    <!-- Home_screen credits dialog ok button -->
+    <!-- Home screen credits dialog ok button -->
     <style name="home_screen_dialog_ok_button" parent="Widget.AppCompat.Button.Borderless">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -118,22 +118,12 @@
         <item name="android:textColor">@color/text_color</item>
     </style>
 
-    <!--  BLUE AND RED FRAGMENT'S COMPONENTS STYLIZATION  -->
+    <!--  HOME SCREEN FRAGMENT'S COMPONENTS STYLIZATION  -->
 
-    <!-- Blue fragments buttons style -->
-    <style name="blue_fragment_button">
+    <!-- Home screen fragment buttons style -->
+    <style name="type_of_measurement_button">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">@dimen/home_screen_buttons_height</item>
-        <item name="android:background">@drawable/home_screen_blue_button_background</item>
-        <item name="android:textColor">@color/home_screen_fragments_buttons_text_color</item>
-        <item name="android:textSize">@dimen/home_screen_buttons_text_size</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-    <!-- Red fragment buttons style -->
-    <style name="red_fragment_button">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">@dimen/home_screen_buttons_height</item>
-        <item name="android:background">@drawable/home_screen_red_button_background</item>
         <item name="android:textColor">@color/home_screen_fragments_buttons_text_color</item>
         <item name="android:textSize">@dimen/home_screen_buttons_text_size</item>
         <item name="android:textStyle">bold</item>
