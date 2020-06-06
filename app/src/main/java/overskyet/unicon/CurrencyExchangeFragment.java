@@ -7,16 +7,18 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
@@ -24,16 +26,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import overskyet.unicon.databinding.FragmentCurrencyExchangeBinding;
 import overskyet.unicon.exchangerates.CurrencyConverter;
 
-public class CurrencyExchangeScreen extends AppCompatActivity {
+public class CurrencyExchangeFragment extends Fragment {
 
-    private static final String TAG = CurrencyExchangeScreen.class.getSimpleName();
+    private FragmentCurrencyExchangeBinding mBinding;
 
-    private CurrencyConverter mCurrencyConverter;
+    private static final String TAG = CurrencyExchangeFragment.class.getSimpleName();
 
     private String mKey1, mKey2;
 
@@ -50,34 +54,38 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
     private EditText mEditTextInput, mEditTextOutput;
     private Spinner mSpinnerFrom, mSpinnerTo;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_currency_exchange_screen);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mBinding = FragmentCurrencyExchangeBinding.inflate(inflater, container, false);
+        return mBinding.getRoot();
+    }
 
+    @Override
+    public void onViewCreated(@NonNull View v, @Nullable Bundle savedInstanceState) {
+
+        mBinding.setCurrencyExchange(this);
+
+        //TODO Replace with NavController AppBar
         // Action bar initialization
-        initToolbar(getIntent().getExtras().getInt("intExtra", 0));
+        //initToolbar(getIntent().getExtras().getInt("intExtra", 0));
 
         // Keys and spinners items array initialization
-        mKey1 = getIntent().getExtras().getString("stringExtra1");
-        mKey2 = getIntent().getExtras().getString("stringExtra2");
-        String[] spinnerItems = getIntent().getExtras().getStringArray("stringArrayExtra");
-
-        // Init CurrencyConverter object
-        mCurrencyConverter = new CurrencyConverter();
+        mKey1 = getArguments().getString("stringExtra1");
+        mKey2 = getArguments().getString("stringExtra2");
 
         // Clipboard manager initialization
-        mClipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        mClipboard = (ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
 
         // SharedPreferences instance initialization
-        mSpinnersSettings = this.getPreferences(Context.MODE_PRIVATE);
+        mSpinnersSettings = requireActivity().getPreferences(Context.MODE_PRIVATE);
 
         // Widget initialization
-        mUpdateTimeBlock = findViewById(R.id.currency_exchange_time_of_update_block);
-        mScrollView = findViewById(R.id.currency_exchange_scroll_view);
-        mUpdateTime = findViewById(R.id.currency_exchange_update_time_text_view);
-        mEditTextInput = findViewById(R.id.currency_exchange_input);
-        mEditTextOutput = findViewById(R.id.currency_exchange_output);
+        mUpdateTimeBlock = mBinding.currencyExchangeTimeOfUpdateBlock;
+        mScrollView = mBinding.currencyExchangeScrollView;
+        mUpdateTime = mBinding.currencyExchangeUpdateTimeTextView;
+        mEditTextInput = mBinding.currencyExchangeInput;
+        mEditTextOutput = mBinding.currencyExchangeOutput;
 
         // Invoke SharedPreferences method to get last update time and write it to updateTime TextView
         getLastUpdateTime();
@@ -87,9 +95,9 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
         mEditTextOutput.setKeyListener(null);
 
         // Spinners block initialization
-        mSpinnerFrom = findViewById(R.id.currency_exchange_spinnerFrom);
-        mSpinnerTo = findViewById(R.id.currency_exchange_spinnerTo);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item, getResources().getStringArray(R.array.currencies));
+        mSpinnerFrom = mBinding.currencyExchangeSpinnerFrom;
+        mSpinnerTo = mBinding.currencyExchangeSpinnerTo;
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireActivity(), R.layout.spinner_item, getResources().getStringArray(R.array.currencies));
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         mSpinnerFrom.setAdapter(adapter);
         mSpinnerTo.setAdapter(adapter);
@@ -117,27 +125,27 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
         });
 
         // Copy button initialization and listeners
-        final Button copyButton = findViewById(R.id.button_copy);
-        copyButton.setOnClickListener(v -> copy());
-        copyButton.setOnLongClickListener(v -> {
+        final Button copyButton = mBinding.buttonCopy;
+        copyButton.setOnClickListener(view -> copy());
+        copyButton.setOnLongClickListener(view -> {
             paste();
             return true;
         });
 
         // Show keyboard button initialization and listener with anonymous method
-        final ImageButton showKeyboardButton = findViewById(R.id.currency_exchange_image_button_show_keyboard);
-        showKeyboardButton.setOnClickListener(v -> showKeyboard());
+        final ImageButton showKeyboardButton = mBinding.currencyExchangeImageButtonShowKeyboard;
+        showKeyboardButton.setOnClickListener(view -> showKeyboard());
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         mSpinnerFrom.setSelection(mSpinnersSettings.getInt(mKey1, 0));
         mSpinnerTo.setSelection(mSpinnersSettings.getInt(mKey2, 1));
         super.onResume();
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         mSpinnersSettings.edit()
                 .remove(mKey1)
                 .remove(mKey2)
@@ -147,6 +155,8 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
         super.onPause();
     }
 
+    //TODO Replace with NavController AppBar
+    /*
     private void initToolbar(int icon) {
         Toolbar toolbar = findViewById(R.id.currency_exchange_toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white);
@@ -154,11 +164,12 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
         ImageView toolbarImage = findViewById(R.id.currency_exchange_toolbar_image);
         toolbarImage.setImageResource(icon);
     }
+    */
 
     private void getLastUpdateTime() {
-        SharedPreferences preferences = this.getSharedPreferences(HomeScreen.KEY_EXCHANGE_RATES_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences preferences = requireActivity().getSharedPreferences(HomeScreenActivity.KEY_EXCHANGE_RATES_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         if (preferences != null) {
-            String time = preferences.getString(HomeScreen.KEY_ECB_TIME_OF_UPDATE, "No data available");
+            String time = preferences.getString(HomeScreenActivity.KEY_ECB_TIME_OF_UPDATE, "No data available");
             mUpdateTime.setText(time);
         }
     }
@@ -191,10 +202,10 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
                 mEditTextInput.getText().clear();
                 mEditTextOutput.getText().clear();
                 break;
-            // Sign block
-            case R.id.button_sign:
-                setMinusSign();
-                checkDigits();
+             //TODO Handle refresh action
+            // Refresh block
+            case R.id.button_refresh:
+                startRefresh();
                 break;
             // Reverse block
             case R.id.button_reverse:
@@ -224,13 +235,9 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
         }
     }
 
-    private void setMinusSign() {
-        String text = mEditTextInput.getText().toString();
-        if (text.contains("-")) {
-            mEditTextInput.setText(mEditTextInput.getText().delete(0, 1));
-        } else {
-            mEditTextInput.setText(mEditTextInput.getText().insert(0, "-"));
-        }
+    //TODO Handle refresh action
+    private void startRefresh() {
+
     }
 
     private void checkDigits() {
@@ -272,8 +279,8 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
     private void paste() {
         try {
             if (mClipboard.hasPrimaryClip()) {
-                if (mClipboard.getPrimaryClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
-                    ClipData.Item item = mClipboard.getPrimaryClip().getItemAt(0);
+                if (Objects.requireNonNull(mClipboard.getPrimaryClipDescription()).hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
+                    ClipData.Item item = Objects.requireNonNull(mClipboard.getPrimaryClip()).getItemAt(0);
                     String pasteData = item.getText().toString();
                     mEditTextInput.setText(pasteData);
                     checkAmountOfDigitsForPasteValue();
@@ -296,15 +303,19 @@ public class CurrencyExchangeScreen extends AppCompatActivity {
     }
 
     private void showInfoText(String infoMsg) {
-        Toast.makeText(getApplicationContext(), infoMsg, Toast.LENGTH_LONG).show();
+        Toast.makeText(requireActivity(), infoMsg, Toast.LENGTH_LONG).show();
     }
 
     private void startConvert() {
+        // Init CurrencyConverter object
+        CurrencyConverter currencyConverter = new CurrencyConverter();
+
         String spinnerItemFrom = mSpinnerFrom.getSelectedItem().toString().substring(0, 3);
         String spinnerItemTo = mSpinnerTo.getSelectedItem().toString().substring(0, 3);
+
         BigDecimal amount = new BigDecimal(mEditTextInput.getText().toString());
         // Use values from spinners and input field
-        BigDecimal bigDecimalOutput = mCurrencyConverter.convert(spinnerItemFrom, spinnerItemTo, amount);
+        BigDecimal bigDecimalOutput = currencyConverter.convert(spinnerItemFrom, spinnerItemTo, amount);
         // Init output field
         String output = bigDecimalOutput == null ? "0.0" : bigDecimalOutput.toString();
         mEditTextOutput.setText(output);

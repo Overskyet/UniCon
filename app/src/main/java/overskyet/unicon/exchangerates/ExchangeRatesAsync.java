@@ -30,7 +30,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import overskyet.unicon.HomeScreen;
+import overskyet.unicon.HomeScreenActivity;
 import overskyet.unicon.MyApplication;
 
 public class ExchangeRatesAsync extends ViewModel {
@@ -43,17 +43,17 @@ public class ExchangeRatesAsync extends ViewModel {
     }
 
     private void setSharedPreferences(Map<String, Double> rates, String time) {
-        SharedPreferences preferences = MyApplication.getContext().getSharedPreferences(HomeScreen.KEY_EXCHANGE_RATES_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences preferences = MyApplication.getContext().getSharedPreferences(HomeScreenActivity.KEY_EXCHANGE_RATES_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         if (preferences != null) {
-            String sharedPrefTime = preferences.getString(HomeScreen.KEY_ECB_TIME_OF_UPDATE, time);
+            String sharedPrefTime = preferences.getString(HomeScreenActivity.KEY_ECB_TIME_OF_UPDATE, time);
             if (sharedPrefTime.equalsIgnoreCase(time)) return;
             Gson gson = new GsonBuilder().enableComplexMapKeySerialization().create();
             String jsonMapString = gson.toJson(rates);
             preferences.edit()
-                    .remove(HomeScreen.KEY_MAP_OF_RATES)
-                    .remove(HomeScreen.KEY_ECB_TIME_OF_UPDATE)
-                    .putString(HomeScreen.KEY_MAP_OF_RATES, jsonMapString)
-                    .putString(HomeScreen.KEY_ECB_TIME_OF_UPDATE, time)
+                    .remove(HomeScreenActivity.KEY_MAP_OF_RATES)
+                    .remove(HomeScreenActivity.KEY_ECB_TIME_OF_UPDATE)
+                    .putString(HomeScreenActivity.KEY_MAP_OF_RATES, jsonMapString)
+                    .putString(HomeScreenActivity.KEY_ECB_TIME_OF_UPDATE, time)
                     .apply();
         }
     }

@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeScreen">
+        <activity android:name=".HomeScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,18 +24,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".UnitsConversionScreen"
-            android:parentActivityName=".HomeScreen">
+            android:name=".UnitsConversionFragment"
+            android:parentActivityName=".HomeScreenActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeScreen" />
+                android:value=".HomeScreenActivity" />
         </activity>
         <activity
-            android:name=".CurrencyExchangeScreen"
-            android:parentActivityName=".HomeScreen">
+            android:name=".CurrencyExchangeFragment"
+            android:parentActivityName=".HomeScreenActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeScreen" />
+                android:value=".HomeScreenActivity" />
         </activity>
     </application>
 

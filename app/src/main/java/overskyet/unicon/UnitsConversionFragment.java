@@ -6,11 +6,9 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,12 +17,23 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class UnitsConversionScreen extends AppCompatActivity {
+import overskyet.unicon.databinding.FragmentUnitsConversionBinding;
 
-    private static final String TAG = UnitsConversionScreen.class.getSimpleName();
+public class UnitsConversionFragment extends Fragment {
+
+    // Data Binding variable
+    private FragmentUnitsConversionBinding mBinding;
+
+    private static final String TAG = UnitsConversionFragment.class.getSimpleName();
 
     // Key values for saving preferences and conversion() method
     private String mKey1, mKey2;
@@ -39,37 +48,47 @@ public class UnitsConversionScreen extends AppCompatActivity {
     private EditText mEditTextInput, mEditTextOutput;
     private Spinner mSpinnerFrom, mSpinnerTo;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_units_conversion_screen);
+    public UnitsConversionFragment() { }
 
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mBinding = FragmentUnitsConversionBinding.inflate(inflater, container, false);
+        return mBinding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View v, @Nullable Bundle savedInstanceState) {
+
+        mBinding.setUnitsConversion(this);
+
+        //TODO Replace with NavController AppBar
         // Action bar initialization
-        initToolbar(getIntent().getExtras().getInt("intExtra", 0));
+        //initToolbar(getIntent().getExtras().getInt("intExtra", 0), v);
 
         // Keys and spinners items array initialization
-        mKey1 = getIntent().getExtras().getString("stringExtra1");
-        mKey2 = getIntent().getExtras().getString("stringExtra2");
-        String[] spinnerItems = getIntent().getExtras().getStringArray("stringArrayExtra");
+        mKey1 = getArguments().getString("stringExtra1");
+        mKey2 = getArguments().getString("stringExtra2");
+        String[] spinnerItems = getArguments().getStringArray("stringArrayExtra");
 
         // Clipboard manager initialization
-        mClipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        mClipboard = (ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
 
         // SharedPreferences instance initialization
-        mSpinnersSettings = this.getPreferences(Context.MODE_PRIVATE);
+        mSpinnersSettings = requireActivity().getPreferences(Context.MODE_PRIVATE);
 
         // Widget initialization
-        mEditTextInput = findViewById(R.id.input_converter);
-        mEditTextOutput = findViewById(R.id.output_converter);
+        mEditTextInput = mBinding.inputConverter;
+        mEditTextOutput = mBinding.outputConverter;
 
         // Disable input option for EditText views
         mEditTextInput.setKeyListener(null);
         mEditTextOutput.setKeyListener(null);
 
         // Spinners block initialization
-        mSpinnerFrom = findViewById(R.id.units_conversion_spinnerFrom);
-        mSpinnerTo = findViewById(R.id.units_conversion_spinnerTo);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item, spinnerItems);
+        mSpinnerFrom = mBinding.unitsConversionSpinnerFrom;
+        mSpinnerTo = mBinding.unitsConversionSpinnerTo;
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireActivity(), R.layout.spinner_item, spinnerItems);
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         mSpinnerFrom.setAdapter(adapter);
         mSpinnerTo.setAdapter(adapter);
@@ -97,23 +116,23 @@ public class UnitsConversionScreen extends AppCompatActivity {
         });
 
         // Copy button initialization and listeners
-        final Button copyButton = findViewById(R.id.button_copy);
-        copyButton.setOnClickListener(v -> copy());
-        copyButton.setOnLongClickListener(v -> {
+        final Button copyButton = mBinding.buttonCopy;
+        copyButton.setOnClickListener(view -> copy());
+        copyButton.setOnLongClickListener(view -> {
             paste();
             return true;
         });
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         mSpinnerFrom.setSelection(mSpinnersSettings.getInt(mKey1, 0));
         mSpinnerTo.setSelection(mSpinnersSettings.getInt(mKey2, 1));
         super.onResume();
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         mSpinnersSettings.edit()
                 .remove(mKey1)
                 .remove(mKey2)
@@ -123,13 +142,16 @@ public class UnitsConversionScreen extends AppCompatActivity {
         super.onPause();
     }
 
-    private void initToolbar(int icon) {
-        Toolbar toolbar = findViewById(R.id.units_conversion_toolbar);
+    //TODO Replace with NavController AppBar
+    /*
+    private void initToolbar(int icon, View view) {
+        Toolbar toolbar = view.findViewById(R.id.units_conversion_toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white);
         toolbar.setNavigationOnClickListener(v -> finish());
-        ImageView toolbarImage = findViewById(R.id.units_conversion_toolbar_image);
+        ImageView toolbarImage = view.findViewById(R.id.units_conversion_toolbar_image);
         toolbarImage.setImageResource(icon);
     }
+    */
 
     public void onClickDigitButtons(View v) {
         Button btn = (Button) v;
@@ -233,8 +255,8 @@ public class UnitsConversionScreen extends AppCompatActivity {
         String pasteData = "";
         try {
             if (mClipboard.hasPrimaryClip()) {
-                if (mClipboard.getPrimaryClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
-                    ClipData.Item item = mClipboard.getPrimaryClip().getItemAt(0);
+                if (Objects.requireNonNull(mClipboard.getPrimaryClipDescription()).hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
+                    ClipData.Item item = Objects.requireNonNull(mClipboard.getPrimaryClip()).getItemAt(0);
                     pasteData = item.getText().toString();
                     mEditTextInput.setText(pasteData);
                     checkAmountOfDigitsForPasteValue();
@@ -257,7 +279,7 @@ public class UnitsConversionScreen extends AppCompatActivity {
     }
 
     private void showInfoText(String infoMsg) {
-        Toast.makeText(getApplicationContext(), infoMsg, Toast.LENGTH_LONG).show();
+        Toast.makeText(requireActivity(), infoMsg, Toast.LENGTH_LONG).show();
     }
 
     private void conversion() {

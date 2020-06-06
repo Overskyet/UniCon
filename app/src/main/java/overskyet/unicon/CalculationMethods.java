@@ -1,49 +1,49 @@
 package overskyet.unicon;
 
-final class CalculationMethods {
+public final class CalculationMethods {
 
     private static double output;
     private static double input;
     private static String itemName1, itemName2;
 
-    static double convert(double inputValue, String spinnerItemName, String spinner2ItemName, String key1) {
+    public static double convert(double inputValue, String spinnerItemName, String spinner2ItemName, String key1) {
 
         input = inputValue;
         itemName1 = spinnerItemName.toLowerCase();
         itemName2 = spinner2ItemName.toLowerCase();
 
         switch (key1) {
-            case HomeScreen.KEY_1_TIME_CONVERSION:
+            case HomeScreenActivity.KEY_1_TIME_CONVERSION:
                 calculateTime();
                 break;
-            case HomeScreen.KEY_1_FUEL_CONSUMPTION_CONVERSION:
+            case HomeScreenActivity.KEY_1_FUEL_CONSUMPTION_CONVERSION:
                 calculateFuelConsumption();
                 break;
-            case HomeScreen.KEY_1_PRESSURE_CONVERSION:
+            case HomeScreenActivity.KEY_1_PRESSURE_CONVERSION:
                 calculatePressure();
                 break;
-            case HomeScreen.KEY_1_ENERGY_CONVERSION:
+            case HomeScreenActivity.KEY_1_ENERGY_CONVERSION:
                 calculateEnergy();
                 break;
-            case HomeScreen.KEY_1_TEMPERATURE_CONVERSION:
+            case HomeScreenActivity.KEY_1_TEMPERATURE_CONVERSION:
                 calculateTemperature();
                 break;
-            case HomeScreen.KEY_1_LENGTH_CONVERSION:
+            case HomeScreenActivity.KEY_1_LENGTH_CONVERSION:
                 calculateLength();
                 break;
-            case HomeScreen.KEY_1_WEIGHT_CONVERSION:
+            case HomeScreenActivity.KEY_1_WEIGHT_CONVERSION:
                 calculateWeight();
                 break;
-            case HomeScreen.KEY_1_VOLUME_CONVERSION:
+            case HomeScreenActivity.KEY_1_VOLUME_CONVERSION:
                 calculateVolume();
                 break;
-            case HomeScreen.KEY_1_AREA_CONVERSION:
+            case HomeScreenActivity.KEY_1_AREA_CONVERSION:
                 calculateArea();
                 break;
-            case HomeScreen.KEY_1_ANGLE_CONVERSION:
+            case HomeScreenActivity.KEY_1_ANGLE_CONVERSION:
                 calculateAngle();
                 break;
-            case HomeScreen.KEY_1_SPEED_CONVERSION:
+            case HomeScreenActivity.KEY_1_SPEED_CONVERSION:
                 calculateSpeed();
                 break;
             default: return 0.0;

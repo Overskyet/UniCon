@@ -1,10 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
     app:startDestination="@id/homeScreenFragment">
 
     <fragment
         android:id="@+id/homeScreenFragment"
         android:name="overskyet.unicon.HomeScreenFragment"
-        android:label="HomeScreenFragment" />
+        android:label="HomeScreenFragment" >
+        <action
+            android:id="@+id/action_homeScreenFragment_to_unitsConversionFragment"
+            app:destination="@id/unitsConversionFragment" />
+        <action
+            android:id="@+id/action_homeScreenFragment_to_currencyExchangeFragment"
+            app:destination="@id/currencyExchangeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/unitsConversionFragment"
+        android:name="overskyet.unicon.UnitsConversionFragment"
+        android:label="UnitsConversionFragment" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/currencyExchangeFragment"
+        android:name="overskyet.unicon.CurrencyExchangeFragment"
+        android:label="CurrencyExchangeFragment" />
+
 </navigation>

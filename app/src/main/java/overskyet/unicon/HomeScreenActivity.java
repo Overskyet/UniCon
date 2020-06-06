@@ -8,7 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import overskyet.unicon.exchangerates.ExchangeRatesAsync;
 
-public class HomeScreen extends AppCompatActivity {
+public class HomeScreenActivity extends AppCompatActivity {
 
     public static final String KEY_MAP_OF_RATES = "overskyet.unicon.MAP_OF_RATES";
     public static final String KEY_ECB_TIME_OF_UPDATE = "overskyet.unicon.TIME_OF_UPDATE";
@@ -64,7 +64,7 @@ public class HomeScreen extends AppCompatActivity {
         });
     }
 
-    //TODO Move http request invoke to @CurrencyExchangeScreen
+    //TODO Move http request invoke to @CurrencyExchangeFragment
     private void startAsync() {
         final ExchangeRatesAsync exchangeRatesAsync = new ExchangeRatesAsync();
         exchangeRatesAsync.startAsyncTask();

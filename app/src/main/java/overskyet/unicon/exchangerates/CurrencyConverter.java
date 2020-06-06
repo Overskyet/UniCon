@@ -14,7 +14,7 @@ import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
 
-import overskyet.unicon.HomeScreen;
+import overskyet.unicon.HomeScreenActivity;
 import overskyet.unicon.MyApplication;
 
 public class CurrencyConverter {
@@ -26,7 +26,7 @@ public class CurrencyConverter {
     private BigDecimal mAmount;
     private int mCalculationAccuracy = 4;
 
-    private BigDecimal mResult = new BigDecimal(0.0);
+    private BigDecimal mResult = new BigDecimal("0.0");
 
     public BigDecimal convert(String fromCurrency, String toCurrency, BigDecimal amount) {
         mFromCurrency = fromCurrency;
@@ -48,8 +48,8 @@ public class CurrencyConverter {
         BigDecimal baseRate, targetRate;
         if (rates != null) {
             if (rates.containsKey(mFromCurrency) && rates.containsKey(mToCurrency)) {
-                baseRate = new BigDecimal(rates.get(mFromCurrency));
-                targetRate = new BigDecimal(rates.get(mToCurrency));
+                baseRate = new BigDecimal(rates.get(mFromCurrency).toString());
+                targetRate = new BigDecimal(rates.get(mToCurrency).toString());
                 if (baseRate.compareTo(targetRate) < 0) {
                     mResult = mAmount.multiply(targetRate).divide(baseRate, mCalculationAccuracy, RoundingMode.HALF_UP);
                 } else if (baseRate.compareTo(targetRate) > 0) {
@@ -59,10 +59,10 @@ public class CurrencyConverter {
                 }
             } else {
                 if (mFromCurrency.equals("EUR") && !mToCurrency.equals("EUR")) {
-                    targetRate = new BigDecimal(rates.get(mToCurrency));
+                    targetRate = new BigDecimal(rates.get(mToCurrency).toString());
                     mResult = mAmount.multiply(targetRate).setScale(mCalculationAccuracy, RoundingMode.HALF_UP);
                 } else if (mToCurrency.equals("EUR") && !mFromCurrency.equals("EUR")) {
-                    baseRate = new BigDecimal(rates.get(mFromCurrency));
+                    baseRate = new BigDecimal(rates.get(mFromCurrency).toString());
                     mResult = mAmount.divide(baseRate, mCalculationAccuracy, RoundingMode.HALF_UP);
                 } else {
                     mResult = mAmount;
@@ -75,10 +75,10 @@ public class CurrencyConverter {
     private Map<String, Double> getRates() {
         Context context = MyApplication.getContext();
         Map<String, Double> rates = new HashMap<>();
-        SharedPreferences preferences = context.getSharedPreferences(HomeScreen.KEY_EXCHANGE_RATES_SHARED_PREFERENCES,
+        SharedPreferences preferences = context.getSharedPreferences(HomeScreenActivity.KEY_EXCHANGE_RATES_SHARED_PREFERENCES,
                 Context.MODE_PRIVATE);
         if (preferences != null) {
-            String jsonString = preferences.getString(HomeScreen.KEY_MAP_OF_RATES, new JSONObject().toString());
+            String jsonString = preferences.getString(HomeScreenActivity.KEY_MAP_OF_RATES, new JSONObject().toString());
             Type typeOfHashMap = new TypeToken<Map<String, Double>>() {}.getType();
             rates = new Gson().fromJson(jsonString, typeOfHashMap);
         }
