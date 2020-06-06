@@ -44,7 +44,6 @@ public class HomeScreen extends AppCompatActivity {
         setContentView(R.layout.activity_home_screen);
 
         initToolbar();
-        initFragment();
 
         //Start Scheduler here
         startAsync();
@@ -63,13 +62,6 @@ public class HomeScreen extends AppCompatActivity {
             }
             return false;
         });
-    }
-
-    private void initFragment() {
-        final HomeScreenFragment homeScreenFragment = new HomeScreenFragment();
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.home_screen_linear_layout, homeScreenFragment)
-                .commit();
     }
 
     //TODO Move http request invoke to @CurrencyExchangeScreen
