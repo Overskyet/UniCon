@@ -8,7 +8,8 @@
     <fragment
         android:id="@+id/homeScreenFragment"
         android:name="overskyet.unicon.HomeScreenFragment"
-        android:label="HomeScreenFragment" >
+        android:label="HomeScreenFragment"
+        tools:layout="@layout/fragment_home_screen">
         <action
             android:id="@+id/action_homeScreenFragment_to_unitsConversionFragment"
             app:destination="@id/unitsConversionFragment" />
@@ -20,12 +21,20 @@
     <fragment
         android:id="@+id/unitsConversionFragment"
         android:name="overskyet.unicon.UnitsConversionFragment"
-        android:label="UnitsConversionFragment" >
+        android:label="UnitsConversionFragment"
+        tools:layout="@layout/fragment_units_conversion">
     </fragment>
 
     <fragment
         android:id="@+id/currencyExchangeFragment"
         android:name="overskyet.unicon.CurrencyExchangeFragment"
-        android:label="CurrencyExchangeFragment" />
+        android:label="CurrencyExchangeFragment"
+        tools:layout="@layout/fragment_currency_exchange"/>
+
+    <fragment
+        android:id="@+id/homeScreenCreditsDialogFragment"
+        android:name="overskyet.unicon.HomeScreenCreditsDialogFragment"
+        android:label="HomeScreenCreditsDialogFragment"
+        tools:layout="@layout/dialog_home_screen_credits"/>
 
 </navigation>

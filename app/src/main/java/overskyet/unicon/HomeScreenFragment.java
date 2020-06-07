@@ -5,6 +5,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -18,6 +19,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
+
+import java.util.Objects;
 
 import overskyet.unicon.databinding.FragmentHomeScreenBinding;
 import overskyet.unicon.utils.Animation;
@@ -46,6 +49,7 @@ public class HomeScreenFragment extends Fragment {
     public void onPressButton(View view) {
         switch (view.getId()) {
             case R.id.button_currency:
+                @SuppressLint("ObjectAnimatorBinding")
                 ObjectAnimator animWidth = ObjectAnimator.ofInt(view, "width", view.getWidth() + Animation.getScreenWidth());
                 animWidth.addUpdateListener(animation -> {
                     view.getLayoutParams().width = (Integer) animation.getAnimatedValue();
