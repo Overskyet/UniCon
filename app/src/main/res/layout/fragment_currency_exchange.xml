@@ -14,25 +14,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/currency_exchange_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:elevation="@dimen/units_conversion_toolbar_elevation"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="@style/AppTheme"
+        <include
+            android:id="@+id/toolbar_fragment_currency_exchange"
+            layout="@layout/app_toolbar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/currency_exchange_toolbar_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginEnd="@dimen/home_screen_button_padding_10dp" />
-        </androidx.appcompat.widget.Toolbar>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:id="@+id/currency_exchange_time_of_update_block"
@@ -43,7 +30,7 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/currency_exchange_toolbar">
+            app:layout_constraintTop_toBottomOf="@id/toolbar_fragment_currency_exchange">
 
             <TextView
                 style="@style/units_conversion_text_view"
@@ -76,7 +63,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/currency_exchange_toolbar">
+            app:layout_constraintTop_toBottomOf="@id/toolbar_fragment_currency_exchange">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

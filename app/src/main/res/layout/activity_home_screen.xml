@@ -8,22 +8,6 @@
     android:orientation="vertical"
     tools:context=".HomeScreenActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/home_screen_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="@dimen/units_conversion_toolbar_elevation"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="@style/AppTheme">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_home_screen_toolbar_icon" />
-
-    </androidx.appcompat.widget.Toolbar>
-
     <fragment
         android:id="@+id/navHostFragment"
         android:name="androidx.navigation.fragment.NavHostFragment"

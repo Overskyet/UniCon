@@ -1,5 +1,6 @@
 package overskyet.unicon;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -11,8 +12,11 @@ import android.view.LayoutInflater;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Objects;
+
 public class HomeScreenCreditsDialogFragment extends DialogFragment {
 
+    @SuppressLint("InflateParams")
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -23,7 +27,7 @@ public class HomeScreenCreditsDialogFragment extends DialogFragment {
         alertDialog.show();
 
         Button okBtn = alertDialog.findViewById(R.id.home_screen_ok_dialog_button);
-        okBtn.setOnClickListener(v -> getDialog().dismiss());
+        okBtn.setOnClickListener(v -> Objects.requireNonNull(getDialog()).dismiss());
 
         TextView creditsBody = alertDialog.findViewById(R.id.home_screen_credits_dialog_body);
         creditsBody.setMovementMethod(LinkMovementMethod.getInstance());

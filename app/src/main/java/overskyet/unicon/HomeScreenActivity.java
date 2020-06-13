@@ -1,13 +1,7 @@
 package overskyet.unicon;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.DialogFragment;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
 
 import overskyet.unicon.exchangerates.ExchangeRatesAsync;
 
@@ -46,32 +40,9 @@ public class HomeScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
-        initToolbar();
-
         //Start Scheduler here
         startAsync();
 
-    }
-
-    private void initToolbar() {
-        final Toolbar toolbar = findViewById(R.id.home_screen_toolbar);
-        toolbar.inflateMenu(R.menu.home_screen_toolbar_menu);
-        NavController navController = Navigation.findNavController(this, R.id.navHostFragment);
-        NavigationUI.setupWithNavController(toolbar, navController);
-        toolbar.setOnMenuItemClickListener(menuItem -> {
-            int i = menuItem.getItemId();
-
-            if (i == R.id.homeScreenCreditsDialogFragment) {
-                openDialogWindow();
-                return true;
-            }
-            return false;
-        });
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        return Navigation.findNavController(this, R.id.navHostFragment).navigateUp();
     }
 
     //TODO Move http request invoke to @CurrencyExchangeFragment
@@ -79,9 +50,4 @@ public class HomeScreenActivity extends AppCompatActivity {
         final ExchangeRatesAsync exchangeRatesAsync = new ExchangeRatesAsync();
         exchangeRatesAsync.startAsyncTask();
         }
-
-    private void openDialogWindow() {
-        final DialogFragment disclaimerDialogFragment = new HomeScreenCreditsDialogFragment();
-        disclaimerDialogFragment.show(getSupportFragmentManager(), getResources().getString(R.string.credits_header));
-    }
 }

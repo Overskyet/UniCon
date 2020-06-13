@@ -8,33 +8,48 @@
     <fragment
         android:id="@+id/homeScreenFragment"
         android:name="overskyet.unicon.HomeScreenFragment"
-        android:label="HomeScreenFragment"
+        android:label=""
         tools:layout="@layout/fragment_home_screen">
         <action
             android:id="@+id/action_homeScreenFragment_to_unitsConversionFragment"
-            app:destination="@id/unitsConversionFragment" />
+            app:destination="@id/unitsConversionFragment"
+            app:enterAnim="@anim/fade_out"
+            app:exitAnim="@anim/fade_in"
+            app:popEnterAnim="@anim/fade_out"
+            app:popExitAnim="@anim/fade_in" />
         <action
             android:id="@+id/action_homeScreenFragment_to_currencyExchangeFragment"
-            app:destination="@id/currencyExchangeFragment" />
+            app:destination="@id/currencyExchangeFragment"
+            app:enterAnim="@anim/slide_out_left"
+            app:exitAnim="@anim/fade_in"
+            app:popEnterAnim="@anim/fade_out"
+            app:popExitAnim="@anim/slide_in_right" />
     </fragment>
 
     <fragment
         android:id="@+id/unitsConversionFragment"
         android:name="overskyet.unicon.UnitsConversionFragment"
-        android:label="UnitsConversionFragment"
+        android:label=""
         tools:layout="@layout/fragment_units_conversion">
+        <action
+            android:id="@+id/action_unitsConversionFragment_to_homeScreenFragment"
+            app:destination="@id/homeScreenFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/currencyExchangeFragment"
         android:name="overskyet.unicon.CurrencyExchangeFragment"
-        android:label="CurrencyExchangeFragment"
-        tools:layout="@layout/fragment_currency_exchange"/>
+        android:label=""
+        tools:layout="@layout/fragment_currency_exchange">
+        <action
+            android:id="@+id/action_currencyExchangeFragment_to_homeScreenFragment"
+            app:destination="@id/homeScreenFragment" />
+    </fragment>
 
-    <fragment
+    <dialog
         android:id="@+id/homeScreenCreditsDialogFragment"
         android:name="overskyet.unicon.HomeScreenCreditsDialogFragment"
-        android:label="HomeScreenCreditsDialogFragment"
+        android:label="Credits"
         tools:layout="@layout/dialog_home_screen_credits"/>
 
 </navigation>

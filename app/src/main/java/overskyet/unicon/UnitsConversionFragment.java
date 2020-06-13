@@ -21,6 +21,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -62,14 +66,13 @@ public class UnitsConversionFragment extends Fragment {
 
         mBinding.setUnitsConversion(this);
 
-        //TODO Replace with NavController AppBar
-        // Action bar initialization
-        //initToolbar(getIntent().getExtras().getInt("intExtra", 0), v);
+        // Initialize toolbar for the fragment
+        initToolbar(getArguments().getInt("toolbarImage", R.drawable.ic_home_screen_toolbar_icon));
 
         // Keys and spinners items array initialization
-        mKey1 = getArguments().getString("stringExtra1");
-        mKey2 = getArguments().getString("stringExtra2");
-        String[] spinnerItems = getArguments().getStringArray("stringArrayExtra");
+        mKey1 = getArguments().getString("key1");
+        mKey2 = getArguments().getString("key2");
+        String[] spinnerItems = getArguments().getStringArray("spinnerItemsArray");
 
         // Clipboard manager initialization
         mClipboard = (ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
@@ -142,16 +145,18 @@ public class UnitsConversionFragment extends Fragment {
         super.onPause();
     }
 
-    //TODO Replace with NavController AppBar
-    /*
-    private void initToolbar(int icon, View view) {
-        Toolbar toolbar = view.findViewById(R.id.units_conversion_toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white);
-        toolbar.setNavigationOnClickListener(v -> finish());
-        ImageView toolbarImage = view.findViewById(R.id.units_conversion_toolbar_image);
+    private void initToolbar(int icon) {
+        Toolbar toolbar = (Toolbar) mBinding.toolbarFragmentUnitsConversion;
+
+        NavController navController = Navigation.findNavController(toolbar);
+
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+
+        ImageView toolbarImage = toolbar.findViewById(R.id.image_app_toolbar);
         toolbarImage.setImageResource(icon);
+
+        NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
     }
-    */
 
     public void onClickDigitButtons(View v) {
         Button btn = (Button) v;

@@ -9,7 +9,12 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
@@ -66,13 +72,11 @@ public class CurrencyExchangeFragment extends Fragment {
 
         mBinding.setCurrencyExchange(this);
 
-        //TODO Replace with NavController AppBar
-        // Action bar initialization
-        //initToolbar(getIntent().getExtras().getInt("intExtra", 0));
+        initToolbar(getArguments().getInt("toolbarImage", R.drawable.ic_home_screen_toolbar_icon));
 
         // Keys and spinners items array initialization
-        mKey1 = getArguments().getString("stringExtra1");
-        mKey2 = getArguments().getString("stringExtra2");
+        mKey1 = getArguments().getString("key1");
+        mKey2 = getArguments().getString("key2");
 
         // Clipboard manager initialization
         mClipboard = (ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
@@ -156,15 +160,18 @@ public class CurrencyExchangeFragment extends Fragment {
     }
 
     //TODO Replace with NavController AppBar
-    /*
     private void initToolbar(int icon) {
-        Toolbar toolbar = findViewById(R.id.currency_exchange_toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white);
-        toolbar.setNavigationOnClickListener(v -> finish());
-        ImageView toolbarImage = findViewById(R.id.currency_exchange_toolbar_image);
+        Toolbar toolbar = (Toolbar) mBinding.toolbarFragmentCurrencyExchange;
+
+        NavController navController = Navigation.findNavController(toolbar);
+
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+
+        ImageView toolbarImage = toolbar.findViewById(R.id.image_app_toolbar);
         toolbarImage.setImageResource(icon);
+
+        NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
     }
-    */
 
     private void getLastUpdateTime() {
         SharedPreferences preferences = requireActivity().getSharedPreferences(HomeScreenActivity.KEY_EXCHANGE_RATES_SHARED_PREFERENCES, Context.MODE_PRIVATE);

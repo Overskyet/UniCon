@@ -48,7 +48,7 @@
     <string name="credits_body">Icons made by <a href='https://www.flaticon.com/authors/freepik'>Freepik</a>,
         <a href='https://www.flaticon.com/authors/those-icons'>Those Icons</a>,
         <a href='https://www.flaticon.com/authors/gregor-cresnar'>Gregor Cresnar</a> from <a href='https://www.flaticon.com/'>www.flaticon.com</a>
-        \nData provided by <a href= 'https://www.ecb.europa.eu/home/html/index.en.html'>ECB</a> for currency exchange rates
+        \n\nData provided by <a href= 'https://www.ecb.europa.eu/home/html/index.en.html'>ECB</a> for currency exchange rates
     </string>
 
     <string name="digits_regexp">^-|\\.|-\\.$</string>
