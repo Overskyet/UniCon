@@ -1,4 +1,4 @@
-package overskyet.unicon.exchangerates;
+package overskyet.unicon.data;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -30,7 +30,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import overskyet.unicon.HomeScreenActivity;
+import overskyet.unicon.ui.HomeScreenActivity;
 import overskyet.unicon.MyApplication;
 
 public class ExchangeRatesAsync extends ViewModel {

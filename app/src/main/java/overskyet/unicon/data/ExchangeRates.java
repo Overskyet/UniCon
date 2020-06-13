@@ -1,34 +1,34 @@
-package overskyet.unicon.exchangerates;
+package overskyet.unicon.data;
 
 import androidx.annotation.NonNull;
 
 import java.util.List;
 import java.util.Map;
 
-class ExchangeRates {
-    private List<String> mCurrencies;
-    private Map<String, Double> mRates;
-    private String mTime;
+public class ExchangeRates {
+    private final List<String> mCurrencies;
+    private final Map<String, Double> mRates;
+    private final String mTime;
 
-    ExchangeRates(List<String> currencies, Map<String, Double> rates, String time) {
+    public ExchangeRates(List<String> currencies, Map<String, Double> rates, String time) {
         this.mCurrencies = currencies;
         this.mRates = rates;
         this.mTime = time;
     }
 
-    Map<String, Double> getRates() {
+    public Map<String, Double> getRates() {
         return mRates;
     }
 
-    List<String> getCurrencies() {
+    public List<String> getCurrencies() {
         return mCurrencies;
     }
 
-    String getTime() {
+    public String getTime() {
         return mTime;
     }
 
-    Boolean isRatesEmpty() {
+    public Boolean isRatesEmpty() {
         return mCurrencies.isEmpty() || mRates.isEmpty() || mTime.isEmpty();
     }
 

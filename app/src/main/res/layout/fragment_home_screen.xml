@@ -2,13 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".HomeScreenActivity">
+    tools:context=".ui.HomeScreenActivity">
 
     <data>
 
         <variable
             name="homeScreen"
-            type="overskyet.unicon.HomeScreenFragment" />
+            type="overskyet.unicon.ui.fragments.HomeScreenFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

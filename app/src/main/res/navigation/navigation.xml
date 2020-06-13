@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeScreenFragment"
-        android:name="overskyet.unicon.HomeScreenFragment"
+        android:name="overskyet.unicon.ui.fragments.HomeScreenFragment"
         android:label=""
         tools:layout="@layout/fragment_home_screen">
         <action
@@ -28,7 +28,7 @@
 
     <fragment
         android:id="@+id/unitsConversionFragment"
-        android:name="overskyet.unicon.UnitsConversionFragment"
+        android:name="overskyet.unicon.ui.fragments.UnitsConversionFragment"
         android:label=""
         tools:layout="@layout/fragment_units_conversion">
         <action
@@ -38,7 +38,7 @@
 
     <fragment
         android:id="@+id/currencyExchangeFragment"
-        android:name="overskyet.unicon.CurrencyExchangeFragment"
+        android:name="overskyet.unicon.ui.fragments.CurrencyExchangeFragment"
         android:label=""
         tools:layout="@layout/fragment_currency_exchange">
         <action
@@ -48,7 +48,7 @@
 
     <dialog
         android:id="@+id/homeScreenCreditsDialogFragment"
-        android:name="overskyet.unicon.HomeScreenCreditsDialogFragment"
+        android:name="overskyet.unicon.ui.fragments.HomeScreenCreditsDialogFragment"
         android:label="Credits"
         tools:layout="@layout/dialog_home_screen_credits"/>
 

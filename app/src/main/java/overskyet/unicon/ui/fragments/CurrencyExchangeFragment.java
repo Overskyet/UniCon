@@ -1,4 +1,4 @@
-package overskyet.unicon;
+package overskyet.unicon.ui.fragments;
 
 import android.content.ClipData;
 import android.content.ClipDescription;
@@ -36,8 +36,10 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import overskyet.unicon.ui.HomeScreenActivity;
+import overskyet.unicon.R;
 import overskyet.unicon.databinding.FragmentCurrencyExchangeBinding;
-import overskyet.unicon.exchangerates.CurrencyConverter;
+import overskyet.unicon.ratesconversion.CurrencyConverter;
 
 public class CurrencyExchangeFragment extends Fragment {
 

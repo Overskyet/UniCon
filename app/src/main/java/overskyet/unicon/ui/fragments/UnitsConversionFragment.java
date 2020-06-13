@@ -1,4 +1,4 @@
-package overskyet.unicon;
+package overskyet.unicon.ui.fragments;
 
 import android.content.ClipData;
 import android.content.ClipDescription;
@@ -30,6 +30,8 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import overskyet.unicon.unitsconversion.CalculationMethods;
+import overskyet.unicon.R;
 import overskyet.unicon.databinding.FragmentUnitsConversionBinding;
 
 public class UnitsConversionFragment extends Fragment {

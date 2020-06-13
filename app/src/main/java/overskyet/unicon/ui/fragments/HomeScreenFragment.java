@@ -1,4 +1,4 @@
-package overskyet.unicon;
+package overskyet.unicon.ui.fragments;
 
 
 import android.animation.Animator;
@@ -22,6 +22,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
+import overskyet.unicon.ui.HomeScreenActivity;
+import overskyet.unicon.R;
 import overskyet.unicon.databinding.FragmentHomeScreenBinding;
 import overskyet.unicon.utils.Animation;
 

@@ -1,9 +1,10 @@
-package overskyet.unicon;
+package overskyet.unicon.ui;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
-import overskyet.unicon.exchangerates.ExchangeRatesAsync;
+import overskyet.unicon.R;
+import overskyet.unicon.data.ExchangeRatesAsync;
 
 public class HomeScreenActivity extends AppCompatActivity {
 

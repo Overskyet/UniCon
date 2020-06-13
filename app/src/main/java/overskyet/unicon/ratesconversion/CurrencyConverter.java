@@ -1,4 +1,4 @@
-package overskyet.unicon.exchangerates;
+package overskyet.unicon.ratesconversion;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -14,7 +14,7 @@ import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
 
-import overskyet.unicon.HomeScreenActivity;
+import overskyet.unicon.ui.HomeScreenActivity;
 import overskyet.unicon.MyApplication;
 
 public class CurrencyConverter {

@@ -1,4 +1,4 @@
-package overskyet.unicon;
+package overskyet.unicon.ui.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.Objects;
+
+import overskyet.unicon.R;
 
 public class HomeScreenCreditsDialogFragment extends DialogFragment {
 
