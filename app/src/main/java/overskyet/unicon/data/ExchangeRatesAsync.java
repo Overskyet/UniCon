@@ -68,7 +68,7 @@ public class ExchangeRatesAsync extends ViewModel {
 
         @Override
         protected void onPostExecute(ExchangeRates exchangeRates) {
-            if (exchangeRates == null || exchangeRates.isRatesEmpty()) return;
+            if (exchangeRates == null || exchangeRates.isEmpty()) return;
 
             setSharedPreferences(exchangeRates.getRates(), exchangeRates.getTime());
         }

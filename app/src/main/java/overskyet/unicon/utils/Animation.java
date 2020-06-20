@@ -1,10 +1,15 @@
 package overskyet.unicon.utils;
 
+import android.animation.Animator;
 import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.res.Resources;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
+
+import overskyet.unicon.R;
+import overskyet.unicon.ui.HomeScreenActivity;
 
 public class Animation {
 
@@ -37,5 +42,32 @@ public class Animation {
     public static int getScreenHeight() {
         return Resources.getSystem().getDisplayMetrics().heightPixels;
     }
+
+    /*ObjectAnimator animWidth = ObjectAnimator.ofInt(
+            view,
+            "width",
+            view.getWidth() + Animation.getScreenWidth());
+
+                animWidth.addUpdateListener(animation ->
+    {
+        view.getLayoutParams().width = (Integer) animation.getAnimatedValue();
+        view.requestLayout();
+    });
+                animWidth.addListener(new AnimatorListenerAdapter()
+    {
+        @Override
+        public void onAnimationEnd(Animator animation)
+        {
+            mBundle = initBundle(null,
+                    HomeScreenActivity.KEY_1_CURRENCY_CONVERSION,
+                    HomeScreenActivity.KEY_2_CURRENCY_CONVERSION,
+                    R.drawable.ic_currency_white);
+            navigateToCurrencyExchangeFragment(view);
+        }
+    });
+    AnimatorSet animatorSet = new AnimatorSet();
+                animatorSet.setInterpolator(new AccelerateDecelerateInterpolator());
+                animatorSet.play(animWidth);
+                animatorSet.start();*/
 
 }

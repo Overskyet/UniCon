@@ -20,10 +20,10 @@
         <action
             android:id="@+id/action_homeScreenFragment_to_currencyExchangeFragment"
             app:destination="@id/currencyExchangeFragment"
-            app:enterAnim="@anim/slide_out_left"
+            app:enterAnim="@anim/fade_out"
             app:exitAnim="@anim/fade_in"
             app:popEnterAnim="@anim/fade_out"
-            app:popExitAnim="@anim/slide_in_right" />
+            app:popExitAnim="@anim/fade_in" />
     </fragment>
 
     <fragment

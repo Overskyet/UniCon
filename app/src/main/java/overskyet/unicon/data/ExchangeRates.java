@@ -28,7 +28,7 @@ public class ExchangeRates {
         return mTime;
     }
 
-    public Boolean isRatesEmpty() {
+    public Boolean isEmpty() {
         return mCurrencies.isEmpty() || mRates.isEmpty() || mTime.isEmpty();
     }
 
