@@ -73,13 +73,16 @@ public class UnitsConversionFragment extends Fragment {
 
         binding.setUnitsConversion(this);
 
-        // Initialize toolbar for the fragment
-        initToolbar(getArguments().getInt("toolbarImage", R.drawable.ic_home_screen_toolbar_icon));
+        // Getting arguments from bundle
+        UnitsConversionFragmentArgs args = UnitsConversionFragmentArgs.fromBundle(requireArguments());
 
-        // Keys and spinners items array initialization
-        key1 = getArguments().getString("key1");
-        key2 = getArguments().getString("key2");
-        String[] spinnerItems = getArguments().getStringArray("spinnerItemsArray");
+        // Initialize fragment toolbar
+        initToolbar(args.getToolbarImageId());
+
+        // Keys and spinner items array initialization
+        key1 = args.getKey1();
+        key2 = args.getKey2();
+        String[] spinnerItems = args.getSpinnerItemsArray();
 
         // Clipboard manager initialization
         clipboard = (ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
@@ -125,7 +128,6 @@ public class UnitsConversionFragment extends Fragment {
             }
         });
 
-        // Copy button initialization and listeners
         final Button copyButton = binding.buttonCopy;
         copyButton.setOnClickListener(view -> copy());
         copyButton.setOnLongClickListener(view -> {

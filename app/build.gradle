@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: "androidx.navigation.safeargs"
 
 android {
     compileSdkVersion 29
@@ -21,11 +22,11 @@ android {
         targetCompatibility = 1.8
     }
 
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        dataBinding = true
     }
 
-    buildToolsVersion = '28.0.3'
+    buildToolsVersion = '29.0.3'
 }
 
 dependencies {
@@ -51,7 +52,6 @@ dependencies {
     // Navigation
     implementation "androidx.navigation:navigation-fragment:2.3.0"
     implementation "androidx.navigation:navigation-ui:2.3.0"
-    implementation "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.0"
 
     // Tests
     testImplementation 'junit:junit:4.13'

@@ -34,6 +34,18 @@
         <action
             android:id="@+id/action_unitsConversionFragment_to_homeScreenFragment"
             app:destination="@id/homeScreenFragment" />
+        <argument
+            android:name="toolbarImageId"
+            app:argType="integer"/>
+        <argument
+            android:name="key1"
+            app:argType="string"/>
+        <argument
+            android:name="key2"
+            app:argType="string" />
+        <argument
+            android:name="spinnerItemsArray"
+            app:argType="string[]" />
     </fragment>
 
     <fragment
@@ -44,6 +56,18 @@
         <action
             android:id="@+id/action_currencyExchangeFragment_to_homeScreenFragment"
             app:destination="@id/homeScreenFragment" />
+        <argument
+            android:name="toolbarImageId"
+            app:argType="integer" />
+        <argument
+            android:name="key1"
+            app:argType="string" />
+        <argument
+            android:name="key2"
+            app:argType="string" />
+        <argument
+            android:name="spinnerItemsArray"
+            app:argType="string[]" />
     </fragment>
 
     <dialog

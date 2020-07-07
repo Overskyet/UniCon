@@ -43,73 +43,75 @@ import overskyet.unicon.ratesconversion.CurrencyConverter;
 
 public class CurrencyExchangeFragment extends Fragment {
 
-    private FragmentCurrencyExchangeBinding mBinding;
+    private FragmentCurrencyExchangeBinding binding;
 
-    private static final String TAG = CurrencyExchangeFragment.class.getSimpleName();
-
-    private String mKey1, mKey2;
+    private String key1, key2;
 
     // Instance of SharedPreferences object for setting up spinners items
-    private SharedPreferences mSpinnersSettings;
+    private SharedPreferences spinnersPosition;
 
     // Clipboard manager for copy and paste operations
-    private ClipboardManager mClipboard;
+    private ClipboardManager clipboard;
 
     // Widgets
-    private LinearLayout mUpdateTimeBlock;
-    private ScrollView mScrollView;
-    private TextView mUpdateTime;
-    private EditText mEditTextInput, mEditTextOutput;
-    private Spinner mSpinnerFrom, mSpinnerTo;
+    private LinearLayout updateTimeContainer;
+    private ScrollView scrollView;
+    private TextView lastUpdate;
+    private EditText editTextInput, editTextOutput;
+    private Spinner spinnerFrom, spinnerTo;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mBinding = FragmentCurrencyExchangeBinding.inflate(inflater, container, false);
-        return mBinding.getRoot();
+        binding = FragmentCurrencyExchangeBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View v, @Nullable Bundle savedInstanceState) {
 
-        mBinding.setCurrencyExchange(this);
+        binding.setCurrencyExchange(this);
 
-        initToolbar(getArguments().getInt("toolbarImage", R.drawable.ic_home_screen_toolbar_icon));
+        // Getting arguments from bundle
+        CurrencyExchangeFragmentArgs args = CurrencyExchangeFragmentArgs.fromBundle(requireArguments());
 
-        // Keys and spinners items array initialization
-        mKey1 = getArguments().getString("key1");
-        mKey2 = getArguments().getString("key2");
+        // Initialize fragment toolbar
+        initToolbar(args.getToolbarImageId());
+
+        // Keys initialization
+        key1 = args.getKey1();
+        key2 = args.getKey2();
 
         // Clipboard manager initialization
-        mClipboard = (ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+        clipboard = (ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
 
         // SharedPreferences instance initialization
-        mSpinnersSettings = requireActivity().getPreferences(Context.MODE_PRIVATE);
+        spinnersPosition = requireActivity().getPreferences(Context.MODE_PRIVATE);
 
         // Widget initialization
-        mUpdateTimeBlock = mBinding.currencyExchangeTimeOfUpdateBlock;
-        mScrollView = mBinding.currencyExchangeScrollView;
-        mUpdateTime = mBinding.currencyExchangeUpdateTimeTextView;
-        mEditTextInput = mBinding.currencyExchangeInput;
-        mEditTextOutput = mBinding.currencyExchangeOutput;
+        updateTimeContainer = binding.currencyExchangeTimeOfUpdateBlock;
+        scrollView = binding.currencyExchangeScrollView;
+        lastUpdate = binding.currencyExchangeUpdateTimeTextView;
+        editTextInput = binding.currencyExchangeInput;
+        editTextOutput = binding.currencyExchangeOutput;
 
         // Invoke SharedPreferences method to get last update time and write it to updateTime TextView
         getLastUpdateTime();
 
-        // Disable input option for EditText views
-        mEditTextInput.setKeyListener(null);
-        mEditTextOutput.setKeyListener(null);
+        // Disable input for EditText views
+        editTextInput.setKeyListener(null);
+        editTextOutput.setKeyListener(null);
 
         // Spinners block initialization
-        mSpinnerFrom = mBinding.currencyExchangeSpinnerFrom;
-        mSpinnerTo = mBinding.currencyExchangeSpinnerTo;
+        spinnerFrom = binding.currencyExchangeSpinnerFrom;
+        spinnerTo = binding.currencyExchangeSpinnerTo;
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireActivity(), R.layout.spinner_item, getResources().getStringArray(R.array.currencies));
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        mSpinnerFrom.setAdapter(adapter);
-        mSpinnerTo.setAdapter(adapter);
+        spinnerFrom.setAdapter(adapter);
+        spinnerTo.setAdapter(adapter);
 
         // Spinners listeners
-        mSpinnerFrom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerFrom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 checkDigits();
@@ -119,7 +121,7 @@ public class CurrencyExchangeFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        mSpinnerTo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerTo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 checkDigits();
@@ -130,40 +132,38 @@ public class CurrencyExchangeFragment extends Fragment {
             }
         });
 
-        // Copy button initialization and listeners
-        final Button copyButton = mBinding.buttonCopy;
+        final Button copyButton = binding.buttonCopy;
         copyButton.setOnClickListener(view -> copy());
         copyButton.setOnLongClickListener(view -> {
             paste();
             return true;
         });
 
-        // Show keyboard button initialization and listener with anonymous method
-        final ImageButton showKeyboardButton = mBinding.currencyExchangeImageButtonShowKeyboard;
+        final ImageButton showKeyboardButton = binding.currencyExchangeImageButtonShowKeyboard;
         showKeyboardButton.setOnClickListener(view -> showKeyboard());
     }
 
     @Override
     public void onResume() {
-        mSpinnerFrom.setSelection(mSpinnersSettings.getInt(mKey1, 0));
-        mSpinnerTo.setSelection(mSpinnersSettings.getInt(mKey2, 1));
+        spinnerFrom.setSelection(spinnersPosition.getInt(key1, 0));
+        spinnerTo.setSelection(spinnersPosition.getInt(key2, 1));
         super.onResume();
     }
 
     @Override
     public void onPause() {
-        mSpinnersSettings.edit()
-                .remove(mKey1)
-                .remove(mKey2)
-                .putInt(mKey1, mSpinnerFrom.getSelectedItemPosition())
-                .putInt(mKey2, mSpinnerTo.getSelectedItemPosition())
+        spinnersPosition.edit()
+                .remove(key1)
+                .remove(key2)
+                .putInt(key1, spinnerFrom.getSelectedItemPosition())
+                .putInt(key2, spinnerTo.getSelectedItemPosition())
                 .apply();
         super.onPause();
     }
 
     //TODO Replace with NavController AppBar
     private void initToolbar(int icon) {
-        Toolbar toolbar = (Toolbar) mBinding.toolbarFragmentCurrencyExchange;
+        Toolbar toolbar = (Toolbar) binding.toolbarFragmentCurrencyExchange;
 
         NavController navController = Navigation.findNavController(toolbar);
 
@@ -178,20 +178,20 @@ public class CurrencyExchangeFragment extends Fragment {
     private void getLastUpdateTime() {
         SharedPreferences preferences = requireActivity().getSharedPreferences(HomeScreenActivity.KEY_EXCHANGE_RATES_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         if (preferences != null) {
-            String time = preferences.getString(HomeScreenActivity.KEY_ECB_TIME_OF_UPDATE, "No data available");
-            mUpdateTime.setText(time);
+            String time = preferences.getString(HomeScreenActivity.KEY_ECB_TIME_OF_UPDATE, getString(R.string.last_update_time_error));
+            lastUpdate.setText(time);
         }
     }
 
     private void showKeyboard() {
-        mUpdateTimeBlock.setVisibility(View.GONE);
-        mUpdateTime.setVisibility(View.GONE);
-        mScrollView.setVisibility(View.VISIBLE);
+        updateTimeContainer.setVisibility(View.GONE);
+        lastUpdate.setVisibility(View.GONE);
+        scrollView.setVisibility(View.VISIBLE);
     }
 
     public void onClickDigitButtons(View v) {
         Button btn = (Button) v;
-        mEditTextInput.setText(mEditTextInput.getText().append(btn.getText()));
+        editTextInput.setText(editTextInput.getText().append(btn.getText()));
         checkAmountOfDigits();
         startConvert();
     }
@@ -208,8 +208,8 @@ public class CurrencyExchangeFragment extends Fragment {
                 checkDigits();
                 break;
             case R.id.button_clear:
-                mEditTextInput.getText().clear();
-                mEditTextOutput.getText().clear();
+                editTextInput.getText().clear();
+                editTextOutput.getText().clear();
                 break;
              //TODO Handle refresh action
             // Refresh block
@@ -227,20 +227,20 @@ public class CurrencyExchangeFragment extends Fragment {
     }
 
     private void setDotSign() {
-        String text = mEditTextInput.getText().toString();
+        String text = editTextInput.getText().toString();
         if (text.contains(".")) {
-            mEditTextInput.setText(mEditTextInput.getText());
+            editTextInput.setText(editTextInput.getText());
         } else {
-            mEditTextInput.setText(mEditTextInput.getText().append('.'));
+            editTextInput.setText(editTextInput.getText().append('.'));
         }
     }
 
     private void checkEmptyInputField() {
-        String text = mEditTextInput.getText().toString();
+        String text = editTextInput.getText().toString();
         if (text.isEmpty()) {
-            mEditTextInput.setText(mEditTextInput.getText());
+            editTextInput.setText(editTextInput.getText());
         } else {
-            mEditTextInput.setText(text.substring(0, text.length() - 1));
+            editTextInput.setText(text.substring(0, text.length() - 1));
         }
     }
 
@@ -250,48 +250,48 @@ public class CurrencyExchangeFragment extends Fragment {
     }
 
     private void checkDigits() {
-        String inputText = mEditTextInput.getText().toString();
+        String inputText = editTextInput.getText().toString();
         //Matcher matcher = Pattern.compile("^-|\\.|-\\.$").matcher(inputText);
         Matcher matcher = Pattern.compile(getResources().getString(R.string.digits_regexp)).matcher(inputText);
         if (matcher.matches() || inputText.isEmpty()) {
-            mEditTextOutput.getText().clear();
+            editTextOutput.getText().clear();
         } else {
             startConvert();
         }
     }
 
     private void checkAmountOfDigits() {
-        String textInput = mEditTextInput.getText().toString();
+        String textInput = editTextInput.getText().toString();
         //Matcher matcher = Pattern.compile("^[0-9\\-.]{0,30}(\\.\\d{3})$").matcher(textInput);
         Matcher matcher = Pattern.compile(getResources().getString(R.string.max_amount_of_chars_regexp)).matcher(textInput);
         if (textInput.length() > 30 || matcher.matches()) {
-            mEditTextInput.setText(textInput.substring(0, textInput.length() - 1));
+            editTextInput.setText(textInput.substring(0, textInput.length() - 1));
         }
     }
 
     private void checkAmountOfDigitsForPasteValue() {
-        String textInput = mEditTextInput.getText().toString();
+        String textInput = editTextInput.getText().toString();
         if (textInput.length() > 30) {
             String str = getResources().getString(R.string.max_length_of_pasted_value_exceeded_notification);
-            mEditTextInput.setText(textInput.substring(0, 30));
+            editTextInput.setText(textInput.substring(0, 30));
             showInfoText(str);
         }
     }
 
     private void copy() {
-        ClipData clip = ClipData.newPlainText("Output", mEditTextOutput.getText());
-        mClipboard.setPrimaryClip(clip);
+        ClipData clip = ClipData.newPlainText("Output", editTextOutput.getText());
+        clipboard.setPrimaryClip(clip);
         String str = getResources().getString(R.string.copy_notification);
         showInfoText(str);
     }
 
     private void paste() {
         try {
-            if (mClipboard.hasPrimaryClip()) {
-                if (Objects.requireNonNull(mClipboard.getPrimaryClipDescription()).hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
-                    ClipData.Item item = Objects.requireNonNull(mClipboard.getPrimaryClip()).getItemAt(0);
+            if (clipboard.hasPrimaryClip()) {
+                if (Objects.requireNonNull(clipboard.getPrimaryClipDescription()).hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
+                    ClipData.Item item = Objects.requireNonNull(clipboard.getPrimaryClip()).getItemAt(0);
                     String pasteData = item.getText().toString();
-                    mEditTextInput.setText(pasteData);
+                    editTextInput.setText(pasteData);
                     checkAmountOfDigitsForPasteValue();
                     startConvert();
                 }
@@ -299,16 +299,16 @@ public class CurrencyExchangeFragment extends Fragment {
         } catch (NumberFormatException e) {
             String str = getResources().getString(R.string.incorrect_paste_value_notification);
             showInfoText(str);
-            mEditTextInput.getText().clear();
-            mEditTextOutput.getText().clear();
+            editTextInput.getText().clear();
+            editTextOutput.getText().clear();
         }
     }
 
     private void reverse() {
-        int selectedFrom = mSpinnerFrom.getSelectedItemPosition();
-        int selectedTo = mSpinnerTo.getSelectedItemPosition();
-        mSpinnerFrom.setSelection(selectedTo);
-        mSpinnerTo.setSelection(selectedFrom);
+        int selectedFrom = spinnerFrom.getSelectedItemPosition();
+        int selectedTo = spinnerTo.getSelectedItemPosition();
+        spinnerFrom.setSelection(selectedTo);
+        spinnerTo.setSelection(selectedFrom);
     }
 
     private void showInfoText(String infoMsg) {
@@ -319,14 +319,14 @@ public class CurrencyExchangeFragment extends Fragment {
         // Init CurrencyConverter object
         CurrencyConverter currencyConverter = new CurrencyConverter();
 
-        String spinnerItemFrom = mSpinnerFrom.getSelectedItem().toString().substring(0, 3);
-        String spinnerItemTo = mSpinnerTo.getSelectedItem().toString().substring(0, 3);
+        String spinnerItemFrom = spinnerFrom.getSelectedItem().toString().substring(0, 3);
+        String spinnerItemTo = spinnerTo.getSelectedItem().toString().substring(0, 3);
 
-        BigDecimal amount = new BigDecimal(mEditTextInput.getText().toString());
+        BigDecimal amount = new BigDecimal(editTextInput.getText().toString());
         // Use values from spinners and input field
         BigDecimal bigDecimalOutput = currencyConverter.convert(spinnerItemFrom, spinnerItemTo, amount);
         // Init output field
         String output = bigDecimalOutput == null ? "0.0" : bigDecimalOutput.toString();
-        mEditTextOutput.setText(output);
+        editTextOutput.setText(output);
     }
 }
