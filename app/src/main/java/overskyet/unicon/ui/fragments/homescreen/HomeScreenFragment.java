@@ -1,7 +1,10 @@
-package overskyet.unicon.ui.fragments;
+package overskyet.unicon.ui.fragments.homescreen;
 
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,13 +15,9 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import overskyet.unicon.ui.HomeScreenActivity;
 import overskyet.unicon.R;
 import overskyet.unicon.databinding.FragmentHomeScreenBinding;
+import overskyet.unicon.ui.HomeScreenActivity;
 
 public class HomeScreenFragment extends Fragment
 {

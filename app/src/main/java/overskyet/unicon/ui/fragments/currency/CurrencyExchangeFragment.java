@@ -1,4 +1,4 @@
-package overskyet.unicon.ui.fragments;
+package overskyet.unicon.ui.fragments.currency;
 
 import android.content.ClipData;
 import android.content.ClipDescription;
@@ -6,16 +6,6 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,15 +21,24 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+
 import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import overskyet.unicon.ui.HomeScreenActivity;
 import overskyet.unicon.R;
 import overskyet.unicon.databinding.FragmentCurrencyExchangeBinding;
 import overskyet.unicon.ratesconversion.CurrencyConverter;
+import overskyet.unicon.ui.HomeScreenActivity;
 
 public class CurrencyExchangeFragment extends Fragment {
 
@@ -193,7 +192,7 @@ public class CurrencyExchangeFragment extends Fragment {
         Button btn = (Button) v;
         editTextInput.setText(editTextInput.getText().append(btn.getText()));
         checkAmountOfDigits();
-        startConvert();
+        convert();
     }
 
     public void onClickFunctionButtons(View v) {
@@ -256,7 +255,7 @@ public class CurrencyExchangeFragment extends Fragment {
         if (matcher.matches() || inputText.isEmpty()) {
             editTextOutput.getText().clear();
         } else {
-            startConvert();
+            convert();
         }
     }
 
@@ -293,7 +292,7 @@ public class CurrencyExchangeFragment extends Fragment {
                     String pasteData = item.getText().toString();
                     editTextInput.setText(pasteData);
                     checkAmountOfDigitsForPasteValue();
-                    startConvert();
+                    convert();
                 }
             }
         } catch (NumberFormatException e) {
@@ -315,7 +314,7 @@ public class CurrencyExchangeFragment extends Fragment {
         Toast.makeText(requireActivity(), infoMsg, Toast.LENGTH_LONG).show();
     }
 
-    private void startConvert() {
+    private void convert() {
         // Init CurrencyConverter object
         CurrencyConverter currencyConverter = new CurrencyConverter();
 

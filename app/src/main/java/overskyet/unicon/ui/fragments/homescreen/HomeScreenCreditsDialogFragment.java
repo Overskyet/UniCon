@@ -1,4 +1,4 @@
-package overskyet.unicon.ui.fragments;
+package overskyet.unicon.ui.fragments.homescreen;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;

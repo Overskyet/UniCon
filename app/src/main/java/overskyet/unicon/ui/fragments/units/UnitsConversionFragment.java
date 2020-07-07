@@ -1,4 +1,4 @@
-package overskyet.unicon.ui.fragments;
+package overskyet.unicon.ui.fragments.units;
 
 import android.content.ClipData;
 import android.content.ClipDescription;
@@ -30,9 +30,9 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import overskyet.unicon.unitsconversion.CalculationMethods;
 import overskyet.unicon.R;
 import overskyet.unicon.databinding.FragmentUnitsConversionBinding;
+import overskyet.unicon.unitsconversion.UnitsConverter;
 
 public class UnitsConversionFragment extends Fragment {
 
@@ -171,7 +171,7 @@ public class UnitsConversionFragment extends Fragment {
         Button btn = (Button) v;
         editTextInput.setText(editTextInput.getText().append(btn.getText()));
         checkAmountOfDigits();
-        conversion();
+        convert();
     }
 
     public void onClickFunctionButtons(View v) {
@@ -238,7 +238,7 @@ public class UnitsConversionFragment extends Fragment {
         if (matcher.matches() || inputText.isEmpty()) {
             editTextOutput.getText().clear();
         } else {
-            conversion();
+            convert();
         }
     }
 
@@ -274,7 +274,7 @@ public class UnitsConversionFragment extends Fragment {
                     pasteData = item.getText().toString();
                     editTextInput.setText(pasteData);
                     checkAmountOfDigitsForPasteValue();
-                    conversion();
+                    convert();
                 }
             }
         } catch (NumberFormatException e) {
@@ -296,11 +296,11 @@ public class UnitsConversionFragment extends Fragment {
         Toast.makeText(requireActivity(), infoMsg, Toast.LENGTH_LONG).show();
     }
 
-    private void conversion() {
+    private void convert() {
         String spinnerItemFrom = spinnerFrom.getSelectedItem().toString();
         String spinnerItemTo = spinnerTo.getSelectedItem().toString();
         double inputValue = Double.parseDouble(editTextInput.getText().toString());
-        double outputValue = CalculationMethods.convert(inputValue, spinnerItemFrom, spinnerItemTo, key1);
+        double outputValue = UnitsConverter.convert(inputValue, spinnerItemFrom, spinnerItemTo, key1);
         editTextOutput.setText(String.valueOf(outputValue));
     }
 }

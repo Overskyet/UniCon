@@ -8,7 +8,7 @@
 
         <variable
             name="homeScreen"
-            type="overskyet.unicon.ui.fragments.HomeScreenFragment" />
+            type="overskyet.unicon.ui.fragments.homescreen.HomeScreenFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
