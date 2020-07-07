@@ -17,29 +17,28 @@ import java.util.Map;
 import overskyet.unicon.ui.HomeScreenActivity;
 import overskyet.unicon.MyApplication;
 
+// TODO Make singleton and pass app context to constructor
 public class CurrencyConverter {
 
-    private static final String TAG = CurrencyConverter.class.getSimpleName();
+    private String fromCurrency;
+    private String toCurrency;
+    private BigDecimal amount;
+    private int calculationAccuracy = 4;
 
-    private String mFromCurrency;
-    private String mToCurrency;
-    private BigDecimal mAmount;
-    private int mCalculationAccuracy = 4;
-
-    private BigDecimal mResult = new BigDecimal("0.0");
+    private BigDecimal result = new BigDecimal("0.0");
 
     public BigDecimal convert(String fromCurrency, String toCurrency, BigDecimal amount) {
-        mFromCurrency = fromCurrency;
-        mToCurrency = toCurrency;
-        mAmount = amount;
+        this.fromCurrency = fromCurrency;
+        this.toCurrency = toCurrency;
+        this.amount = amount;
         return startConversion();
     }
 
     public BigDecimal convert(String fromCurrency, String toCurrency, BigDecimal amount, int calculationAccuracy) {
-        mFromCurrency = fromCurrency;
-        mToCurrency = toCurrency;
-        mAmount = amount;
-        mCalculationAccuracy = calculationAccuracy < 0 ? mCalculationAccuracy : calculationAccuracy;
+        this.fromCurrency = fromCurrency;
+        this.toCurrency = toCurrency;
+        this.amount = amount;
+        this.calculationAccuracy = calculationAccuracy < 0 ? this.calculationAccuracy : calculationAccuracy;
         return startConversion();
     }
 
@@ -47,34 +46,36 @@ public class CurrencyConverter {
         Map<String, Double> rates = getRates();
         BigDecimal baseRate, targetRate;
         if (rates != null) {
-            if (rates.containsKey(mFromCurrency) && rates.containsKey(mToCurrency)) {
-                baseRate = new BigDecimal(rates.get(mFromCurrency).toString());
-                targetRate = new BigDecimal(rates.get(mToCurrency).toString());
+            if (rates.containsKey(fromCurrency) && rates.containsKey(toCurrency)) {
+                baseRate = new BigDecimal(rates.get(fromCurrency).toString());
+                targetRate = new BigDecimal(rates.get(toCurrency).toString());
                 if (baseRate.compareTo(targetRate) < 0) {
-                    mResult = mAmount.multiply(targetRate).divide(baseRate, mCalculationAccuracy, RoundingMode.HALF_UP);
+                    result = amount.multiply(targetRate).divide(baseRate, calculationAccuracy, RoundingMode.HALF_UP);
                 } else if (baseRate.compareTo(targetRate) > 0) {
-                    mResult = mAmount.divide(baseRate, mCalculationAccuracy, RoundingMode.HALF_UP).multiply(targetRate).setScale(mCalculationAccuracy, RoundingMode.HALF_UP);
+                    result = amount.divide(baseRate, calculationAccuracy, RoundingMode.HALF_UP).multiply(targetRate).setScale(calculationAccuracy, RoundingMode.HALF_UP);
                 } else {
-                    mResult = mAmount;
+                    result = amount;
                 }
             } else {
-                if (mFromCurrency.equals("EUR") && !mToCurrency.equals("EUR")) {
-                    targetRate = new BigDecimal(rates.get(mToCurrency).toString());
-                    mResult = mAmount.multiply(targetRate).setScale(mCalculationAccuracy, RoundingMode.HALF_UP);
-                } else if (mToCurrency.equals("EUR") && !mFromCurrency.equals("EUR")) {
-                    baseRate = new BigDecimal(rates.get(mFromCurrency).toString());
-                    mResult = mAmount.divide(baseRate, mCalculationAccuracy, RoundingMode.HALF_UP);
+                if (fromCurrency.equals("EUR") && !toCurrency.equals("EUR")) {
+                    targetRate = new BigDecimal(rates.get(toCurrency).toString());
+                    result = amount.multiply(targetRate).setScale(calculationAccuracy, RoundingMode.HALF_UP);
+                } else if (toCurrency.equals("EUR") && !fromCurrency.equals("EUR")) {
+                    baseRate = new BigDecimal(rates.get(fromCurrency).toString());
+                    result = amount.divide(baseRate, calculationAccuracy, RoundingMode.HALF_UP);
                 } else {
-                    mResult = mAmount;
+                    result = amount;
                 }
             }
         }
-        return mResult;
+        return result;
     }
 
     private Map<String, Double> getRates() {
+        // TODO Delete context
         Context context = MyApplication.getContext();
-        Map<String, Double> rates = new HashMap<>();
+        Map<String, Double> rates = null;
+        // TODO Delete shared preferences, pass map of rates as constructor argument
         SharedPreferences preferences = context.getSharedPreferences(HomeScreenActivity.KEY_EXCHANGE_RATES_SHARED_PREFERENCES,
                 Context.MODE_PRIVATE);
         if (preferences != null) {
