@@ -1,15 +1,11 @@
 package overskyet.unicon.utils;
 
-import android.animation.Animator;
 import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.res.Resources;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
-import overskyet.unicon.R;
-import overskyet.unicon.ui.HomeScreenActivity;
 
 public class Animation {
 

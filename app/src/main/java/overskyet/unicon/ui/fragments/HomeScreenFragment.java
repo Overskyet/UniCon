@@ -15,19 +15,17 @@ import androidx.navigation.ui.NavigationUI;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
 
 import overskyet.unicon.ui.HomeScreenActivity;
 import overskyet.unicon.R;
 import overskyet.unicon.databinding.FragmentHomeScreenBinding;
-import overskyet.unicon.utils.Animation;
 
 public class HomeScreenFragment extends Fragment
 {
 
-    private FragmentHomeScreenBinding mBinding;
+    private FragmentHomeScreenBinding binding;
 
-    private Bundle mBundle;
+    private Bundle bundle;
 
     public HomeScreenFragment() { }
 
@@ -37,12 +35,12 @@ public class HomeScreenFragment extends Fragment
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState)
     {
-        mBinding = FragmentHomeScreenBinding.inflate(
+        binding = FragmentHomeScreenBinding.inflate(
                 inflater,
                 container,
                 false);
 
-        return mBinding.getRoot();
+        return binding.getRoot();
     }
 
     @Override
@@ -50,14 +48,14 @@ public class HomeScreenFragment extends Fragment
             @NonNull View v,
             @Nullable Bundle savedInstanceState)
     {
-        mBinding.setHomeScreen(this);
+        binding.setHomeScreen(this);
 
         initToolbar();
     }
 
     private void initToolbar()
     {
-        Toolbar toolbar = (Toolbar) mBinding.toolbarFragmentHomeScreen;
+        Toolbar toolbar = (Toolbar) binding.toolbarFragmentHomeScreen;
 
         NavController navController = Navigation.findNavController(toolbar);
 
@@ -79,7 +77,7 @@ public class HomeScreenFragment extends Fragment
     public void onPressButton(View view) {
         switch (view.getId()) {
             case R.id.button_currency:
-                mBundle = initBundle(
+                bundle = initBundle(
                         null,
                         HomeScreenActivity.KEY_1_CURRENCY_CONVERSION,
                         HomeScreenActivity.KEY_2_CURRENCY_CONVERSION,
@@ -87,7 +85,7 @@ public class HomeScreenFragment extends Fragment
                 navigateToCurrencyExchangeFragment(view);
                 break;
             case R.id.button_time:
-                mBundle = initBundle(
+                bundle = initBundle(
                         getResources().getStringArray(R.array.time_block),
                         HomeScreenActivity.KEY_1_TIME_CONVERSION,
                         HomeScreenActivity.KEY_2_TIME_CONVERSION,
@@ -95,7 +93,7 @@ public class HomeScreenFragment extends Fragment
                 navigateToUnitsConversionFragment(view);
                 break;
             case R.id.button_fuel_consumption:
-                mBundle = initBundle(
+                bundle = initBundle(
                         getResources().getStringArray(R.array.fuel_consumption_block),
                         HomeScreenActivity.KEY_1_FUEL_CONSUMPTION_CONVERSION,
                         HomeScreenActivity.KEY_2_FUEL_CONSUMPTION_CONVERSION,
@@ -103,7 +101,7 @@ public class HomeScreenFragment extends Fragment
                 navigateToUnitsConversionFragment(view);
                 break;
             case R.id.button_pressure:
-                mBundle = initBundle(
+                bundle = initBundle(
                         getResources().getStringArray(R.array.pressure_block),
                         HomeScreenActivity.KEY_1_PRESSURE_CONVERSION,
                         HomeScreenActivity.KEY_2_PRESSURE_CONVERSION,
@@ -111,7 +109,7 @@ public class HomeScreenFragment extends Fragment
                 navigateToUnitsConversionFragment(view);
                 break;
             case R.id.button_energy:
-                mBundle = initBundle(
+                bundle = initBundle(
                         getResources().getStringArray(R.array.energy_block),
                         HomeScreenActivity.KEY_1_ENERGY_CONVERSION,
                         HomeScreenActivity.KEY_2_ENERGY_CONVERSION,
@@ -119,7 +117,7 @@ public class HomeScreenFragment extends Fragment
                 navigateToUnitsConversionFragment(view);
                 break;
             case R.id.button_temperature:
-                mBundle = initBundle(
+                bundle = initBundle(
                         getResources().getStringArray(R.array.temperature_block),
                         HomeScreenActivity.KEY_1_TEMPERATURE_CONVERSION,
                         HomeScreenActivity.KEY_2_TEMPERATURE_CONVERSION,
@@ -127,7 +125,7 @@ public class HomeScreenFragment extends Fragment
                 navigateToUnitsConversionFragment(view);
                 break;
             case R.id.button_length:
-                mBundle = initBundle(
+                bundle = initBundle(
                         getResources().getStringArray(R.array.length_block),
                         HomeScreenActivity.KEY_1_LENGTH_CONVERSION,
                         HomeScreenActivity.KEY_2_LENGTH_CONVERSION,
@@ -135,7 +133,7 @@ public class HomeScreenFragment extends Fragment
                 navigateToUnitsConversionFragment(view);
                 break;
             case R.id.button_weight:
-                mBundle = initBundle(
+                bundle = initBundle(
                         getResources().getStringArray(R.array.weight_block),
                         HomeScreenActivity.KEY_1_WEIGHT_CONVERSION,
                         HomeScreenActivity.KEY_2_WEIGHT_CONVERSION,
@@ -143,7 +141,7 @@ public class HomeScreenFragment extends Fragment
                 navigateToUnitsConversionFragment(view);
                 break;
             case R.id.button_volume:
-                mBundle = initBundle(
+                bundle = initBundle(
                         getResources().getStringArray(R.array.volume_block),
                         HomeScreenActivity.KEY_1_VOLUME_CONVERSION,
                         HomeScreenActivity.KEY_2_VOLUME_CONVERSION,
@@ -151,7 +149,7 @@ public class HomeScreenFragment extends Fragment
                 navigateToUnitsConversionFragment(view);
                 break;
             case R.id.button_area:
-                mBundle = initBundle(
+                bundle = initBundle(
                         getResources().getStringArray(R.array.area_block),
                         HomeScreenActivity.KEY_1_AREA_CONVERSION,
                         HomeScreenActivity.KEY_2_AREA_CONVERSION,
@@ -159,7 +157,7 @@ public class HomeScreenFragment extends Fragment
                 navigateToUnitsConversionFragment(view);
                 break;
             case R.id.button_angle:
-                mBundle = initBundle(
+                bundle = initBundle(
                         getResources().getStringArray(R.array.angle_block),
                         HomeScreenActivity.KEY_1_ANGLE_CONVERSION,
                         HomeScreenActivity.KEY_2_ANGLE_CONVERSION,
@@ -167,7 +165,7 @@ public class HomeScreenFragment extends Fragment
                 navigateToUnitsConversionFragment(view);
                 break;
             case R.id.button_speed:
-                mBundle = initBundle(
+                bundle = initBundle(
                         getResources().getStringArray(R.array.speed_block),
                         HomeScreenActivity.KEY_1_SPEED_CONVERSION,
                         HomeScreenActivity.KEY_2_SPEED_CONVERSION,
@@ -182,13 +180,13 @@ public class HomeScreenFragment extends Fragment
     private void navigateToUnitsConversionFragment(View view) {
         Navigation.findNavController(view).navigate(
                 R.id.action_homeScreenFragment_to_unitsConversionFragment,
-                mBundle);
+                bundle);
     }
 
     private void navigateToCurrencyExchangeFragment(View view) {
         Navigation.findNavController(view).navigate(
                 R.id.action_homeScreenFragment_to_currencyExchangeFragment,
-                mBundle);
+                bundle);
     }
 
     private Bundle initBundle(
