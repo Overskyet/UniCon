@@ -67,7 +67,8 @@
             app:argType="string" />
         <argument
             android:name="spinnerItemsArray"
-            app:argType="string[]" />
+            app:argType="string[]"
+            app:nullable="true"/>
     </fragment>
 
     <dialog
