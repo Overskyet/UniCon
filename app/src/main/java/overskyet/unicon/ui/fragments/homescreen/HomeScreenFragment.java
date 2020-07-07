@@ -15,9 +15,9 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import overskyet.unicon.Constants;
 import overskyet.unicon.R;
 import overskyet.unicon.databinding.FragmentHomeScreenBinding;
-import overskyet.unicon.ui.HomeScreenActivity;
 
 public class HomeScreenFragment extends Fragment
 {
@@ -74,85 +74,85 @@ public class HomeScreenFragment extends Fragment
             case R.id.button_currency:
                 navigateToCurrencyExchangeFragment(
                         R.drawable.ic_currency_white,
-                        HomeScreenActivity.KEY_1_CURRENCY_CONVERSION,
-                        HomeScreenActivity.KEY_2_CURRENCY_CONVERSION,
+                        Constants.KEY_1_CURRENCY_CONVERSION,
+                        Constants.KEY_2_CURRENCY_CONVERSION,
                         null);
                 break;
             case R.id.button_time:
                 navigateToUnitsConversionFragment(
                         R.drawable.ic_time_white,
-                        HomeScreenActivity.KEY_1_TIME_CONVERSION,
-                        HomeScreenActivity.KEY_2_TIME_CONVERSION,
+                        Constants.KEY_1_TIME_CONVERSION,
+                        Constants.KEY_2_TIME_CONVERSION,
                         getResources().getStringArray(R.array.time_block));
                 break;
             case R.id.button_fuel_consumption:
                 navigateToUnitsConversionFragment(
                         R.drawable.ic_fuel_consumption_white,
-                        HomeScreenActivity.KEY_1_FUEL_CONSUMPTION_CONVERSION,
-                        HomeScreenActivity.KEY_2_FUEL_CONSUMPTION_CONVERSION,
+                        Constants.KEY_1_FUEL_CONSUMPTION_CONVERSION,
+                        Constants.KEY_2_FUEL_CONSUMPTION_CONVERSION,
                         getResources().getStringArray(R.array.fuel_consumption_block));
                 break;
             case R.id.button_pressure:
                 navigateToUnitsConversionFragment(
                         R.drawable.ic_pressure_white,
-                        HomeScreenActivity.KEY_1_PRESSURE_CONVERSION,
-                        HomeScreenActivity.KEY_2_PRESSURE_CONVERSION,
+                        Constants.KEY_1_PRESSURE_CONVERSION,
+                        Constants.KEY_2_PRESSURE_CONVERSION,
                         getResources().getStringArray(R.array.pressure_block));
                 break;
             case R.id.button_energy:
                 navigateToUnitsConversionFragment(
                         R.drawable.ic_energy_white,
-                        HomeScreenActivity.KEY_1_ENERGY_CONVERSION,
-                        HomeScreenActivity.KEY_2_ENERGY_CONVERSION,
+                        Constants.KEY_1_ENERGY_CONVERSION,
+                        Constants.KEY_2_ENERGY_CONVERSION,
                         getResources().getStringArray(R.array.energy_block));
                 break;
             case R.id.button_temperature:
                 navigateToUnitsConversionFragment(
                         R.drawable.ic_temperature_white,
-                        HomeScreenActivity.KEY_1_TEMPERATURE_CONVERSION,
-                        HomeScreenActivity.KEY_2_TEMPERATURE_CONVERSION,
+                        Constants.KEY_1_TEMPERATURE_CONVERSION,
+                        Constants.KEY_2_TEMPERATURE_CONVERSION,
                         getResources().getStringArray(R.array.temperature_block));
                 break;
             case R.id.button_length:
                 navigateToUnitsConversionFragment(
                         R.drawable.ic_length_white,
-                        HomeScreenActivity.KEY_1_LENGTH_CONVERSION,
-                        HomeScreenActivity.KEY_2_LENGTH_CONVERSION,
+                        Constants.KEY_1_LENGTH_CONVERSION,
+                        Constants.KEY_2_LENGTH_CONVERSION,
                         getResources().getStringArray(R.array.length_block));
                 break;
             case R.id.button_weight:
                 navigateToUnitsConversionFragment(
                         R.drawable.ic_weight_white,
-                        HomeScreenActivity.KEY_1_WEIGHT_CONVERSION,
-                        HomeScreenActivity.KEY_2_WEIGHT_CONVERSION,
+                        Constants.KEY_1_WEIGHT_CONVERSION,
+                        Constants.KEY_2_WEIGHT_CONVERSION,
                         getResources().getStringArray(R.array.weight_block));
                 break;
             case R.id.button_volume:
                 navigateToUnitsConversionFragment(
                         R.drawable.ic_volume_white,
-                        HomeScreenActivity.KEY_1_VOLUME_CONVERSION,
-                        HomeScreenActivity.KEY_2_VOLUME_CONVERSION,
+                        Constants.KEY_1_VOLUME_CONVERSION,
+                        Constants.KEY_2_VOLUME_CONVERSION,
                         getResources().getStringArray(R.array.volume_block));
                 break;
             case R.id.button_area:
                 navigateToUnitsConversionFragment(
                         R.drawable.ic_area_white,
-                        HomeScreenActivity.KEY_1_AREA_CONVERSION,
-                        HomeScreenActivity.KEY_2_AREA_CONVERSION,
+                        Constants.KEY_1_AREA_CONVERSION,
+                        Constants.KEY_2_AREA_CONVERSION,
                         getResources().getStringArray(R.array.area_block));
                 break;
             case R.id.button_angle:
                 navigateToUnitsConversionFragment(
                         R.drawable.ic_angle_white,
-                        HomeScreenActivity.KEY_1_ANGLE_CONVERSION,
-                        HomeScreenActivity.KEY_2_ANGLE_CONVERSION,
+                        Constants.KEY_1_ANGLE_CONVERSION,
+                        Constants.KEY_2_ANGLE_CONVERSION,
                         getResources().getStringArray(R.array.angle_block));
                 break;
             case R.id.button_speed:
                 navigateToUnitsConversionFragment(
                         R.drawable.ic_speed_white,
-                        HomeScreenActivity.KEY_1_SPEED_CONVERSION,
-                        HomeScreenActivity.KEY_2_SPEED_CONVERSION,
+                        Constants.KEY_1_SPEED_CONVERSION,
+                        Constants.KEY_2_SPEED_CONVERSION,
                         getResources().getStringArray(R.array.speed_block));
                 break;
             default:

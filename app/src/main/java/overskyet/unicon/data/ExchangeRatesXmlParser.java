@@ -22,15 +22,17 @@ import javax.xml.parsers.ParserConfigurationException;
 
 public final class ExchangeRatesXmlParser {
 
-    private static final String TAG = ExchangeRatesXmlParser.class.getSimpleName();
+    private static class ExchangeRatesXmlParserHolder {
+        private final static ExchangeRatesXmlParser instance = new ExchangeRatesXmlParser();
+    }
 
-    private static ExchangeRatesXmlParser instance = new ExchangeRatesXmlParser();
+    public static ExchangeRatesXmlParser getInstance() {
+        return ExchangeRatesXmlParserHolder.instance;
+    }
 
     private ExchangeRatesXmlParser() { }
 
-    public static ExchangeRatesXmlParser getInstance() {
-        return instance;
-    }
+    private static final String TAG = ExchangeRatesXmlParser.class.getSimpleName();
 
     public ExchangeRates parseXml(InputStream is) {
         return parse(is);

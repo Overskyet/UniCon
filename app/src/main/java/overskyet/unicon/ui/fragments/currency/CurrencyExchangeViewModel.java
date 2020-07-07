@@ -1,32 +1,20 @@
 package overskyet.unicon.ui.fragments.currency;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 import overskyet.unicon.data.ExchangeRates;
-import overskyet.unicon.data.ExchangeRatesAsync;
 import overskyet.unicon.data.ExchangeRatesXmlParser;
 
 public final class CurrencyExchangeViewModel extends ViewModel {
@@ -37,7 +25,7 @@ public final class CurrencyExchangeViewModel extends ViewModel {
 
     private boolean isNotInitialized = true;
 
-    public ExchangeRates rates
+    private LiveData<ExchangeRates> rates = new MutableLiveData<>();
 
     public void initUi() {
         if (isNotInitialized) {
@@ -45,8 +33,27 @@ public final class CurrencyExchangeViewModel extends ViewModel {
         }
     }
 
+    public LiveData<ExchangeRates> getRates() {
+        return rates;
+    }
+
     private void startAsyncTask() {
-        new CurrencyExchangeViewModel.DownloadExchangeRatesTask().execute(ECB_URL);
+        loadRates(ECB_URL);
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private void loadRates(String url) {
+        new AsyncTask<String, Void, ExchangeRates>() {
+            @Override
+            protected ExchangeRates doInBackground(String... urls) {
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(ExchangeRates exchangeRates) {
+                super.onPostExecute(exchangeRates);
+            }
+        }.execute();
     }
 
     private class DownloadExchangeRatesTask extends AsyncTask<String, Void, ExchangeRates> {

@@ -297,10 +297,10 @@ public class UnitsConversionFragment extends Fragment {
     }
 
     private void convert() {
-        String spinnerItemFrom = spinnerFrom.getSelectedItem().toString();
-        String spinnerItemTo = spinnerTo.getSelectedItem().toString();
-        double inputValue = Double.parseDouble(editTextInput.getText().toString());
-        double outputValue = UnitsConverter.convert(inputValue, spinnerItemFrom, spinnerItemTo, key1);
+        final String spinnerItemFrom = spinnerFrom.getSelectedItem().toString();
+        final String spinnerItemTo = spinnerTo.getSelectedItem().toString();
+        final double inputValue = Double.parseDouble(editTextInput.getText().toString());
+        final double outputValue = UnitsConverter.convert(inputValue, spinnerItemFrom, spinnerItemTo, key1);
         editTextOutput.setText(String.valueOf(outputValue));
     }
 }

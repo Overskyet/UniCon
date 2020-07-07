@@ -35,6 +35,7 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import overskyet.unicon.Constants;
 import overskyet.unicon.R;
 import overskyet.unicon.databinding.FragmentCurrencyExchangeBinding;
 import overskyet.unicon.ratesconversion.CurrencyConverter;
@@ -160,7 +161,6 @@ public class CurrencyExchangeFragment extends Fragment {
         super.onPause();
     }
 
-    //TODO Replace with NavController AppBar
     private void initToolbar(int icon) {
         Toolbar toolbar = (Toolbar) binding.toolbarFragmentCurrencyExchange;
 
@@ -175,9 +175,9 @@ public class CurrencyExchangeFragment extends Fragment {
     }
 
     private void getLastUpdateTime() {
-        SharedPreferences preferences = requireActivity().getSharedPreferences(HomeScreenActivity.KEY_EXCHANGE_RATES_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences preferences = requireActivity().getSharedPreferences(Constants.KEY_EXCHANGE_RATES_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         if (preferences != null) {
-            String time = preferences.getString(HomeScreenActivity.KEY_ECB_TIME_OF_UPDATE, getString(R.string.last_update_time_error));
+            String time = preferences.getString(Constants.KEY_ECB_TIME_OF_UPDATE, getString(R.string.last_update_time_error));
             lastUpdate.setText(time);
         }
     }
@@ -316,16 +316,16 @@ public class CurrencyExchangeFragment extends Fragment {
 
     private void convert() {
         // Init CurrencyConverter object
-        CurrencyConverter currencyConverter = new CurrencyConverter();
+        final CurrencyConverter currencyConverter = new CurrencyConverter();
 
-        String spinnerItemFrom = spinnerFrom.getSelectedItem().toString().substring(0, 3);
-        String spinnerItemTo = spinnerTo.getSelectedItem().toString().substring(0, 3);
+        final String spinnerItemFrom = spinnerFrom.getSelectedItem().toString().substring(0, 3);
+        final String spinnerItemTo = spinnerTo.getSelectedItem().toString().substring(0, 3);
 
-        BigDecimal amount = new BigDecimal(editTextInput.getText().toString());
+        final BigDecimal amount = new BigDecimal(editTextInput.getText().toString());
         // Use values from spinners and input field
-        BigDecimal bigDecimalOutput = currencyConverter.convert(spinnerItemFrom, spinnerItemTo, amount);
+        final BigDecimal bigDecimalOutput = currencyConverter.convert(spinnerItemFrom, spinnerItemTo, amount);
         // Init output field
-        String output = bigDecimalOutput == null ? "0.0" : bigDecimalOutput.toString();
+        final String output = bigDecimalOutput == null ? "0.0" : bigDecimalOutput.toString();
         editTextOutput.setText(output);
     }
 }
