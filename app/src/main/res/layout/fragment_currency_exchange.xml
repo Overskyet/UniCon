@@ -8,6 +8,9 @@
         <variable
             name="currencyExchange"
             type="overskyet.unicon.ui.fragments.currency.CurrencyExchangeFragment" />
+        <variable
+            name="currencyExchangeViewModel"
+            type="overskyet.unicon.ui.fragments.currency.CurrencyExchangeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -39,7 +42,8 @@
             <TextView
                 android:id="@+id/currency_exchange_update_time_text_view"
                 style="@style/units_conversion_text_view"
-                android:text="No data available" />
+                android:text="@{currencyExchangeViewModel.rates.time}"
+                tools:text="No data available" />
         </LinearLayout>
 
         <ImageButton

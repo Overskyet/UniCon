@@ -44,7 +44,7 @@ public final class ExchangeRatesHttpRequest {
                 return null;
             }
             inputStream = urlConnection.getInputStream();
-            exchangeRates = ExchangeRatesXmlParser.getInstance().parseXml(inputStream);
+            exchangeRates = ExchangeRatesXmlParser.getInstance().parse(inputStream);
         } catch (IOException e) {
             Log.e(TAG, "makeHttpRequest: ", e);
         } finally {

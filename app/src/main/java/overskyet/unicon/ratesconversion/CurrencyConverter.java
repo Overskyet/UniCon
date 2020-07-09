@@ -1,51 +1,52 @@
 package overskyet.unicon.ratesconversion;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONObject;
-
-import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.HashMap;
 import java.util.Map;
 
-import overskyet.unicon.ui.HomeScreenActivity;
-import overskyet.unicon.MyApplication;
 
-// TODO Make singleton and pass app context to constructor
-public class CurrencyConverter {
+public final class CurrencyConverter {
 
+    private CurrencyConverter() {
+    }
+
+    private static class CurrencyConverterHolder {
+        private static final CurrencyConverter instance = new CurrencyConverter();
+    }
+
+    public static CurrencyConverter getInstance() {
+        return CurrencyConverterHolder.instance;
+    }
+
+    private Map<String, Double> rates;
     private String fromCurrency;
     private String toCurrency;
     private BigDecimal amount;
     private int calculationAccuracy = 4;
 
-    private BigDecimal result = new BigDecimal("0.0");
-
-    public BigDecimal convert(String fromCurrency, String toCurrency, BigDecimal amount) {
+    public BigDecimal convert(String fromCurrency, String toCurrency, BigDecimal amount, Map<String, Double> rates) {
         this.fromCurrency = fromCurrency;
         this.toCurrency = toCurrency;
         this.amount = amount;
+        this.rates = rates;
         return startConversion();
     }
 
-    public BigDecimal convert(String fromCurrency, String toCurrency, BigDecimal amount, int calculationAccuracy) {
+    public BigDecimal convert(String fromCurrency, String toCurrency, BigDecimal amount, int calculationAccuracy, Map<String, Double> rates) {
         this.fromCurrency = fromCurrency;
         this.toCurrency = toCurrency;
         this.amount = amount;
+        this.rates = rates;
         this.calculationAccuracy = calculationAccuracy < 0 ? this.calculationAccuracy : calculationAccuracy;
         return startConversion();
     }
 
     private BigDecimal startConversion() {
-        Map<String, Double> rates = getRates();
-        BigDecimal baseRate, targetRate;
-        if (rates != null) {
+        BigDecimal baseRate, targetRate, result;
+
+        if (rates == null || rates.isEmpty()) {
+            return null;
+        } else {
             if (rates.containsKey(fromCurrency) && rates.containsKey(toCurrency)) {
                 baseRate = new BigDecimal(rates.get(fromCurrency).toString());
                 targetRate = new BigDecimal(rates.get(toCurrency).toString());
@@ -69,20 +70,5 @@ public class CurrencyConverter {
             }
         }
         return result;
-    }
-
-    private Map<String, Double> getRates() {
-        // TODO Delete context
-        Context context = MyApplication.getContext();
-        Map<String, Double> rates = null;
-        // TODO Delete shared preferences, pass map of rates as constructor argument
-        SharedPreferences preferences = context.getSharedPreferences(HomeScreenActivity.KEY_EXCHANGE_RATES_SHARED_PREFERENCES,
-                Context.MODE_PRIVATE);
-        if (preferences != null) {
-            String jsonString = preferences.getString(HomeScreenActivity.KEY_MAP_OF_RATES, new JSONObject().toString());
-            Type typeOfHashMap = new TypeToken<Map<String, Double>>() {}.getType();
-            rates = new Gson().fromJson(jsonString, typeOfHashMap);
-        }
-        return rates;
     }
 }

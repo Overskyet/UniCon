@@ -1,44 +1,30 @@
 package overskyet.unicon.data;
 
-import androidx.annotation.NonNull;
-
 import java.util.List;
 import java.util.Map;
 
-public class ExchangeRates {
-    private final List<String> mCurrencies;
-    private final Map<String, Double> mRates;
-    private final String mTime;
+public final class ExchangeRates {
+
+    private final List<String> currencies;
+    private final Map<String, Double> rates;
+    private final String time;
 
     public ExchangeRates(List<String> currencies, Map<String, Double> rates, String time) {
-        this.mCurrencies = currencies;
-        this.mRates = rates;
-        this.mTime = time;
+        this.currencies = currencies;
+        this.rates = rates;
+        this.time = time;
     }
 
     public Map<String, Double> getRates() {
-        return mRates;
+        return rates;
     }
 
     public List<String> getCurrencies() {
-        return mCurrencies;
+        return currencies;
     }
 
     public String getTime() {
-        return mTime;
+        return time;
     }
 
-    public Boolean isEmpty() {
-        return mCurrencies.isEmpty() || mRates.isEmpty() || mTime.isEmpty();
-    }
-
-    @Override
-    @NonNull
-    public String toString() {
-        return "ExchangeRates{" +
-                "mCurrencies=" + mCurrencies +
-                ", mRates=" + mRates +
-                ", mTime='" + mTime + '\'' +
-                '}';
-    }
 }

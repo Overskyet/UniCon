@@ -25,18 +25,24 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import overskyet.unicon.Constants;
 import overskyet.unicon.R;
+import overskyet.unicon.data.ExchangeRates;
 import overskyet.unicon.databinding.FragmentCurrencyExchangeBinding;
 import overskyet.unicon.ratesconversion.CurrencyConverter;
 import overskyet.unicon.ui.HomeScreenActivity;
@@ -60,6 +66,10 @@ public class CurrencyExchangeFragment extends Fragment {
     private EditText editTextInput, editTextOutput;
     private Spinner spinnerFrom, spinnerTo;
 
+    private final CurrencyConverter currencyConverter = CurrencyConverter.getInstance();
+
+    private Map<String, Double> rates;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -70,7 +80,9 @@ public class CurrencyExchangeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View v, @Nullable Bundle savedInstanceState) {
 
+        CurrencyExchangeViewModel viewModel = new ViewModelProvider(this).get(CurrencyExchangeViewModel.class);
         binding.setCurrencyExchange(this);
+        binding.setCurrencyExchangeViewModel(viewModel);
 
         // Getting arguments from bundle
         CurrencyExchangeFragmentArgs args = CurrencyExchangeFragmentArgs.fromBundle(requireArguments());
@@ -315,17 +327,14 @@ public class CurrencyExchangeFragment extends Fragment {
     }
 
     private void convert() {
-        // Init CurrencyConverter object
-        final CurrencyConverter currencyConverter = new CurrencyConverter();
-
         final String spinnerItemFrom = spinnerFrom.getSelectedItem().toString().substring(0, 3);
         final String spinnerItemTo = spinnerTo.getSelectedItem().toString().substring(0, 3);
 
         final BigDecimal amount = new BigDecimal(editTextInput.getText().toString());
         // Use values from spinners and input field
-        final BigDecimal bigDecimalOutput = currencyConverter.convert(spinnerItemFrom, spinnerItemTo, amount);
+        final BigDecimal bigDecimalOutput = currencyConverter.convert(spinnerItemFrom, spinnerItemTo, amount, rates);
         // Init output field
-        final String output = bigDecimalOutput == null ? "0.0" : bigDecimalOutput.toString();
+        final String output = bigDecimalOutput == null ? getString(R.string.exchange_rates_load_error) : bigDecimalOutput.toString();
         editTextOutput.setText(output);
     }
 }

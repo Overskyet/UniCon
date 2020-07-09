@@ -42,13 +42,13 @@ public final class CurrencyExchangeViewModel extends ViewModel {
         new AsyncTask<Void, Void, ExchangeRates>() {
             @Override
             protected ExchangeRates doInBackground(Void... voids) {
-                URL requestUrl = UrlMaker.createUrl(url);
-                return requestUrl == null ? null : ExchangeRatesHttpRequest.getInstance().loadData(requestUrl);
+                URL urlRequest = UrlMaker.createUrl(url);
+                return urlRequest == null ? null : ExchangeRatesHttpRequest.getInstance().loadData(urlRequest);
             }
 
             @Override
             protected void onPostExecute(ExchangeRates exchangeRates) {
-                if (exchangeRates == null || exchangeRates.isEmpty()) return;
+                if (exchangeRates == null) return;
 
                 isNotInitialized = false;
                 rates.setValue(exchangeRates);

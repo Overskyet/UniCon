@@ -34,11 +34,11 @@ public final class ExchangeRatesXmlParser {
 
     private static final String TAG = ExchangeRatesXmlParser.class.getSimpleName();
 
-    public ExchangeRates parseXml(InputStream is) {
-        return parse(is);
+    public ExchangeRates parse(InputStream is) {
+        return parseXml(is);
     }
 
-    private ExchangeRates parse(InputStream is) {
+    private ExchangeRates parseXml(InputStream is) {
 
         List<String> currencies = new ArrayList<>();
         Map<String, Double> rates = new HashMap<>();
@@ -67,6 +67,8 @@ public final class ExchangeRatesXmlParser {
                         rates.put(attributeCurrency, Double.valueOf(attributeRate));
                     }
                 }
+            } else {
+                return null;
             }
         } catch (IOException | ParserConfigurationException | SAXException e) {
             Log.e(TAG, "parseXml: ", e);

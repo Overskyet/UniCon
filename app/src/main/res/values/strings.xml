@@ -45,6 +45,7 @@
     <string name="max_length_of_pasted_value_exceeded_notification">The maximum amount of characters in the input field is 30</string>
 
     <string name="last_update_time_error">No data available.</string>
+    <string name="exchange_rates_load_error">No data available</string>
 
     <string name="credits_header">Credits</string>
     <string name="credits_body">Icons made by <a href='https://www.flaticon.com/authors/freepik'>Freepik</a>,
