@@ -4,6 +4,6 @@ import java.io.InputStream;
 
 import overskyet.unicon.data.pojo.ExchangeRates;
 
-interface Parser {
-    ExchangeRates parse(InputStream is);
+public abstract class Parser {
+    public abstract ExchangeRates parse(InputStream is);
 }

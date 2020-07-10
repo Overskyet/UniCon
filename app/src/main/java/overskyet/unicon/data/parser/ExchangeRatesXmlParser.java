@@ -22,7 +22,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import overskyet.unicon.data.pojo.ExchangeRates;
 
 
-public final class ExchangeRatesXmlParser implements Parser{
+public final class ExchangeRatesXmlParser extends Parser {
 
     private static class ExchangeRatesXmlParserHolder {
         private final static ExchangeRatesXmlParser instance = new ExchangeRatesXmlParser();

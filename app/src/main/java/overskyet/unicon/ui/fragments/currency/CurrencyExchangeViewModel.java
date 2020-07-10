@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import overskyet.unicon.data.parser.ParseType;
 import overskyet.unicon.data.pojo.ExchangeRates;
 import overskyet.unicon.data.network.ExchangeRatesHttpRequest;
 import overskyet.unicon.utils.UrlMaker;
@@ -45,7 +46,7 @@ public final class CurrencyExchangeViewModel extends ViewModel {
             @Override
             protected ExchangeRates doInBackground(Void... voids) {
                 URL urlRequest = UrlMaker.createUrl(url);
-                return urlRequest == null ? null : ExchangeRatesHttpRequest.getInstance().loadData(urlRequest);
+                return urlRequest == null ? null : ExchangeRatesHttpRequest.getInstance().loadData(urlRequest, ParseType.XML);
             }
 
             @Override

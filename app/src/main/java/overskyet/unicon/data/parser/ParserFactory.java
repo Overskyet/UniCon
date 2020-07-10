@@ -1,4 +1,5 @@
 package overskyet.unicon.data.parser;
 
-abstract class ParserFactory {
+interface ParserFactory {
+    Parser createParser(ParseType type);
 }

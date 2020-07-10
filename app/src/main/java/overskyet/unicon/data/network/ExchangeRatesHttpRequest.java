@@ -7,6 +7,9 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import overskyet.unicon.data.parser.ParseType;
+import overskyet.unicon.data.parser.Parser;
+import overskyet.unicon.data.parser.ParserFactoryImpl;
 import overskyet.unicon.data.pojo.ExchangeRates;
 import overskyet.unicon.data.parser.ExchangeRatesXmlParser;
 
@@ -22,13 +25,15 @@ public final class ExchangeRatesHttpRequest {
         return ExchangeRatesHttpRequestHolder.instance;
     }
 
-    private ExchangeRatesHttpRequest() {}
+    private ExchangeRatesHttpRequest() { }
 
-    public ExchangeRates loadData(URL url) {
-        return makeHttpRequest(url);
+    public ExchangeRates loadData(URL url, ParseType type) {
+        return makeHttpRequest(url, type);
     }
 
-    private ExchangeRates makeHttpRequest(URL url) {
+    private ExchangeRates makeHttpRequest(URL url, ParseType type) {
+        Parser parser = ParserFactoryImpl.getInstance().createParser(type);
+        if (parser == null) return null;
         ExchangeRates exchangeRates = null;
         HttpURLConnection urlConnection = null;
         InputStream inputStream = null;
@@ -44,7 +49,7 @@ public final class ExchangeRatesHttpRequest {
                 return null;
             }
             inputStream = urlConnection.getInputStream();
-            exchangeRates = ExchangeRatesXmlParser.getInstance().parse(inputStream); //TODO Replace with factory
+            exchangeRates = parser.parse(inputStream);
         } catch (IOException e) {
             Log.e(TAG, "makeHttpRequest: ", e);
         } finally {
