@@ -1,6 +1,6 @@
 package overskyet.unicon.unitsconversion;
 
-import overskyet.unicon.ui.HomeScreenActivity;
+import overskyet.unicon.Constants;
 
 public final class UnitsConverter {
 
@@ -15,37 +15,37 @@ public final class UnitsConverter {
         itemName2 = spinner2ItemName.toLowerCase();
 
         switch (key1) {
-            case HomeScreenActivity.KEY_1_TIME_CONVERSION:
+            case Constants.KEY_1_TIME_CONVERSION:
                 calculateTime();
                 break;
-            case HomeScreenActivity.KEY_1_FUEL_CONSUMPTION_CONVERSION:
+            case Constants.KEY_1_FUEL_CONSUMPTION_CONVERSION:
                 calculateFuelConsumption();
                 break;
-            case HomeScreenActivity.KEY_1_PRESSURE_CONVERSION:
+            case Constants.KEY_1_PRESSURE_CONVERSION:
                 calculatePressure();
                 break;
-            case HomeScreenActivity.KEY_1_ENERGY_CONVERSION:
+            case Constants.KEY_1_ENERGY_CONVERSION:
                 calculateEnergy();
                 break;
-            case HomeScreenActivity.KEY_1_TEMPERATURE_CONVERSION:
+            case Constants.KEY_1_TEMPERATURE_CONVERSION:
                 calculateTemperature();
                 break;
-            case HomeScreenActivity.KEY_1_LENGTH_CONVERSION:
+            case Constants.KEY_1_LENGTH_CONVERSION:
                 calculateLength();
                 break;
-            case HomeScreenActivity.KEY_1_WEIGHT_CONVERSION:
+            case Constants.KEY_1_WEIGHT_CONVERSION:
                 calculateWeight();
                 break;
-            case HomeScreenActivity.KEY_1_VOLUME_CONVERSION:
+            case Constants.KEY_1_VOLUME_CONVERSION:
                 calculateVolume();
                 break;
-            case HomeScreenActivity.KEY_1_AREA_CONVERSION:
+            case Constants.KEY_1_AREA_CONVERSION:
                 calculateArea();
                 break;
-            case HomeScreenActivity.KEY_1_ANGLE_CONVERSION:
+            case Constants.KEY_1_ANGLE_CONVERSION:
                 calculateAngle();
                 break;
-            case HomeScreenActivity.KEY_1_SPEED_CONVERSION:
+            case Constants.KEY_1_SPEED_CONVERSION:
                 calculateSpeed();
                 break;
             default: return 0.0;

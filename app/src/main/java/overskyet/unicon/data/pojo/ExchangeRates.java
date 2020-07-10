@@ -1,4 +1,4 @@
-package overskyet.unicon.data;
+package overskyet.unicon.data.pojo;
 
 import java.util.List;
 import java.util.Map;

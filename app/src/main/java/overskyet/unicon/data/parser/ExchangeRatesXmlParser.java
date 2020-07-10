@@ -1,4 +1,4 @@
-package overskyet.unicon.data;
+package overskyet.unicon.data.parser;
 
 import android.util.Log;
 
@@ -19,8 +19,10 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import overskyet.unicon.data.pojo.ExchangeRates;
 
-public final class ExchangeRatesXmlParser {
+
+public final class ExchangeRatesXmlParser implements Parser{
 
     private static class ExchangeRatesXmlParserHolder {
         private final static ExchangeRatesXmlParser instance = new ExchangeRatesXmlParser();
@@ -34,6 +36,7 @@ public final class ExchangeRatesXmlParser {
 
     private static final String TAG = ExchangeRatesXmlParser.class.getSimpleName();
 
+    @Override
     public ExchangeRates parse(InputStream is) {
         return parseXml(is);
     }

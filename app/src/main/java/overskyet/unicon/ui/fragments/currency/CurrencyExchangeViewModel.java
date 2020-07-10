@@ -8,8 +8,10 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
-import overskyet.unicon.data.ExchangeRates;
+import overskyet.unicon.data.pojo.ExchangeRates;
 import overskyet.unicon.data.network.ExchangeRatesHttpRequest;
 import overskyet.unicon.utils.UrlMaker;
 
@@ -21,7 +23,8 @@ public final class CurrencyExchangeViewModel extends ViewModel {
 
     private boolean isNotInitialized = true;
 
-    private MutableLiveData<ExchangeRates> rates = new MutableLiveData<>();
+    private MutableLiveData<Map<String, Double>> mapOfRates = new MutableLiveData<>();
+    private MutableLiveData<String> lastUpdateTime = new MutableLiveData<>();
 
     public void initUi() {
         if (isNotInitialized) {
@@ -29,9 +32,8 @@ public final class CurrencyExchangeViewModel extends ViewModel {
         }
     }
 
-    public LiveData<ExchangeRates> getRates() {
-        return rates;
-    }
+    MutableLiveData<Map<String, Double>> getMapOfRates() { return mapOfRates; }
+    MutableLiveData<String> getLastUpdateTime() { return lastUpdateTime; }
 
     private void startAsyncTask() {
         loadRates(ECB_URL);
@@ -51,7 +53,8 @@ public final class CurrencyExchangeViewModel extends ViewModel {
                 if (exchangeRates == null) return;
 
                 isNotInitialized = false;
-                rates.setValue(exchangeRates);
+                mapOfRates.setValue(exchangeRates.getRates());
+                lastUpdateTime.setValue(exchangeRates.getTime());
             }
         }.execute();
     }

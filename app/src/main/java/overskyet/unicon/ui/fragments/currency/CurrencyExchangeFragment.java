@@ -4,7 +4,6 @@ import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -32,9 +32,6 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -42,19 +39,23 @@ import java.util.regex.Pattern;
 
 import overskyet.unicon.Constants;
 import overskyet.unicon.R;
-import overskyet.unicon.data.ExchangeRates;
 import overskyet.unicon.databinding.FragmentCurrencyExchangeBinding;
 import overskyet.unicon.ratesconversion.CurrencyConverter;
-import overskyet.unicon.ui.HomeScreenActivity;
+import overskyet.unicon.ui.activity.HomeScreenActivity;
+import overskyet.unicon.utils.MapSerializationAndDeserialization;
 
 public class CurrencyExchangeFragment extends Fragment {
 
     private FragmentCurrencyExchangeBinding binding;
 
+    private CurrencyExchangeViewModel viewModel;
+
     private String key1, key2;
 
-    // Instance of SharedPreferences object for setting up spinners items
-    private SharedPreferences spinnersPosition;
+    //    // Instance of SharedPreferences object for setting up spinners items
+//    private SharedPreferences currencyExchangeFragmentSharedPref;
+    private String lastUpdateTime;
+    private Map<String, Double> rates;
 
     // Clipboard manager for copy and paste operations
     private ClipboardManager clipboard;
@@ -62,13 +63,12 @@ public class CurrencyExchangeFragment extends Fragment {
     // Widgets
     private LinearLayout updateTimeContainer;
     private ScrollView scrollView;
-    private TextView lastUpdate;
+    private TextView lastUpdateTimeContainer;
     private EditText editTextInput, editTextOutput;
     private Spinner spinnerFrom, spinnerTo;
 
     private final CurrencyConverter currencyConverter = CurrencyConverter.getInstance();
 
-    private Map<String, Double> rates;
 
     @Nullable
     @Override
@@ -80,43 +80,27 @@ public class CurrencyExchangeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View v, @Nullable Bundle savedInstanceState) {
 
-        CurrencyExchangeViewModel viewModel = new ViewModelProvider(this).get(CurrencyExchangeViewModel.class);
-        binding.setCurrencyExchange(this);
-        binding.setCurrencyExchangeViewModel(viewModel);
+        initViewModelAndDataBinding();
 
-        // Getting arguments from bundle
-        CurrencyExchangeFragmentArgs args = CurrencyExchangeFragmentArgs.fromBundle(requireArguments());
+        initUsingSafeArgs(getSafeArgs());
 
-        // Initialize fragment toolbar
-        initToolbar(args.getToolbarImageId());
+        initWidgets();
 
-        // Keys initialization
-        key1 = args.getKey1();
-        key2 = args.getKey2();
+        loadData();
+
+        initCopyButton();
+
+//        // SharedPreferences instance initialization
+//        currencyExchangeFragmentSharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
 
         // Clipboard manager initialization
         clipboard = (ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
-
-        // SharedPreferences instance initialization
-        spinnersPosition = requireActivity().getPreferences(Context.MODE_PRIVATE);
-
-        // Widget initialization
-        updateTimeContainer = binding.currencyExchangeTimeOfUpdateBlock;
-        scrollView = binding.currencyExchangeScrollView;
-        lastUpdate = binding.currencyExchangeUpdateTimeTextView;
-        editTextInput = binding.currencyExchangeInput;
-        editTextOutput = binding.currencyExchangeOutput;
-
-        // Invoke SharedPreferences method to get last update time and write it to updateTime TextView
-        getLastUpdateTime();
 
         // Disable input for EditText views
         editTextInput.setKeyListener(null);
         editTextOutput.setKeyListener(null);
 
         // Spinners block initialization
-        spinnerFrom = binding.currencyExchangeSpinnerFrom;
-        spinnerTo = binding.currencyExchangeSpinnerTo;
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireActivity(), R.layout.spinner_item, getResources().getStringArray(R.array.currencies));
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinnerFrom.setAdapter(adapter);
@@ -144,33 +128,86 @@ public class CurrencyExchangeFragment extends Fragment {
             }
         });
 
-        final Button copyButton = binding.buttonCopy;
-        copyButton.setOnClickListener(view -> copy());
-        copyButton.setOnLongClickListener(view -> {
-            paste();
-            return true;
-        });
-
+        // TODO What am I supposed to do with this Last Update Time block!?
         final ImageButton showKeyboardButton = binding.currencyExchangeImageButtonShowKeyboard;
         showKeyboardButton.setOnClickListener(view -> showKeyboard());
     }
 
     @Override
     public void onResume() {
-        spinnerFrom.setSelection(spinnersPosition.getInt(key1, 0));
-        spinnerTo.setSelection(spinnersPosition.getInt(key2, 1));
+        spinnerFrom.setSelection(HomeScreenActivity.getSharedPreferences().getInt(key1, 0));
+        spinnerTo.setSelection(HomeScreenActivity.getSharedPreferences().getInt(key2, 1));
         super.onResume();
     }
 
     @Override
     public void onPause() {
-        spinnersPosition.edit()
+        HomeScreenActivity.getSharedPreferences().edit()
                 .remove(key1)
                 .remove(key2)
+                .remove(Constants.EXCHANGE_RATES_LAST_UPDATE_TIME)
+                .remove(Constants.EXCHANGE_RATES_SERIALIZED_MAP)
                 .putInt(key1, spinnerFrom.getSelectedItemPosition())
                 .putInt(key2, spinnerTo.getSelectedItemPosition())
+                .putString(Constants.EXCHANGE_RATES_LAST_UPDATE_TIME, lastUpdateTime)
+                .putString(Constants.EXCHANGE_RATES_SERIALIZED_MAP, MapSerializationAndDeserialization.serializeMap(rates))
                 .apply();
         super.onPause();
+    }
+
+    private void loadData() {
+        lastUpdateTime = HomeScreenActivity.getSharedPreferences().getString(Constants.EXCHANGE_RATES_LAST_UPDATE_TIME, getString(R.string.last_update_time_error));
+        rates = MapSerializationAndDeserialization.deserializeMap(HomeScreenActivity.getSharedPreferences().getString(Constants.EXCHANGE_RATES_SERIALIZED_MAP, null));
+        lastUpdateTimeContainer.setText(lastUpdateTime);
+
+        viewModel.initUi();
+
+        viewModel.getLastUpdateTime().observe(getViewLifecycleOwner(), lastUpdateTime -> {
+            lastUpdateTimeContainer.setText(lastUpdateTime);
+        });
+        viewModel.getMapOfRates().observe(getViewLifecycleOwner(), mapOfRates -> {
+            rates = mapOfRates;
+        });
+    }
+
+    private void initViewModelAndDataBinding() {
+        viewModel = new ViewModelProvider(this).get(CurrencyExchangeViewModel.class);
+        binding.setCurrencyExchange(this);
+        binding.setCurrencyExchangeViewModel(viewModel);
+    }
+
+    private CurrencyExchangeFragmentArgs getSafeArgs() {
+        return CurrencyExchangeFragmentArgs.fromBundle(requireArguments());
+    }
+
+    private void initUsingSafeArgs(CurrencyExchangeFragmentArgs args) {
+
+        // Initialize fragment toolbar
+        initToolbar(args.getToolbarImageId());
+
+        // Keys initialization
+        key1 = args.getKey1();
+        key2 = args.getKey2();
+
+    }
+
+    private void initWidgets() {
+        updateTimeContainer = binding.currencyExchangeTimeOfUpdateBlock;
+        scrollView = binding.currencyExchangeScrollView;
+        lastUpdateTimeContainer = binding.currencyExchangeUpdateTimeTextView;
+        editTextInput = binding.currencyExchangeInput;
+        editTextOutput = binding.currencyExchangeOutput;
+        spinnerFrom = binding.currencyExchangeSpinnerFrom;
+        spinnerTo = binding.currencyExchangeSpinnerTo;
+    }
+
+    private void initCopyButton() {
+        final Button copyButton = binding.buttonCopy;
+        copyButton.setOnClickListener(view -> copy());
+        copyButton.setOnLongClickListener(view -> {
+            paste();
+            return true;
+        });
     }
 
     private void initToolbar(int icon) {
@@ -186,17 +223,9 @@ public class CurrencyExchangeFragment extends Fragment {
         NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
     }
 
-    private void getLastUpdateTime() {
-        SharedPreferences preferences = requireActivity().getSharedPreferences(Constants.KEY_EXCHANGE_RATES_SHARED_PREFERENCES, Context.MODE_PRIVATE);
-        if (preferences != null) {
-            String time = preferences.getString(Constants.KEY_ECB_TIME_OF_UPDATE, getString(R.string.last_update_time_error));
-            lastUpdate.setText(time);
-        }
-    }
-
     private void showKeyboard() {
         updateTimeContainer.setVisibility(View.GONE);
-        lastUpdate.setVisibility(View.GONE);
+        lastUpdateTimeContainer.setVisibility(View.GONE);
         scrollView.setVisibility(View.VISIBLE);
     }
 
@@ -222,7 +251,7 @@ public class CurrencyExchangeFragment extends Fragment {
                 editTextInput.getText().clear();
                 editTextOutput.getText().clear();
                 break;
-             //TODO Handle refresh action
+            //TODO Handle refresh action
             // Refresh block
             case R.id.button_refresh:
                 startRefresh();

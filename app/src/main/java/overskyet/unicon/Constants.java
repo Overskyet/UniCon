@@ -1,9 +1,9 @@
 package overskyet.unicon;
 
 public final class Constants {
-    public static final String KEY_MAP_OF_RATES = "overskyet.unicon.MAP_OF_RATES";
-    public static final String KEY_ECB_TIME_OF_UPDATE = "overskyet.unicon.TIME_OF_UPDATE";
-    public static final String KEY_EXCHANGE_RATES_SHARED_PREFERENCES = "overskyet.unicon.EXCHANGE_RATES";
+    public static final String EXCHANGE_RATES_SERIALIZED_MAP = "overskyet.unicon.SERIALIZED_MAP";
+    public static final String EXCHANGE_RATES_LAST_UPDATE_TIME = "overskyet.unicon.LAST_UPDATE_TIME";
+
     public static final String KEY_1_CURRENCY_CONVERSION = "overskyet.unicon.CURRENCY_SPINNER_1";
     public static final String KEY_1_TIME_CONVERSION = "overskyet.unicon.TIME_SPINNER_1";
     public static final String KEY_1_FUEL_CONSUMPTION_CONVERSION = "overskyet.unicon.FUEL_CONSUMPTION_SPINNER_1";

@@ -7,8 +7,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import overskyet.unicon.data.ExchangeRates;
-import overskyet.unicon.data.ExchangeRatesXmlParser;
+import overskyet.unicon.data.pojo.ExchangeRates;
+import overskyet.unicon.data.parser.ExchangeRatesXmlParser;
 
 public final class ExchangeRatesHttpRequest {
 
@@ -44,7 +44,7 @@ public final class ExchangeRatesHttpRequest {
                 return null;
             }
             inputStream = urlConnection.getInputStream();
-            exchangeRates = ExchangeRatesXmlParser.getInstance().parse(inputStream);
+            exchangeRates = ExchangeRatesXmlParser.getInstance().parse(inputStream); //TODO Replace with factory
         } catch (IOException e) {
             Log.e(TAG, "makeHttpRequest: ", e);
         } finally {
