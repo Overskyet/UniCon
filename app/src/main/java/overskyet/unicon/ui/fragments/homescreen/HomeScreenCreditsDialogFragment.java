@@ -23,8 +23,7 @@ public class HomeScreenCreditsDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = requireActivity().getLayoutInflater();
-        builder.setView(inflater.inflate(R.layout.dialog_home_screen_credits, null));
+        builder.setView(requireActivity().getLayoutInflater().inflate(R.layout.dialog_home_screen_credits, null));
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
 
