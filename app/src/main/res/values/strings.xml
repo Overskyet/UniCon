@@ -2,8 +2,6 @@
 
     <string name="app_name">UniCon</string>
 
-    <string name="ok_dialog_button">@android:string/ok</string>
-
     <string name="currency_button">CURRENCY</string>
     <string name="weight_button">WEIGHT</string>
     <string name="volume_button">VOLUME</string>
@@ -17,27 +15,27 @@
     <string name="pressure_button">PRESSURE</string>
     <string name="energy_button">ENERGY</string>
 
-    <string name="button_0">0</string>
-    <string name="button_1">1</string>
-    <string name="button_2">2</string>
-    <string name="button_3">3</string>
-    <string name="button_4">4</string>
-    <string name="button_5">5</string>
-    <string name="button_6">6</string>
-    <string name="button_7">7</string>
-    <string name="button_8">8</string>
-    <string name="button_9">9</string>
-    <string name="button_dot">.</string>
-    <string name="button_clear">C</string>
-    <string name="button_plus_minus">+/-</string>
-    <string name="button_delete">\u232b</string>
-    <string name="button_reverse">\u21c4</string>
-    <string name="button_copy">\u2397</string>
-    <string name="button_refresh">\u21bb</string>
+    <string translatable="false" name="button_0">0</string>
+    <string translatable="false" name="button_1">1</string>
+    <string translatable="false" name="button_2">2</string>
+    <string translatable="false" name="button_3">3</string>
+    <string translatable="false" name="button_4">4</string>
+    <string translatable="false" name="button_5">5</string>
+    <string translatable="false" name="button_6">6</string>
+    <string translatable="false" name="button_7">7</string>
+    <string translatable="false" name="button_8">8</string>
+    <string translatable="false" name="button_9">9</string>
+    <string translatable="false" name="button_dot">.</string>
+    <string translatable="false" name="button_clear">C</string>
+    <string translatable="false" name="button_plus_minus">+/-</string>
+    <string translatable="false" name="button_delete">\u232b</string>
+    <string translatable="false" name="button_reverse">\u21c4</string>
+    <string translatable="false" name="button_copy">\u2397</string>
+    <string translatable="false" name="button_refresh">\u21bb</string>
 
     <string name="from_string">From</string>
     <string name="to_string">To</string>
-    <string name="output_hint">=0</string>
+    <string translatable="false" name="output_hint">=0</string>
 
     <string name="copy_notification">Copied</string>
     <string name="incorrect_paste_value_notification">Incorrect data format for paste value.
@@ -50,11 +48,11 @@
     <string name="credits_header">Credits</string>
     <string name="credits_body">Icons made by <a href='https://www.flaticon.com/authors/freepik'>Freepik</a>,
         <a href='https://www.flaticon.com/authors/those-icons'>Those Icons</a>,
-        <a href='https://www.flaticon.com/authors/gregor-cresnar'>Gregor Cresnar</a> from <a href='https://www.flaticon.com/'>www.flaticon.com</a>
-        \n\nData provided by <a href= 'https://www.ecb.europa.eu/home/html/index.en.html'>ECB</a> for currency exchange rates
+        <a href='https://www.flaticon.com/authors/gregor-cresnar'>Gregor Cresnar</a> from <a href='https://www.flaticon.com/'>www.flaticon.com</a>.
+        \n\nCurrency exchange rates data provided by <a href= 'https://www.ecb.europa.eu/home/html/index.en.html'>ECB</a>.
     </string>
 
-    <string name="digits_regexp">^-|\\.|-\\.$</string>
-    <string name="max_amount_of_chars_regexp">^[0-9\\-.]{0,30}(\\.\\d{3})$</string>
+    <string translatable="false" name="digits_regexp">^-|\\.|-\\.$</string>
+    <string translatable="false" name="max_amount_of_chars_regexp">^[0-9\\-.]{0,30}(\\.\\d{3})$</string>
 
 </resources>

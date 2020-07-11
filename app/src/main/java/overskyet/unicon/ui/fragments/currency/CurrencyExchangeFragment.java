@@ -163,10 +163,11 @@ public class CurrencyExchangeFragment extends Fragment {
         viewModel.initUi();
 
         viewModel.getLastUpdateTime().observe(getViewLifecycleOwner(), lastUpdateTime -> {
+            this.lastUpdateTime = lastUpdateTime;
             lastUpdateTimeContainer.setText(lastUpdateTime);
         });
         viewModel.getMapOfRates().observe(getViewLifecycleOwner(), mapOfRates -> {
-            rates = mapOfRates;
+            this.rates = mapOfRates;
         });
     }
 

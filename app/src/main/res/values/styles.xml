@@ -8,9 +8,36 @@
         <item name="android:windowBackground">@color/colorPrimary</item>
     </style>
 
-    <!--  ACTIVITY_UNITS_CONVERSION COMPONENTS STYLIZATION  -->
+    <style name="AppToolbar">
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="android:elevation">@dimen/units_conversion_toolbar_elevation</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="android:theme">@style/AppTheme</item>
+    </style>
 
-    <!-- activity_units_conversion text_view style -->
+    <style name="AppToolbarImageView">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginEnd">@dimen/home_screen_button_padding_10dp</item>
+    </style>
+
+    <style name="CreditsHeader">
+        <item name="android:elevation">@dimen/units_conversion_toolbar_elevation</item>
+        <item name="android:padding">@dimen/home_screen_credits_dialog_header_padding</item>
+        <item name="android:paddingStart">@dimen/home_screen_credits_dialog_body_padding</item>
+        <item name="android:text">@string/credits_header</item>
+        <item name="android:textSize">@dimen/home_screen_credits_dialog_header_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CreditsBody">
+        <item name="android:padding">@dimen/home_screen_credits_dialog_body_padding</item>
+        <item name="android:text">@string/credits_body</item>
+        <item name="android:layout_marginBottom">15dp</item>
+        <item name="android:textSize">@dimen/home_screen_credits_dialog_body_text_size</item>
+    </style>
+
+
+
     <style name="units_conversion_text_view">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -83,39 +110,6 @@
         </item>
         <item name="android:textColor">@color/text_color</item>
         <item name="android:textSize">@dimen/units_conversion_buttons_text_size</item>
-    </style>
-
-    <!-- HOME SCREEN COMPONENTS STYLIZATION -->
-
-    <!-- Home screen credits dialog header style -->
-    <style name="home_screen_dialog_header">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:elevation">@dimen/units_conversion_toolbar_elevation</item>
-        <item name="android:padding">@dimen/home_screen_credits_dialog_header_padding</item>
-        <item name="android:paddingStart">@dimen/home_screen_credits_dialog_body_padding</item>
-        <item name="android:text">@string/credits_header</item>
-        <item name="android:textSize">@dimen/home_screen_credits_dialog_header_text_size</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-    <!-- Home screen credits dialog body style -->
-    <style name="home_screen_dialog_body">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">@dimen/home_screen_credits_dialog_body_padding</item>
-        <item name="android:text">@string/credits_body</item>
-        <item name="android:textSize">@dimen/home_screen_credits_dialog_body_text_size</item>
-    </style>
-    <!-- Home screen credits dialog ok button -->
-    <style name="home_screen_dialog_ok_button" parent="Widget.AppCompat.Button.Borderless">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">end</item>
-        <item name="android:layout_marginTop">@dimen/home_screen_button_padding_10dp</item>
-        <item name="android:text">@string/ok_dialog_button</item>
-        <item name="android:textSize">@dimen/home_screen_buttons_text_size</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/text_color</item>
     </style>
 
     <!--  HOME SCREEN FRAGMENT'S COMPONENTS STYLIZATION  -->

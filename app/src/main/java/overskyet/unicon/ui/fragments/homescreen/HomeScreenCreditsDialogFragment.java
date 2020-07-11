@@ -28,9 +28,6 @@ public class HomeScreenCreditsDialogFragment extends DialogFragment {
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
 
-        Button okBtn = alertDialog.findViewById(R.id.home_screen_ok_dialog_button);
-        okBtn.setOnClickListener(v -> Objects.requireNonNull(getDialog()).dismiss());
-
         TextView creditsBody = alertDialog.findViewById(R.id.home_screen_credits_dialog_body);
         creditsBody.setMovementMethod(LinkMovementMethod.getInstance());
 

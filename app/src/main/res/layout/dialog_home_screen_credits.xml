@@ -10,21 +10,15 @@
 
         <TextView
             android:id="@+id/home_screen_credits_header"
-            style="@style/home_screen_dialog_header" />
-
-        <View
-            android:id="@+id/divider4"
+            style="@style/CreditsHeader"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/units_conversion_toolbar_elevation"
-            android:background="@drawable/units_conversion_screen_toolbar_bottom_shadow" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/home_screen_credits_dialog_body"
-            style="@style/home_screen_dialog_body" />
-
-        <Button
-            android:id="@+id/home_screen_ok_dialog_button"
-            style="@style/home_screen_dialog_ok_button" />
+            style="@style/CreditsBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 </ScrollView>

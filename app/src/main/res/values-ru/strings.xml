@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">UniCon</string>
+    <string name="currency_button">КУРСЫ ВАЛЮТ</string>
+    <string name="weight_button">ВЕС</string>
+    <string name="volume_button">ОБЪЁМ</string>
+    <string name="length_button">ДЛИНА</string>
+    <string name="speed_button">СКОРОСТЬ</string>
+    <string name="temperature_button">ТЕМПЕРАТУРА</string>
+    <string name="area_button">ПЛОЩАДЬ</string>
+    <string name="angle_button">УГЛОВАЯ МЕРА</string>
+    <string name="time_button">ВРЕМЯ</string>
+    <string name="fuel_consumption_button">РАСХОД ТОПЛИВА</string>
+    <string name="pressure_button">ДАВЛЕНИЕ</string>
+    <string name="energy_button">ЭНЕРГИЯ</string>
+    <string name="from_string">Из</string>
+    <string name="to_string">В</string>
+    <string name="copy_notification">Скопировано</string>
+    <string name="incorrect_paste_value_notification">Неподходящий формат данных для поля ввода.
+        Убедитесь, что скопированное значение - целое, либо дробное число. Пример: \u201c123 или 123.45\u201d</string>
+    <string name="max_length_of_pasted_value_exceeded_notification">Максимальное количество символов в поле ввода — 30 знаков</string>
+    <string name="last_update_time_error">Информация отсутствует.</string>
+    <string name="exchange_rates_load_error">Информация отсутствует</string>
+    <string name="credits_header">Информация</string>
+    <string name="credits_body">Иконки взяты с сайта <a href='https://www.flaticon.com/'>www.flaticon.com</a>.
+        \nАвторы иконок — <a href='https://www.flaticon.com/authors/freepik'>Freepik</a>,
+        <a href='https://www.flaticon.com/authors/those-icons'>Those Icons</a>,
+        <a href='https://www.flaticon.com/authors/gregor-cresnar'>Gregor Cresnar</a>.
+        \n\nИнформация о курсе валют предоставлена <a href= 'https://www.ecb.europa.eu/home/html/index.en.html'>Европейским центральным банком</a>.
+    </string>
+</resources>
