@@ -8,9 +8,6 @@
         <variable
             name="currencyExchange"
             type="overskyet.unicon.ui.fragments.currency.CurrencyExchangeFragment" />
-        <variable
-            name="currencyExchangeViewModel"
-            type="overskyet.unicon.ui.fragments.currency.CurrencyExchangeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

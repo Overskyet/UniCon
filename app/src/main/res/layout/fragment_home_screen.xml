@@ -47,9 +47,8 @@
 
                 <Button
                     android:id="@+id/button_currency"
-                    style="@style/type_of_measurement_button"
+                    style="@style/HomeScreenButton.Red"
                     android:layout_marginTop="@dimen/home_screen_button_margin"
-                    android:background="@drawable/home_screen_red_button_background"
                     android:drawableEnd="@drawable/ic_currency_white"
                     android:onClick="@{homeScreen::onPressButton}"
                     android:text="@string/currency_button"
@@ -62,9 +61,8 @@
 
                 <Button
                     android:id="@+id/button_temperature"
-                    style="@style/type_of_measurement_button"
+                    style="@style/HomeScreenButton.Red"
                     android:layout_marginTop="@dimen/home_screen_button_margin"
-                    android:background="@drawable/home_screen_red_button_background"
                     android:drawableStart="@drawable/ic_temperature_white"
                     android:onClick="@{homeScreen::onPressButton}"
                     android:text="@string/temperature_button"
@@ -77,9 +75,8 @@
 
                 <Button
                     android:id="@+id/button_time"
-                    style="@style/type_of_measurement_button"
+                    style="@style/HomeScreenButton.Red"
                     android:layout_marginTop="@dimen/home_screen_button_margin"
-                    android:background="@drawable/home_screen_red_button_background"
                     android:drawableStart="@drawable/ic_time_white"
                     android:onClick="@{homeScreen::onPressButton}"
                     android:text="@string/time_button"
@@ -92,9 +89,8 @@
 
                 <Button
                     android:id="@+id/button_fuel_consumption"
-                    style="@style/type_of_measurement_button"
+                    style="@style/HomeScreenButton.Red"
                     android:layout_marginTop="@dimen/home_screen_button_margin"
-                    android:background="@drawable/home_screen_red_button_background"
                     android:drawableEnd="@drawable/ic_fuel_consumption_white"
                     android:onClick="@{homeScreen::onPressButton}"
                     android:text="@string/fuel_consumption_button"
@@ -107,9 +103,8 @@
 
                 <Button
                     android:id="@+id/button_pressure"
-                    style="@style/type_of_measurement_button"
+                    style="@style/HomeScreenButton.Red"
                     android:layout_marginTop="@dimen/home_screen_button_margin"
-                    android:background="@drawable/home_screen_red_button_background"
                     android:drawableStart="@drawable/ic_pressure_white"
                     android:onClick="@{homeScreen::onPressButton}"
                     android:text="@string/pressure_button"
@@ -122,9 +117,8 @@
 
                 <Button
                     android:id="@+id/button_energy"
-                    style="@style/type_of_measurement_button"
+                    style="@style/HomeScreenButton.Red"
                     android:layout_marginTop="@dimen/home_screen_button_margin"
-                    android:background="@drawable/home_screen_red_button_background"
                     android:drawableEnd="@drawable/ic_energy_white"
                     android:onClick="@{homeScreen::onPressButton}"
                     android:text="@string/energy_button"
@@ -137,9 +131,8 @@
 
                 <Button
                     android:id="@+id/button_area"
-                    style="@style/type_of_measurement_button"
+                    style="@style/HomeScreenButton.Blue"
                     android:layout_marginTop="@dimen/home_screen_button_margin"
-                    android:background="@drawable/home_screen_blue_button_background"
                     android:drawableStart="@drawable/ic_area_white"
                     android:onClick="@{homeScreen::onPressButton}"
                     android:text="@string/area_button"
@@ -152,9 +145,8 @@
 
                 <Button
                     android:id="@+id/button_angle"
-                    style="@style/type_of_measurement_button"
+                    style="@style/HomeScreenButton.Blue"
                     android:layout_marginTop="@dimen/home_screen_button_margin"
-                    android:background="@drawable/home_screen_blue_button_background"
                     android:drawableEnd="@drawable/ic_angle_white"
                     android:onClick="@{homeScreen::onPressButton}"
                     android:text="@string/angle_button"
@@ -167,9 +159,8 @@
 
                 <Button
                     android:id="@+id/button_length"
-                    style="@style/type_of_measurement_button"
+                    style="@style/HomeScreenButton.Blue"
                     android:layout_marginTop="@dimen/home_screen_button_margin"
-                    android:background="@drawable/home_screen_blue_button_background"
                     android:drawableEnd="@drawable/ic_length_white"
                     android:onClick="@{homeScreen::onPressButton}"
                     android:text="@string/length_button"
@@ -182,10 +173,9 @@
 
                 <Button
                     android:id="@+id/button_speed"
-                    style="@style/type_of_measurement_button"
+                    style="@style/HomeScreenButton.Blue"
                     android:layout_marginTop="@dimen/home_screen_button_margin"
                     android:layout_marginBottom="@dimen/home_screen_button_margin"
-                    android:background="@drawable/home_screen_blue_button_background"
                     android:drawableStart="@drawable/ic_speed_white"
                     android:onClick="@{homeScreen::onPressButton}"
                     android:text="@string/speed_button"
@@ -198,9 +188,8 @@
 
                 <Button
                     android:id="@+id/button_volume"
-                    style="@style/type_of_measurement_button"
+                    style="@style/HomeScreenButton.Blue"
                     android:layout_marginTop="@dimen/home_screen_button_margin"
-                    android:background="@drawable/home_screen_blue_button_background"
                     android:drawableEnd="@drawable/ic_volume_white"
                     android:onClick="@{homeScreen::onPressButton}"
                     android:text="@string/volume_button"
@@ -213,9 +202,8 @@
 
                 <Button
                     android:id="@+id/button_weight"
-                    style="@style/type_of_measurement_button"
+                    style="@style/HomeScreenButton.Blue"
                     android:layout_marginTop="@dimen/home_screen_button_margin"
-                    android:background="@drawable/home_screen_blue_button_background"
                     android:drawableStart="@drawable/ic_weight_white"
                     android:onClick="@{homeScreen::onPressButton}"
                     android:text="@string/weight_button"

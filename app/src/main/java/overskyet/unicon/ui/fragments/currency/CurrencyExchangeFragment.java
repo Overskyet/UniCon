@@ -52,8 +52,6 @@ public class CurrencyExchangeFragment extends Fragment {
 
     private String key1, key2;
 
-    //    // Instance of SharedPreferences object for setting up spinners items
-//    private SharedPreferences currencyExchangeFragmentSharedPref;
     private String lastUpdateTime;
     private Map<String, Double> rates;
 
@@ -90,10 +88,6 @@ public class CurrencyExchangeFragment extends Fragment {
 
         initCopyButton();
 
-//        // SharedPreferences instance initialization
-//        currencyExchangeFragmentSharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
-
-        // Clipboard manager initialization
         clipboard = (ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
 
         // Disable input for EditText views
@@ -174,7 +168,6 @@ public class CurrencyExchangeFragment extends Fragment {
     private void initViewModelAndDataBinding() {
         viewModel = new ViewModelProvider(this).get(CurrencyExchangeViewModel.class);
         binding.setCurrencyExchange(this);
-        binding.setCurrencyExchangeViewModel(viewModel);
     }
 
     private CurrencyExchangeFragmentArgs getSafeArgs() {

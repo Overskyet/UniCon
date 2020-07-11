@@ -36,6 +36,33 @@
         <item name="android:textSize">@dimen/home_screen_credits_dialog_body_text_size</item>
     </style>
 
+    <style name="HomeScreenButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/home_screen_buttons_height</item>
+        <item name="android:textColor">@color/home_screen_fragments_buttons_text_color</item>
+        <item name="android:textSize">@dimen/home_screen_buttons_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:drawablePadding">@dimen/home_screen_button_padding_10dp</item>
+        <item name="android:paddingStart">@dimen/home_screen_button_padding_10dp</item>
+        <item name="android:paddingEnd">@dimen/home_screen_button_padding_10dp</item>
+    </style>
+
+    <style name="HomeScreenButton.Red">
+        <item name="android:background">@drawable/home_screen_red_button_background</item>
+    </style>
+
+    <style name="HomeScreenButton.Blue">
+        <item name="android:background">@drawable/home_screen_blue_button_background</item>
+    </style>
+
+    <style name="SpinnerItem">
+        <item name="android:padding">@dimen/spinner_item_padding</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:textSize">@dimen/spinner_item_text_size</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:gravity">start</item>
+    </style>
+
 
 
     <style name="units_conversion_text_view">
@@ -110,33 +137,6 @@
         </item>
         <item name="android:textColor">@color/text_color</item>
         <item name="android:textSize">@dimen/units_conversion_buttons_text_size</item>
-    </style>
-
-    <!--  HOME SCREEN FRAGMENT'S COMPONENTS STYLIZATION  -->
-
-    <!-- Home screen fragment buttons style -->
-    <style name="type_of_measurement_button">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">@dimen/home_screen_buttons_height</item>
-        <item name="android:textColor">@color/home_screen_fragments_buttons_text_color</item>
-        <item name="android:textSize">@dimen/home_screen_buttons_text_size</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:drawablePadding">@dimen/home_screen_button_padding_10dp</item>
-        <item name="android:paddingStart">@dimen/home_screen_button_padding_10dp</item>
-        <item name="android:paddingEnd">@dimen/home_screen_button_padding_10dp</item>
-    </style>
-
-    <!--  SPINNER ITEM STYLIZATION  -->
-
-    <!-- Spinner item style -->
-    <style name="spinner_item">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">@dimen/spinner_item_padding</item>
-        <item name="android:background">?android:attr/selectableItemBackground</item>
-        <item name="android:textSize">@dimen/spinner_item_text_size</item>
-        <item name="android:textColor">@color/text_color</item>
-        <item name="android:gravity">start</item>
     </style>
 
 </resources>
