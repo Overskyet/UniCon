@@ -21,40 +21,44 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/currency_exchange_time_of_update_block"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:orientation="vertical"
+        <RelativeLayout
+            android:id="@+id/last_update_time_container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/units_conversion_screen_background_color"
             android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar_fragment_currency_exchange">
 
             <TextView
-                style="@style/units_conversion_text_view"
+                android:id="@+id/last_update_time_info"
+                style="@style/SpinnerInfoTextView.LastUpdateTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Last update time: " />
 
             <TextView
-                android:id="@+id/currency_exchange_update_time_text_view"
-                style="@style/units_conversion_text_view"
+                android:id="@+id/last_update_time_data"
+                style="@style/SpinnerInfoTextView.LastUpdateTime"
+                android:layout_toEndOf="@id/last_update_time_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 tools:text="No data available" />
-        </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/currency_exchange_image_button_show_keyboard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp"
-            android:src="@android:drawable/arrow_up_float"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            <ImageButton
+                android:id="@+id/last_update_time_hide_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:src="@android:drawable/arrow_up_float" />
+        </RelativeLayout>
 
         <ScrollView
-            android:id="@+id/currency_exchange_scroll_view"
+            android:id="@+id/exchange_rates_scrollView_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:fillViewport="true"
@@ -72,7 +76,9 @@
 
                 <TextView
                     android:id="@+id/textView"
-                    style="@style/units_conversion_text_view"
+                    style="@style/SpinnerInfoTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="@string/from_string"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -86,7 +92,9 @@
 
                 <TextView
                     android:id="@+id/textView5"
-                    style="@style/units_conversion_text_view"
+                    style="@style/SpinnerInfoTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="@string/to_string"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/currency_exchange_spinnerFrom" />

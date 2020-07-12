@@ -38,7 +38,9 @@
 
                 <TextView
                     android:id="@+id/textView"
-                    style="@style/units_conversion_text_view"
+                    style="@style/SpinnerInfoTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="@string/from_string"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -52,7 +54,9 @@
 
                 <TextView
                     android:id="@+id/textView5"
-                    style="@style/units_conversion_text_view"
+                    style="@style/SpinnerInfoTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="@string/to_string"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/units_conversion_spinnerFrom" />

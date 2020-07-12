@@ -31,13 +31,15 @@ public final class CurrencyExchangeViewModel extends ViewModel {
         }
     }
 
+    public void setNotInitialized(boolean flag) { this.isNotInitialized = flag; }
+
     MutableLiveData<Map<String, Double>> getMapOfRates() { return mapOfRates; }
     MutableLiveData<String> getLastUpdateTime() { return lastUpdateTime; }
 
     private void startAsyncTask() {
         loadRates(ECB_URL);
     }
-
+ 
     @SuppressLint("StaticFieldLeak")
     private void loadRates(String url) {
         new AsyncTask<Void, Void, ExchangeRates>() {

@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -24,7 +24,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -59,9 +58,9 @@ public class CurrencyExchangeFragment extends Fragment {
     private ClipboardManager clipboard;
 
     // Widgets
-    private LinearLayout updateTimeContainer;
-    private ScrollView scrollView;
-    private TextView lastUpdateTimeContainer;
+    private RelativeLayout lastUpdateTimeContainer;
+    private ScrollView exchangeRatesScrollViewContainer;
+    private TextView lastUpdateTimeData;
     private EditText editTextInput, editTextOutput;
     private Spinner spinnerFrom, spinnerTo;
 
@@ -123,8 +122,8 @@ public class CurrencyExchangeFragment extends Fragment {
         });
 
         // TODO What am I supposed to do with this Last Update Time block!?
-        final ImageButton showKeyboardButton = binding.currencyExchangeImageButtonShowKeyboard;
-        showKeyboardButton.setOnClickListener(view -> showKeyboard());
+        final ImageButton showKeyboardButton = binding.lastUpdateTimeHideContainer;
+        showKeyboardButton.setOnClickListener(view -> hideLastUpdateTimeInfo());
     }
 
     @Override
@@ -150,15 +149,16 @@ public class CurrencyExchangeFragment extends Fragment {
     }
 
     private void loadData() {
+        // TODO Check network connection
         lastUpdateTime = HomeScreenActivity.getSharedPreferences().getString(Constants.EXCHANGE_RATES_LAST_UPDATE_TIME, getString(R.string.last_update_time_error));
         rates = MapSerializationAndDeserialization.deserializeMap(HomeScreenActivity.getSharedPreferences().getString(Constants.EXCHANGE_RATES_SERIALIZED_MAP, null));
-        lastUpdateTimeContainer.setText(lastUpdateTime);
+        lastUpdateTimeData.setText(lastUpdateTime);
 
         viewModel.initUi();
 
         viewModel.getLastUpdateTime().observe(getViewLifecycleOwner(), lastUpdateTime -> {
             this.lastUpdateTime = lastUpdateTime;
-            lastUpdateTimeContainer.setText(lastUpdateTime);
+            lastUpdateTimeData.setText(lastUpdateTime);
         });
         viewModel.getMapOfRates().observe(getViewLifecycleOwner(), mapOfRates -> {
             this.rates = mapOfRates;
@@ -186,9 +186,9 @@ public class CurrencyExchangeFragment extends Fragment {
     }
 
     private void initWidgets() {
-        updateTimeContainer = binding.currencyExchangeTimeOfUpdateBlock;
-        scrollView = binding.currencyExchangeScrollView;
-        lastUpdateTimeContainer = binding.currencyExchangeUpdateTimeTextView;
+        lastUpdateTimeContainer = binding.lastUpdateTimeContainer;
+        exchangeRatesScrollViewContainer = binding.exchangeRatesScrollViewContainer;
+        lastUpdateTimeData = binding.lastUpdateTimeData;
         editTextInput = binding.currencyExchangeInput;
         editTextOutput = binding.currencyExchangeOutput;
         spinnerFrom = binding.currencyExchangeSpinnerFrom;
@@ -217,10 +217,9 @@ public class CurrencyExchangeFragment extends Fragment {
         NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
     }
 
-    private void showKeyboard() {
-        updateTimeContainer.setVisibility(View.GONE);
+    private void hideLastUpdateTimeInfo() {
         lastUpdateTimeContainer.setVisibility(View.GONE);
-        scrollView.setVisibility(View.VISIBLE);
+        exchangeRatesScrollViewContainer.setVisibility(View.VISIBLE);
     }
 
     public void onClickDigitButtons(View v) {
@@ -232,11 +231,9 @@ public class CurrencyExchangeFragment extends Fragment {
 
     public void onClickFunctionButtons(View v) {
         switch (v.getId()) {
-            // Dot block
             case R.id.button_dot:
                 setDotSign();
                 break;
-            // Delete and Clear block
             case R.id.button_delete:
                 checkEmptyInputField();
                 checkDigits();
@@ -245,16 +242,12 @@ public class CurrencyExchangeFragment extends Fragment {
                 editTextInput.getText().clear();
                 editTextOutput.getText().clear();
                 break;
-            //TODO Handle refresh action
-            // Refresh block
             case R.id.button_refresh:
-                startRefresh();
+                reloadData();
                 break;
-            // Reverse block
             case R.id.button_reverse:
                 reverse();
                 break;
-            // Default block
             default:
                 break;
         }
@@ -278,9 +271,9 @@ public class CurrencyExchangeFragment extends Fragment {
         }
     }
 
-    //TODO Handle refresh action
-    private void startRefresh() {
-
+    private void reloadData() {
+        viewModel.setNotInitialized(true);
+        viewModel.initUi();
     }
 
     private void checkDigits() {

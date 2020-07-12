@@ -63,16 +63,19 @@
         <item name="android:gravity">start</item>
     </style>
 
-
-
-    <style name="units_conversion_text_view">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="SpinnerInfoTextView">
         <item name="android:layout_marginStart">@dimen/units_conversion_text_view_marginStart</item>
         <item name="android:layout_marginTop">@dimen/units_conversion_text_view_marginTop</item>
         <item name="android:textColor">@color/text_color</item>
         <item name="android:textSize">@dimen/units_conversion_text_size</item>
     </style>
+
+    <style name="SpinnerInfoTextView.LastUpdateTime">
+        <item name="android:gravity">center</item>
+    </style>
+
+
+
     <!-- activity_units_conversion edit_text input style -->
     <style name="units_conversion_edit_text_input">
         <item name="android:layout_width">0dp</item>
