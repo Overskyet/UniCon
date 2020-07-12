@@ -1,4 +1,4 @@
-package overskyet.unicon.ratesconversion;
+package overskyet.unicon.utils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

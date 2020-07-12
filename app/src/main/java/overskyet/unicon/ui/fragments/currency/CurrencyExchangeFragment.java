@@ -39,7 +39,7 @@ import java.util.regex.Pattern;
 import overskyet.unicon.Constants;
 import overskyet.unicon.R;
 import overskyet.unicon.databinding.FragmentCurrencyExchangeBinding;
-import overskyet.unicon.ratesconversion.CurrencyConverter;
+import overskyet.unicon.utils.CurrencyConverter;
 import overskyet.unicon.ui.activity.HomeScreenActivity;
 import overskyet.unicon.utils.MapSerializationAndDeserialization;
 
@@ -83,9 +83,9 @@ public class CurrencyExchangeFragment extends Fragment {
 
         initWidgets();
 
-        loadData();
-
         initCopyButton();
+
+        loadData();
 
         clipboard = (ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
 
@@ -195,15 +195,6 @@ public class CurrencyExchangeFragment extends Fragment {
         spinnerTo = binding.currencyExchangeSpinnerTo;
     }
 
-    private void initCopyButton() {
-        final Button copyButton = binding.buttonCopy;
-        copyButton.setOnClickListener(view -> copy());
-        copyButton.setOnLongClickListener(view -> {
-            paste();
-            return true;
-        });
-    }
-
     private void initToolbar(int icon) {
         Toolbar toolbar = (Toolbar) binding.toolbarFragmentCurrencyExchange;
 
@@ -239,8 +230,7 @@ public class CurrencyExchangeFragment extends Fragment {
                 checkDigits();
                 break;
             case R.id.button_clear:
-                editTextInput.getText().clear();
-                editTextOutput.getText().clear();
+                clear();
                 break;
             case R.id.button_refresh:
                 reloadData();
@@ -251,6 +241,15 @@ public class CurrencyExchangeFragment extends Fragment {
             default:
                 break;
         }
+    }
+
+    private void initCopyButton() {
+        Button button = binding.buttonCopy;
+        button.setOnClickListener( view -> copy());
+        button.setOnLongClickListener(view -> {
+            paste();
+            return true;
+        });
     }
 
     private void setDotSign() {
@@ -278,7 +277,6 @@ public class CurrencyExchangeFragment extends Fragment {
 
     private void checkDigits() {
         String inputText = editTextInput.getText().toString();
-        //Matcher matcher = Pattern.compile("^-|\\.|-\\.$").matcher(inputText);
         Matcher matcher = Pattern.compile(getResources().getString(R.string.digits_regexp)).matcher(inputText);
         if (matcher.matches() || inputText.isEmpty()) {
             editTextOutput.getText().clear();
@@ -289,7 +287,6 @@ public class CurrencyExchangeFragment extends Fragment {
 
     private void checkAmountOfDigits() {
         String textInput = editTextInput.getText().toString();
-        //Matcher matcher = Pattern.compile("^[0-9\\-.]{0,30}(\\.\\d{3})$").matcher(textInput);
         Matcher matcher = Pattern.compile(getResources().getString(R.string.max_amount_of_chars_regexp)).matcher(textInput);
         if (textInput.length() > 30 || matcher.matches()) {
             editTextInput.setText(textInput.substring(0, textInput.length() - 1));
@@ -303,6 +300,11 @@ public class CurrencyExchangeFragment extends Fragment {
             editTextInput.setText(textInput.substring(0, 30));
             showInfoText(str);
         }
+    }
+
+    private void clear() {
+        editTextInput.getText().clear();
+        editTextOutput.getText().clear();
     }
 
     private void copy() {

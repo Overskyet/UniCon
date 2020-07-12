@@ -32,7 +32,9 @@ import java.util.regex.Pattern;
 
 import overskyet.unicon.R;
 import overskyet.unicon.databinding.FragmentUnitsConversionBinding;
-import overskyet.unicon.unitsconversion.UnitsConverter;
+import overskyet.unicon.ui.activity.HomeScreenActivity;
+import overskyet.unicon.ui.fragments.currency.CurrencyExchangeFragmentArgs;
+import overskyet.unicon.utils.UnitsConverter;
 
 public class UnitsConversionFragment extends Fragment {
 
@@ -41,9 +43,7 @@ public class UnitsConversionFragment extends Fragment {
 
     // Key values for saving preferences and conversion() method
     private String key1, key2;
-
-    // Instance of SharedPreferences object for setting up spinners items
-    private SharedPreferences spinnersPosition;
+    private String[] spinnerItems;
 
     // Clipboard manager for copy and paste operations
     private ClipboardManager clipboard;
@@ -73,26 +73,14 @@ public class UnitsConversionFragment extends Fragment {
 
         binding.setUnitsConversion(this);
 
-        // Getting arguments from bundle
-        UnitsConversionFragmentArgs args = UnitsConversionFragmentArgs.fromBundle(requireArguments());
+        initUsingSafeArgs(getSafeArgs());
 
-        // Initialize fragment toolbar
-        initToolbar(args.getToolbarImageId());
+        initWidgets();
 
-        // Keys and spinner items array initialization
-        key1 = args.getKey1();
-        key2 = args.getKey2();
-        String[] spinnerItems = args.getSpinnerItemsArray();
+        initCopyButton();
 
         // Clipboard manager initialization
         clipboard = (ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
-
-        // SharedPreferences instance initialization
-        spinnersPosition = requireActivity().getPreferences(Context.MODE_PRIVATE);
-
-        // Widget initialization
-        editTextInput = binding.inputConverter;
-        editTextOutput = binding.outputConverter;
 
         // Disable input option for EditText views
         editTextInput.setKeyListener(null);
@@ -127,31 +115,41 @@ public class UnitsConversionFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-
-        final Button copyButton = binding.buttonCopy;
-        copyButton.setOnClickListener(view -> copy());
-        copyButton.setOnLongClickListener(view -> {
-            paste();
-            return true;
-        });
     }
 
     @Override
     public void onResume() {
-        spinnerFrom.setSelection(spinnersPosition.getInt(key1, 0));
-        spinnerTo.setSelection(spinnersPosition.getInt(key2, 1));
+        spinnerFrom.setSelection(HomeScreenActivity.getSharedPreferences().getInt(key1, 0));
+        spinnerTo.setSelection(HomeScreenActivity.getSharedPreferences().getInt(key2, 1));
         super.onResume();
     }
 
     @Override
     public void onPause() {
-        spinnersPosition.edit()
+        HomeScreenActivity.getSharedPreferences().edit()
                 .remove(key1)
                 .remove(key2)
                 .putInt(key1, spinnerFrom.getSelectedItemPosition())
                 .putInt(key2, spinnerTo.getSelectedItemPosition())
                 .apply();
         super.onPause();
+    }
+
+    private UnitsConversionFragmentArgs getSafeArgs() {
+        return UnitsConversionFragmentArgs.fromBundle(requireArguments());
+    }
+
+    private void initUsingSafeArgs(UnitsConversionFragmentArgs args) {
+        initToolbar(args.getToolbarImageId());
+
+        key1 = args.getKey1();
+        key2 = args.getKey2();
+        spinnerItems = args.getSpinnerItemsArray();
+    }
+
+    private void initWidgets() {
+        editTextInput = binding.inputConverter;
+        editTextOutput = binding.outputConverter;
     }
 
     private void initToolbar(int icon) {
@@ -176,32 +174,35 @@ public class UnitsConversionFragment extends Fragment {
 
     public void onClickFunctionButtons(View v) {
         switch (v.getId()) {
-            // Dot block
             case R.id.button_dot:
                 setDotSign();
                 break;
-            // Delete and Clear block
             case R.id.button_delete:
                 checkEmptyInputField();
                 checkDigits();
                 break;
             case R.id.button_clear:
-                editTextInput.getText().clear();
-                editTextOutput.getText().clear();
+                clear();
                 break;
-            // Sign block
             case R.id.button_sign:
                 setMinusSign();
                 checkDigits();
                 break;
-            // Reverse block
             case R.id.button_reverse:
                 reverse();
                 break;
-            // Default block
             default:
                 break;
         }
+    }
+
+    private void initCopyButton() {
+        Button button = binding.buttonCopy;
+        button.setOnClickListener( view -> copy());
+        button.setOnLongClickListener(view -> {
+            paste();
+            return true;
+        });
     }
 
     private void setDotSign() {
@@ -256,6 +257,11 @@ public class UnitsConversionFragment extends Fragment {
             editTextInput.setText(textInput.substring(0, 30));
             showInfoText(str);
         }
+    }
+
+    private void clear() {
+        editTextInput.getText().clear();
+        editTextOutput.getText().clear();
     }
 
     private void copy() {

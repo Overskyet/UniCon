@@ -74,72 +74,53 @@
         <item name="android:gravity">center</item>
     </style>
 
-
-
-    <!-- activity_units_conversion edit_text input style -->
-    <style name="units_conversion_edit_text_input">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginBottom">@dimen/units_conversion_edit_text_marginBottom
-        </item>
-        <item name="android:backgroundTint">@color/hint_color</item>
-        <item name="android:enabled">false</item>
-        <item name="android:inputType">none</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:textAlignment">viewEnd</item>
-        <item name="android:textColor">@color/text_color</item>
-        <item name="android:textSize">@dimen/units_conversion_text_size</item>
+    <style name="ScrollView">
+        <item name="android:fillViewport">true</item>
+        <item name="android:scrollbars">none</item>
     </style>
-    <!-- activity_units_conversion edit_text output style -->
-    <style name="units_conversion_edit_text_output">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginEnd">@dimen/units_conversion_edit_text_marginEnd</item>
-        <item name="android:layout_marginBottom">@dimen/units_conversion_edit_text_marginBottom
-        </item>
-        <item name="android:background">@android:color/transparent</item>
-        <item name="android:enabled">false</item>
-        <item name="android:inputType">none</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:hint">@string/output_hint</item>
-        <item name="android:textColorHint">@color/hint_color</item>
-        <item name="android:textAlignment">viewEnd</item>
+
+    <style name="KeyboardButton">
+        <item name="android:layout_margin">@dimen/units_conversion_buttons_margin</item>
+        <item name="android:layout_weight">1</item>
         <item name="android:textColor">@color/text_color</item>
-        <item name="android:textSize">@dimen/units_conversion_text_size</item>
+        <item name="android:textSize">@dimen/units_conversion_buttons_text_size</item>
     </style>
-    <!-- activity_units_conversion spinners style -->
-    <style name="units_conversion_spinners">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
+
+    <style name="KeyboardButton.Digit">
+        <item name="android:background">@drawable/units_conversion_screen_digit_button_background</item>
+    </style>
+
+    <style name="KeyboardButton.Func">
+        <item name="android:background">@drawable/units_conversion_screen_func_button_background</item>
+    </style>
+
+    <style name="SpinnerContainer">
         <item name="android:layout_margin">@dimen/units_conversion_spinner_margin</item>
         <item name="android:backgroundTint">@color/text_color</item>
         <item name="android:dropDownWidth">match_parent</item>
         <item name="android:spinnerMode">dropdown</item>
-        <item name="android:popupBackground">
-            @color/units_conversion_screen_spinner_popup_background_color
-        </item>
+        <item name="android:popupBackground">@color/units_conversion_screen_spinner_popup_background_color</item>
     </style>
-    <!-- activity_units_conversion_digit_buttons style -->
-    <style name="units_conversion_digit_buttons">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_margin">@dimen/units_conversion_buttons_margin</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:background">@drawable/units_conversion_screen_digit_button_background
-        </item>
+
+    <style name="EditText">
+        <item name="android:layout_marginBottom">@dimen/units_conversion_edit_text_marginBottom</item>
+        <item name="android:enabled">false</item>
+        <item name="android:inputType">none</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textAlignment">viewEnd</item>
         <item name="android:textColor">@color/text_color</item>
-        <item name="android:textSize">@dimen/units_conversion_buttons_text_size</item>
+        <item name="android:textSize">@dimen/units_conversion_text_size</item>
     </style>
-    <!-- activity_units_conversion functional buttons style -->
-    <style name="units_conversion_func_buttons">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_margin">@dimen/units_conversion_buttons_margin</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:background">@drawable/units_conversion_screen_func_button_background
-        </item>
-        <item name="android:textColor">@color/text_color</item>
-        <item name="android:textSize">@dimen/units_conversion_buttons_text_size</item>
+
+    <style name="EditText.InputField">
+        <item name="android:backgroundTint">@color/hint_color</item>
+    </style>
+
+    <style name="EditText.OutputField">
+        <item name="android:layout_marginEnd">@dimen/units_conversion_edit_text_marginEnd</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:hint">@string/output_hint</item>
+        <item name="android:textColorHint">@color/hint_color</item>
     </style>
 
 </resources>

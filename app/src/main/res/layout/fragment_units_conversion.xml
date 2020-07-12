@@ -22,10 +22,9 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ScrollView
+            style="@style/ScrollView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:fillViewport="true"
-            android:scrollbars="none"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +46,9 @@
 
                 <Spinner
                     android:id="@+id/units_conversion_spinnerFrom"
-                    style="@style/units_conversion_spinners"
+                    style="@style/SpinnerContainer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -63,7 +64,9 @@
 
                 <Spinner
                     android:id="@+id/units_conversion_spinnerTo"
-                    style="@style/units_conversion_spinners"
+                    style="@style/SpinnerContainer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     app:layout_constraintBottom_toTopOf="@+id/input_converter"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -73,7 +76,9 @@
 
                 <EditText
                     android:id="@+id/input_converter"
-                    style="@style/units_conversion_edit_text_input"
+                    style="@style/EditText.InputField"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     app:layout_constraintBottom_toTopOf="@+id/output_converter"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
@@ -81,7 +86,9 @@
 
                 <EditText
                     android:id="@+id/output_converter"
-                    style="@style/units_conversion_edit_text_output"
+                    style="@style/EditText.OutputField"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     app:layout_constraintBottom_toTopOf="@+id/divider"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -108,7 +115,9 @@
 
                     <Button
                         android:id="@+id/button_clear"
-                        style="@style/units_conversion_func_buttons"
+                        style="@style/KeyboardButton.Func"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:onClick="@{unitsConversion::onClickFunctionButtons}"
                         android:text="@string/button_clear"
                         tools:layout_editor_absoluteX="98dp"
@@ -116,14 +125,18 @@
 
                     <Button
                         android:id="@+id/button_sign"
-                        style="@style/units_conversion_func_buttons"
+                        style="@style/KeyboardButton.Func"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:onClick="@{unitsConversion::onClickFunctionButtons}"                        android:text="@string/button_plus_minus"
                         tools:layout_editor_absoluteX="153dp"
                         tools:layout_editor_absoluteY="518dp" />
 
                     <Button
                         android:id="@+id/button_delete"
-                        style="@style/units_conversion_func_buttons"
+                        style="@style/KeyboardButton.Func"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:onClick="@{unitsConversion::onClickFunctionButtons}"
                         android:text="@string/button_delete"
                         tools:layout_editor_absoluteX="209dp"
@@ -131,7 +144,9 @@
 
                     <Button
                         android:id="@+id/button_reverse"
-                        style="@style/units_conversion_func_buttons"
+                        style="@style/KeyboardButton.Func"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:onClick="@{unitsConversion::onClickFunctionButtons}"
                         android:text="@string/button_reverse"
                         tools:layout_editor_absoluteX="268dp"
@@ -150,7 +165,9 @@
 
                     <Button
                         android:id="@+id/button_7"
-                        style="@style/units_conversion_digit_buttons"
+                        style="@style/KeyboardButton.Digit"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:onClick="@{unitsConversion::onClickDigitButtons}"
                         android:text="@string/button_7"
                         tools:layout_editor_absoluteX="83dp"
@@ -158,7 +175,9 @@
 
                     <Button
                         android:id="@+id/button_8"
-                        style="@style/units_conversion_digit_buttons"
+                        style="@style/KeyboardButton.Digit"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:onClick="@{unitsConversion::onClickDigitButtons}"
                         android:text="@string/button_8"
                         tools:layout_editor_absoluteX="161dp"
@@ -166,7 +185,9 @@
 
                     <Button
                         android:id="@+id/button_9"
-                        style="@style/units_conversion_digit_buttons"
+                        style="@style/KeyboardButton.Digit"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:onClick="@{unitsConversion::onClickDigitButtons}"
                         android:text="@string/button_9"
                         tools:layout_editor_absoluteX="235dp"
@@ -174,7 +195,9 @@
 
                     <Button
                         android:id="@+id/button_copy"
-                        style="@style/units_conversion_func_buttons"
+                        style="@style/KeyboardButton.Func"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:text="@string/button_copy"
                         tools:layout_editor_absoluteX="306dp"
                         tools:layout_editor_absoluteY="432dp" />
@@ -192,7 +215,9 @@
 
                     <Button
                         android:id="@+id/button_4"
-                        style="@style/units_conversion_digit_buttons"
+                        style="@style/KeyboardButton.Digit"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:onClick="@{unitsConversion::onClickDigitButtons}"
                         android:text="@string/button_4"
                         tools:layout_editor_absoluteX="83dp"
@@ -200,7 +225,9 @@
 
                     <Button
                         android:id="@+id/button_5"
-                        style="@style/units_conversion_digit_buttons"
+                        style="@style/KeyboardButton.Digit"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:onClick="@{unitsConversion::onClickDigitButtons}"
                         android:text="@string/button_5"
                         tools:layout_editor_absoluteX="171dp"
@@ -208,7 +235,9 @@
 
                     <Button
                         android:id="@+id/button_6"
-                        style="@style/units_conversion_digit_buttons"
+                        style="@style/KeyboardButton.Digit"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:onClick="@{unitsConversion::onClickDigitButtons}"
                         android:text="@string/button_6"
                         tools:layout_editor_absoluteX="242dp"
@@ -216,7 +245,9 @@
 
                     <Button
                         android:id="@+id/button_dot"
-                        style="@style/units_conversion_digit_buttons"
+                        style="@style/KeyboardButton.Digit"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:onClick="@{unitsConversion::onClickFunctionButtons}"
                         android:text="@string/button_dot"
                         tools:layout_editor_absoluteX="329dp"
@@ -235,7 +266,9 @@
 
                     <Button
                         android:id="@+id/button_1"
-                        style="@style/units_conversion_digit_buttons"
+                        style="@style/KeyboardButton.Digit"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:onClick="@{unitsConversion::onClickDigitButtons}"
                         android:text="@string/button_1"
                         tools:layout_editor_absoluteX="25dp"
@@ -243,7 +276,9 @@
 
                     <Button
                         android:id="@+id/button_2"
-                        style="@style/units_conversion_digit_buttons"
+                        style="@style/KeyboardButton.Digit"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:onClick="@{unitsConversion::onClickDigitButtons}"
                         android:text="@string/button_2"
                         tools:layout_editor_absoluteX="131dp"
@@ -251,7 +286,9 @@
 
                     <Button
                         android:id="@+id/button_3"
-                        style="@style/units_conversion_digit_buttons"
+                        style="@style/KeyboardButton.Digit"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:onClick="@{unitsConversion::onClickDigitButtons}"
                         android:text="@string/button_3"
                         tools:layout_editor_absoluteX="242dp"
@@ -259,7 +296,9 @@
 
                     <Button
                         android:id="@+id/button_0"
-                        style="@style/units_conversion_digit_buttons"
+                        style="@style/KeyboardButton.Digit"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:onClick="@{unitsConversion::onClickDigitButtons}"
                         android:text="@string/button_0"
                         tools:layout_editor_absoluteX="347dp"
