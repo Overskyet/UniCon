@@ -27,11 +27,11 @@ public final class ExchangeRatesHttpRequest {
 
     private ExchangeRatesHttpRequest() { }
 
-    public ExchangeRates loadData(URL url, ParseType type) {
+    public ExchangeRates loadData(URL url, ParseType type) throws BadResponseCodeException {
         return makeHttpRequest(url, type);
     }
 
-    private ExchangeRates makeHttpRequest(URL url, ParseType type) {
+    private ExchangeRates makeHttpRequest(URL url, ParseType type) throws BadResponseCodeException {
         Parser parser = ParserFactoryImpl.getInstance().createParser(type);
         if (parser == null) return null;
         ExchangeRates exchangeRates = null;
@@ -46,7 +46,7 @@ public final class ExchangeRatesHttpRequest {
             if (urlConnection.getResponseCode() != 200) {
                 Log.e(TAG, "makeHttpRequest: response code is " + urlConnection.getResponseCode());
                 urlConnection.disconnect();
-                return null;
+                throw new BadResponseCodeException(String.valueOf(urlConnection.getResponseCode()));
             }
             inputStream = urlConnection.getInputStream();
             exchangeRates = parser.parse(inputStream);

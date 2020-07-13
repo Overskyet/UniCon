@@ -11,7 +11,6 @@ import overskyet.unicon.R;
 
 public class HomeScreenActivity extends AppCompatActivity {
 
-    // TODO Runtime exception incoming?
     private static SharedPreferences sharedPreferences;
 
     @Override
