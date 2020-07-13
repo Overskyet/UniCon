@@ -20,7 +20,7 @@ public final class CurrencyExchangeViewModel extends ViewModel {
 
     private static final String TAG = CurrencyExchangeViewModel.class.getSimpleName();
 
-    private static final String ECB_URL = "https://www.ecb.europa.eu/stats/eurofxref/euroxref-daily.xml";
+    private static final String ECB_URL = "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml";
 
     private boolean isNotInitialized = true;
 

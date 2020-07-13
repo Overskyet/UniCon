@@ -4,6 +4,9 @@ import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +45,7 @@ import overskyet.unicon.databinding.FragmentCurrencyExchangeBinding;
 import overskyet.unicon.utils.CurrencyConverter;
 import overskyet.unicon.ui.activity.HomeScreenActivity;
 import overskyet.unicon.utils.MapSerializationAndDeserialization;
+import overskyet.unicon.utils.NetworkConnection;
 
 public class CurrencyExchangeFragment extends Fragment {
 
@@ -85,41 +89,17 @@ public class CurrencyExchangeFragment extends Fragment {
 
         initCopyButton();
 
+        initClipboard();
+
+        disableEditText();
+
+        initSpinners();
+
+        setupSpinnerListeners();
+
+        initUi();
+
         loadData();
-
-        clipboard = (ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
-
-        // Disable input for EditText views
-        editTextInput.setKeyListener(null);
-        editTextOutput.setKeyListener(null);
-
-        // Spinners block initialization
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireActivity(), R.layout.spinner_item, getResources().getStringArray(R.array.currencies));
-        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        spinnerFrom.setAdapter(adapter);
-        spinnerTo.setAdapter(adapter);
-
-        // Spinners listeners
-        spinnerFrom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                checkDigits();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-        spinnerTo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                checkDigits();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
 
         // TODO What am I supposed to do with this Last Update Time block!?
         final ImageButton showKeyboardButton = binding.lastUpdateTimeHideContainer;
@@ -148,14 +128,13 @@ public class CurrencyExchangeFragment extends Fragment {
         super.onPause();
     }
 
-    private void loadData() {
-        // TODO Check network connection
+    private void initUi() {
         lastUpdateTime = HomeScreenActivity.getSharedPreferences().getString(Constants.EXCHANGE_RATES_LAST_UPDATE_TIME, getString(R.string.last_update_time_error));
         rates = MapSerializationAndDeserialization.deserializeMap(HomeScreenActivity.getSharedPreferences().getString(Constants.EXCHANGE_RATES_SERIALIZED_MAP, null));
         lastUpdateTimeData.setText(lastUpdateTime);
+    }
 
-        viewModel.initUi();
-
+    private void setupViewModelObservers() {
         viewModel.getLastUpdateTime().observe(getViewLifecycleOwner(), lastUpdateTime -> {
             this.lastUpdateTime = lastUpdateTime;
             lastUpdateTimeData.setText(lastUpdateTime);
@@ -165,16 +144,32 @@ public class CurrencyExchangeFragment extends Fragment {
         });
     }
 
+    private void loadData() {
+        if (NetworkConnection.hasInternetConnection(requireContext())) {
+            viewModel.initUi();
+            setupViewModelObservers();
+        } else {
+            //TODO Add new TextView "internetConnectionError" to lastUpdateTime container
+        }
+    }
+
+    private void reloadData() {
+        // TODO Add reopen of TopSheetDialog
+        viewModel.setNotInitialized(true);
+        loadData();
+    }
+
     private void initViewModelAndDataBinding() {
         viewModel = new ViewModelProvider(this).get(CurrencyExchangeViewModel.class);
         binding.setCurrencyExchange(this);
     }
 
+    @NonNull
     private CurrencyExchangeFragmentArgs getSafeArgs() {
         return CurrencyExchangeFragmentArgs.fromBundle(requireArguments());
     }
 
-    private void initUsingSafeArgs(CurrencyExchangeFragmentArgs args) {
+    private void initUsingSafeArgs(@NonNull CurrencyExchangeFragmentArgs args) {
 
         // Initialize fragment toolbar
         initToolbar(args.getToolbarImageId());
@@ -208,6 +203,47 @@ public class CurrencyExchangeFragment extends Fragment {
         NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
     }
 
+    private void setupSpinnerListeners() {
+        // Spinners listeners
+        spinnerFrom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                checkDigits();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        spinnerTo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                checkDigits();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+    }
+
+    private void initSpinners() {
+        // Spinners block initialization
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireActivity(), R.layout.spinner_item, getResources().getStringArray(R.array.currencies));
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spinnerFrom.setAdapter(adapter);
+        spinnerTo.setAdapter(adapter);
+    }
+
+    private void disableEditText() {
+        editTextInput.setKeyListener(null);
+        editTextOutput.setKeyListener(null);
+    }
+
+    private void initClipboard() {
+        clipboard = (ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+    }
+
     private void hideLastUpdateTimeInfo() {
         lastUpdateTimeContainer.setVisibility(View.GONE);
         exchangeRatesScrollViewContainer.setVisibility(View.VISIBLE);
@@ -220,7 +256,7 @@ public class CurrencyExchangeFragment extends Fragment {
         convert();
     }
 
-    public void onClickFunctionButtons(View v) {
+    public void onClickFunctionButtons(@NonNull View v) {
         switch (v.getId()) {
             case R.id.button_dot:
                 setDotSign();
@@ -245,7 +281,7 @@ public class CurrencyExchangeFragment extends Fragment {
 
     private void initCopyButton() {
         Button button = binding.buttonCopy;
-        button.setOnClickListener( view -> copy());
+        button.setOnClickListener(view -> copy());
         button.setOnLongClickListener(view -> {
             paste();
             return true;
@@ -268,11 +304,6 @@ public class CurrencyExchangeFragment extends Fragment {
         } else {
             editTextInput.setText(text.substring(0, text.length() - 1));
         }
-    }
-
-    private void reloadData() {
-        viewModel.setNotInitialized(true);
-        viewModel.initUi();
     }
 
     private void checkDigits() {

@@ -71,7 +71,7 @@ public class UnitsConversionFragment extends Fragment {
                               @Nullable Bundle savedInstanceState)
     {
 
-        binding.setUnitsConversion(this);
+        initDataBinding();
 
         initUsingSafeArgs(getSafeArgs());
 
@@ -79,42 +79,14 @@ public class UnitsConversionFragment extends Fragment {
 
         initCopyButton();
 
-        // Clipboard manager initialization
-        clipboard = (ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+        initClipboard();
 
-        // Disable input option for EditText views
-        editTextInput.setKeyListener(null);
-        editTextOutput.setKeyListener(null);
+        disableEditText();
 
-        // Spinners block initialization
-        spinnerFrom = binding.unitsConversionSpinnerFrom;
-        spinnerTo = binding.unitsConversionSpinnerTo;
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireActivity(), R.layout.spinner_item, spinnerItems);
-        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        spinnerFrom.setAdapter(adapter);
-        spinnerTo.setAdapter(adapter);
+        initSpinners();
 
-        // Spinners listeners
-        spinnerFrom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                checkDigits();
-            }
+        setupSpinnerListeners();
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-        spinnerTo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                checkDigits();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
     }
 
     @Override
@@ -133,6 +105,10 @@ public class UnitsConversionFragment extends Fragment {
                 .putInt(key2, spinnerTo.getSelectedItemPosition())
                 .apply();
         super.onPause();
+    }
+
+    private void initDataBinding() {
+        binding.setUnitsConversion(this);
     }
 
     private UnitsConversionFragmentArgs getSafeArgs() {
@@ -163,6 +139,47 @@ public class UnitsConversionFragment extends Fragment {
         toolbarImage.setImageResource(icon);
 
         NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
+    }
+
+    private void disableEditText() {
+        editTextInput.setKeyListener(null);
+        editTextOutput.setKeyListener(null);
+    }
+
+    private void initClipboard() {
+        clipboard = (ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+    }
+
+    private void initSpinners() {
+        spinnerFrom = binding.unitsConversionSpinnerFrom;
+        spinnerTo = binding.unitsConversionSpinnerTo;
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireActivity(), R.layout.spinner_item, spinnerItems);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spinnerFrom.setAdapter(adapter);
+        spinnerTo.setAdapter(adapter);
+    }
+
+    private void setupSpinnerListeners() {
+        spinnerFrom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                checkDigits();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        spinnerTo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                checkDigits();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
     }
 
     public void onClickDigitButtons(View v) {
