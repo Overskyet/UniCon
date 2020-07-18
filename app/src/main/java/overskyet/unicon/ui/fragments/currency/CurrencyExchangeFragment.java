@@ -4,9 +4,6 @@ import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkCapabilities;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,10 +12,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +21,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -46,6 +42,7 @@ import overskyet.unicon.utils.CurrencyConverter;
 import overskyet.unicon.ui.activity.HomeScreenActivity;
 import overskyet.unicon.utils.MapSerializationAndDeserialization;
 import overskyet.unicon.utils.NetworkConnection;
+import overskyet.unicon.utils.view.TopSheetBehavior;
 
 public class CurrencyExchangeFragment extends Fragment {
 
@@ -62,8 +59,7 @@ public class CurrencyExchangeFragment extends Fragment {
     private ClipboardManager clipboard;
 
     // Widgets
-    private RelativeLayout lastUpdateTimeContainer;
-    private ScrollView exchangeRatesScrollViewContainer;
+    private ConstraintLayout topSheetContainer;
     private TextView lastUpdateTimeData;
     private EditText editTextInput, editTextOutput;
     private Spinner spinnerFrom, spinnerTo;
@@ -87,6 +83,8 @@ public class CurrencyExchangeFragment extends Fragment {
 
         initWidgets();
 
+        showTopSheet();
+
         initCopyButton();
 
         initClipboard();
@@ -100,10 +98,6 @@ public class CurrencyExchangeFragment extends Fragment {
         initUi();
 
         loadData();
-
-        // TODO What am I supposed to do with this Last Update Time block!?
-        final ImageButton showKeyboardButton = binding.lastUpdateTimeHideContainer;
-        showKeyboardButton.setOnClickListener(view -> hideLastUpdateTimeInfo());
     }
 
     @Override
@@ -181,13 +175,16 @@ public class CurrencyExchangeFragment extends Fragment {
     }
 
     private void initWidgets() {
-        lastUpdateTimeContainer = binding.lastUpdateTimeContainer;
-        exchangeRatesScrollViewContainer = binding.exchangeRatesScrollViewContainer;
-        lastUpdateTimeData = binding.lastUpdateTimeData;
+        topSheetContainer = binding.includeTopSheetContainer.findViewById(R.id.topSheet_constraintLayout);
+        lastUpdateTimeData = binding.includeTopSheetContainer.findViewById(R.id.last_update_time_date);
         editTextInput = binding.currencyExchangeInput;
         editTextOutput = binding.currencyExchangeOutput;
         spinnerFrom = binding.currencyExchangeSpinnerFrom;
         spinnerTo = binding.currencyExchangeSpinnerTo;
+    }
+
+    private void showTopSheet() {
+        TopSheetBehavior.from(topSheetContainer).setState(TopSheetBehavior.STATE_EXPANDED);
     }
 
     private void initToolbar(int icon) {
@@ -204,7 +201,6 @@ public class CurrencyExchangeFragment extends Fragment {
     }
 
     private void setupSpinnerListeners() {
-        // Spinners listeners
         spinnerFrom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -228,7 +224,6 @@ public class CurrencyExchangeFragment extends Fragment {
     }
 
     private void initSpinners() {
-        // Spinners block initialization
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireActivity(), R.layout.spinner_item, getResources().getStringArray(R.array.currencies));
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinnerFrom.setAdapter(adapter);
@@ -242,11 +237,6 @@ public class CurrencyExchangeFragment extends Fragment {
 
     private void initClipboard() {
         clipboard = (ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
-    }
-
-    private void hideLastUpdateTimeInfo() {
-        lastUpdateTimeContainer.setVisibility(View.GONE);
-        exchangeRatesScrollViewContainer.setVisibility(View.VISIBLE);
     }
 
     public void onClickDigitButtons(View v) {

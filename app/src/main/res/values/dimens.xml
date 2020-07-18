@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- ACTIVITY_UNITS_CONVERSION DIMENS -->
     <dimen name="units_conversion_button_container_height">65dp</dimen>
     <dimen name="units_conversion_buttons_margin">0.5dp</dimen>
     <dimen name="units_conversion_buttons_text_size">25sp</dimen>
@@ -17,7 +16,6 @@
 
     <dimen name="units_conversion_text_size">20sp</dimen>
 
-    <!-- HOME_SCREEN FRAGMENTS DIMENS -->
     <dimen name="home_screen_buttons_height">60dp</dimen>
     <dimen name="home_screen_buttons_text_size">15sp</dimen>
     <dimen name="home_screen_button_padding_10dp">10dp</dimen>
@@ -28,8 +26,11 @@
     <dimen name="home_screen_credits_dialog_header_text_size">20sp</dimen>
     <dimen name="home_screen_credits_dialog_body_text_size">18sp</dimen>
 
-    <!-- SPINNER ITEM DIMENS -->
     <dimen name="spinner_item_text_size">16sp</dimen>
     <dimen name="spinner_item_padding">6dp</dimen>
+
+    <dimen name="last_update_time_info_marginTop">16dp</dimen>
+    <dimen name="last_update_time_date_marginTop">8dp</dimen>
+    <dimen name="last_update_time_date_marginBottom">32dp</dimen>
 
 </resources>

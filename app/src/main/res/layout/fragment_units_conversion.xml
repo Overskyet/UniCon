@@ -37,7 +37,7 @@
 
                 <TextView
                     android:id="@+id/textView"
-                    style="@style/SpinnerInfoTextView"
+                    style="@style/ConversionTextView.SpinnerInfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/from_string"
@@ -55,7 +55,7 @@
 
                 <TextView
                     android:id="@+id/textView5"
-                    style="@style/SpinnerInfoTextView"
+                    style="@style/ConversionTextView.SpinnerInfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/to_string"

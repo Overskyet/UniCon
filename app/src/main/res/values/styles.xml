@@ -17,7 +17,6 @@
 
     <style name="AppToolbarImageView">
         <item name="android:layout_gravity">center</item>
-        <item name="android:layout_marginEnd">@dimen/home_screen_button_padding_10dp</item>
     </style>
 
     <style name="CreditsHeader">
@@ -63,15 +62,27 @@
         <item name="android:gravity">start</item>
     </style>
 
-    <style name="SpinnerInfoTextView">
-        <item name="android:layout_marginStart">@dimen/units_conversion_text_view_marginStart</item>
-        <item name="android:layout_marginTop">@dimen/units_conversion_text_view_marginTop</item>
+    <style name="ConversionTextView">
         <item name="android:textColor">@color/text_color</item>
         <item name="android:textSize">@dimen/units_conversion_text_size</item>
     </style>
 
-    <style name="SpinnerInfoTextView.LastUpdateTime">
+    <style name="ConversionTextView.SpinnerInfo">
+        <item name="android:layout_marginStart">@dimen/units_conversion_text_view_marginStart</item>
+        <item name="android:layout_marginTop">@dimen/units_conversion_text_view_marginTop</item>
+    </style>
+
+    <style name="ConversionTextView.LastUpdateTime">
         <item name="android:gravity">center</item>
+    </style>
+
+    <style name="ConversionTextView.LastUpdateTime.Info">
+        <item name="android:layout_marginTop">@dimen/last_update_time_info_marginTop</item>
+    </style>
+
+    <style name="ConversionTextView.LastUpdateTime.Date">
+        <item name="android:layout_marginTop">@dimen/last_update_time_date_marginTop</item>
+        <item name="android:layout_marginBottom">@dimen/last_update_time_date_marginBottom</item>
     </style>
 
     <style name="ScrollView">
