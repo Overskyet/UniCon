@@ -4,7 +4,6 @@ import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +32,6 @@ import java.util.regex.Pattern;
 import overskyet.unicon.R;
 import overskyet.unicon.databinding.FragmentUnitsConversionBinding;
 import overskyet.unicon.ui.activity.HomeScreenActivity;
-import overskyet.unicon.ui.fragments.currency.CurrencyExchangeFragmentArgs;
 import overskyet.unicon.utils.UnitsConverter;
 
 public class UnitsConversionFragment extends Fragment {

@@ -83,7 +83,7 @@ public class CurrencyExchangeFragment extends Fragment {
 
         initWidgets();
 
-        showTopSheet();
+//        showTopSheet();
 
         initCopyButton();
 
@@ -166,7 +166,7 @@ public class CurrencyExchangeFragment extends Fragment {
     private void initUsingSafeArgs(@NonNull CurrencyExchangeFragmentArgs args) {
 
         // Initialize fragment toolbar
-        initToolbar(args.getToolbarImageId());
+//        initToolbar(args.getToolbarImageId());
 
         // Keys initialization
         key1 = args.getKey1();
@@ -183,22 +183,22 @@ public class CurrencyExchangeFragment extends Fragment {
         spinnerTo = binding.currencyExchangeSpinnerTo;
     }
 
-    private void showTopSheet() {
-        TopSheetBehavior.from(topSheetContainer).setState(TopSheetBehavior.STATE_EXPANDED);
-    }
+//    private void showTopSheet() {
+//        TopSheetBehavior.from(topSheetContainer).setState(TopSheetBehavior.STATE_EXPANDED);
+//    }
 
-    private void initToolbar(int icon) {
-        Toolbar toolbar = (Toolbar) binding.toolbarFragmentCurrencyExchange;
-
-        NavController navController = Navigation.findNavController(toolbar);
-
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-
-        ImageView toolbarImage = toolbar.findViewById(R.id.image_app_toolbar);
-        toolbarImage.setImageResource(icon);
-
-        NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
-    }
+//    private void initToolbar(int icon) {
+//        Toolbar toolbar = (Toolbar) binding.toolbarFragmentCurrencyExchange;
+//
+//        NavController navController = Navigation.findNavController(toolbar);
+//
+//        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+//
+//        ImageView toolbarImage = toolbar.findViewById(R.id.image_app_toolbar);
+//        toolbarImage.setImageResource(icon);
+//
+//        NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
+//    }
 
     private void setupSpinnerListeners() {
         spinnerFrom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
