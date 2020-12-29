@@ -1,17 +1,14 @@
 package overskyet.unicon;
 
+import androidx.test.core.app.ActivityScenario;
 import androidx.test.filters.LargeTest;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.rule.ActivityTestRule;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import overskyet.unicon.ui.fragments.units.UnitsConversionFragment;
-
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import overskyet.unicon.ui.activity.HomeScreenActivity;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -23,12 +20,9 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 public class ExampleInstrumentedTest {
 
     @Rule
-    public ActivityTestRule<UnitsConversionFragment> activityTestRule = new ActivityTestRule<>(UnitsConversionFragment.class);
+    public ActivityScenario<HomeScreenActivity> scenario = ActivityScenario.launch(HomeScreenActivity.class);
 
     @Test
     public void checkFirstLaunch() {
-       /* onView(withId(R.id.button_0))
-                .perform(click())
-                .check(matches(isDisplayed()));*/
     }
 }

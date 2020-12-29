@@ -1,5 +1,7 @@
 package overskyet.unicon.data.parser;
 
+import androidx.annotation.Nullable;
+
 public final class ParserFactoryImpl implements ParserFactory {
 
     private ParserFactoryImpl() {}
@@ -10,6 +12,7 @@ public final class ParserFactoryImpl implements ParserFactory {
 
     public static ParserFactoryImpl getInstance() { return ParserFactoryImplHolder.instance; }
 
+    @Nullable
     @Override
     public Parser createParser(ParseType type) {
         switch (type) {

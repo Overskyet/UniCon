@@ -2,6 +2,8 @@ package overskyet.unicon.data.parser;
 
 import android.util.Log;
 
+import androidx.annotation.Nullable;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -36,11 +38,13 @@ public final class ExchangeRatesXmlParser extends Parser {
 
     private static final String TAG = ExchangeRatesXmlParser.class.getSimpleName();
 
+    @Nullable
     @Override
     public ExchangeRates parse(InputStream is) {
         return parseXml(is);
     }
 
+    @Nullable
     private ExchangeRates parseXml(InputStream is) {
 
         List<String> currencies = new ArrayList<>();

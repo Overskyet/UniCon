@@ -2,10 +2,13 @@ package overskyet.unicon.utils;
 
 import android.util.Log;
 
+import androidx.annotation.Nullable;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 
 public final class UrlMaker {
+    @Nullable
     public static URL createUrl(String strUrl) {
         URL url = null;
         try {

@@ -2,6 +2,8 @@ package overskyet.unicon.data.network;
 
 import android.util.Log;
 
+import androidx.annotation.Nullable;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -11,7 +13,6 @@ import overskyet.unicon.data.parser.ParseType;
 import overskyet.unicon.data.parser.Parser;
 import overskyet.unicon.data.parser.ParserFactoryImpl;
 import overskyet.unicon.data.pojo.ExchangeRates;
-import overskyet.unicon.data.parser.ExchangeRatesXmlParser;
 
 public final class ExchangeRatesHttpRequest {
 
@@ -31,6 +32,7 @@ public final class ExchangeRatesHttpRequest {
         return makeHttpRequest(url, type);
     }
 
+    @Nullable
     private ExchangeRates makeHttpRequest(URL url, ParseType type) throws BadResponseCodeException {
         Parser parser = ParserFactoryImpl.getInstance().createParser(type);
         if (parser == null) return null;
