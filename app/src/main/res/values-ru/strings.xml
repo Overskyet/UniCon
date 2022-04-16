@@ -19,7 +19,7 @@
     <string name="incorrect_paste_value_notification">Неподходящий формат данных для поля ввода.
         Убедитесь, что скопированное значение - целое, либо дробное число. Пример: \u201c123 или 123.45\u201d</string>
     <string name="max_length_of_pasted_value_exceeded_notification">Максимальное количество символов в поле ввода — 30 знаков</string>
-    <string name="last_update_time_error">Информация отсутствует.</string>
+    <string name="last_update_time_error">Информация отсутствует</string>
     <string name="exchange_rates_load_error">Информация отсутствует</string>
     <string name="credits_header">Информация</string>
     <string name="credits_body">Иконки взяты с сайта <a href='https://www.flaticon.com/'>www.flaticon.com</a>.
